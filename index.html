@@ -176,8 +176,9 @@
             priceBDT: 199,
             currency: "BDT",
             // Configure your real bKash details here before launching Facebook Ads:
-            bkashNumber: "01XXXXXXXXX (আপনার বিকাশ নম্বর)",
-            bkashAccountType: "Personal / Merchant (কনফিগারযোগ্য)",
+            bkashNumber: "01722984756",
+            bkashAccountType: "Personal",
+            bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
             supportPhone: "+880 1XXX-XXXXXX",
             metaPixelId: "YOUR_PIXEL_ID_HERE",
             orderWebhookUrl: "" // Optional backend endpoint to receive order JSON
@@ -1437,21 +1438,37 @@
                                     <span>প্রথমে বিকাশে ৳১৯৯ টাকা পাঠান</span>
                                 </h3>
                                 <p class="text-xs sm:text-sm text-stone-700 leading-relaxed mb-4">
-                                    আপনার বিকাশ অ্যাপ থেকে নিচের নম্বরে <strong>৳১৯৯ টাকা</strong> পেমেন্ট সম্পন্ন করুন:
+                                    আপনার বিকাশ অ্যাপ থেকে নিচের QR কোড স্ক্যান করে অথবা নম্বরে <strong>৳১৯৯ টাকা</strong> পেমেন্ট সম্পন্ন করুন:
                                 </p>
 
-                                <!-- Configurable bKash Number Box with Copy Button -->
-                                <div class="bg-white rounded-xl p-3.5 border-2 border-dashed border-bkash/50">
-                                    <div class="flex items-center justify-between text-xs text-stone-500 mb-1">
-                                        <span>বিকাশ নম্বর (কনফিগারযোগ্য প্লেসহোল্ডার):</span>
-                                        <span id="bkash-account-type-label" class="font-bold text-bkash">Personal / Merchant</span>
+                                <!-- Configurable bKash QR Code & Number Box -->
+                                <div class="bg-white rounded-xl p-3.5 border-2 border-dashed border-bkash/50 space-y-3">
+                                    <!-- QR Code Display -->
+                                    <div class="text-center">
+                                        <span class="inline-block text-[11px] font-bold text-bkash bg-bkash-light px-3 py-1 rounded-full mb-2 border border-bkash/20">
+                                            বিকাশ অ্যাপ দিয়ে QR কোড স্ক্যান করুন
+                                        </span>
+                                        <div class="bg-white p-2 rounded-xl border border-stone-200 inline-block shadow-sm">
+                                            <img src="https://i.ibb.co.com/6c4b6wCr/199.jpg"
+                                                 alt="bKash Payment QR Code - 199 BDT"
+                                                 class="w-48 sm:w-52 h-auto mx-auto rounded-lg object-contain"
+                                                 onerror="this.onerror=null;this.src='https://placehold.co/220x220/FDF2F7/E2136E?text=bKash+QR+199+TK';">
+                                        </div>
                                     </div>
-                                    <div class="flex items-center justify-between gap-2">
-                                        <code id="bkash-number-display" class="text-sm sm:text-base font-extrabold text-charcoal-900 select-all">01XXXXXXXXX</code>
-                                        <button type="button" onclick="copyBkashNumber()" class="px-3 py-1.5 rounded-lg bg-bkash hover:bg-bkash-dark text-white text-xs font-bold transition-colors flex items-center gap-1 shrink-0">
-                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                                            <span id="copy-btn-text">কপি করুন</span>
-                                        </button>
+
+                                    <!-- bKash Number & Copy Button -->
+                                    <div class="pt-2.5 border-t border-stone-200/80">
+                                        <div class="flex items-center justify-between text-xs text-stone-500 mb-1">
+                                            <span>বিকাশ নম্বর:</span>
+                                            <span id="bkash-account-type-label" class="font-bold text-bkash">Personal</span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-2">
+                                            <code id="bkash-number-display" class="text-sm sm:text-base font-extrabold text-charcoal-900 select-all">01722984756</code>
+                                            <button type="button" onclick="copyBkashNumber()" class="px-3 py-1.5 rounded-lg bg-bkash hover:bg-bkash-dark text-white text-xs font-bold transition-colors flex items-center gap-1 shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                                <span id="copy-btn-text">কপি করুন</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1474,7 +1491,7 @@
                                     <span>ডিজিটাল PDF ডেলিভারি নির্দেশনা:</span>
                                 </div>
                                 <p class="leading-relaxed">
-                                    আপনার সাবমিট করা পেমেন্টের তথ্য সফলভাবে যাচাই (Payment Verification) করার পর আপনার প্রদত্ত হোয়াটসঅ্যাপ/ইমেইল বা যোগাযোগ নম্বরে ৫০০ চার্টের ডিজিটাল PDF ক্যাটালগটি ডেলিভারি করা হবে।
+                                    আপনার সাবমিট করা পেমেন্টের তথ্য সফলভাবে যাচাই (Payment Verification) করার পর আপনার প্রদত্ত ইমেইলে (Gmail) ৫০০ চার্টের ডিজিটাল PDF ক্যাটালগটি ডেলিভারি করা হবে।
                                 </p>
                             </div>
                         </div>
@@ -1520,13 +1537,13 @@
                                         class="w-full rounded-xl border border-stone-300 bg-cream-50/60 px-4 py-3 text-sm sm:text-base text-charcoal-900 font-mono uppercase focus:border-bkash focus:bg-white focus:outline-none focus:ring-2 focus:ring-bkash/20 transition-all">
                                 </div>
 
-                                <!-- Field 4: WhatsApp or Email for PDF Delivery (Optional/Helpful) -->
+                                <!-- Field 4: Gmail for PDF Delivery (Required) -->
                                 <div>
                                     <label for="deliveryContact" class="block text-sm font-bold text-charcoal-900 mb-1.5">
-                                        হোয়াটসঅ্যাপ নম্বর অথবা ইমেইল (PDF পাওয়ার জন্য)
+                                        ইমেইল / Gmail (PDF পাওয়ার জন্য) <span class="text-red-600">*</span>
                                     </label>
-                                    <input type="text" id="deliveryContact" name="deliveryContact"
-                                        placeholder="আপনার WhatsApp নম্বর বা Email (ঐচ্ছিক, না দিলে বিকাশ নম্বরে যোগাযোগ করা হবে)"
+                                    <input type="email" id="deliveryContact" name="deliveryContact" required
+                                        placeholder="আপনার Gmail এড্রেস লিখুন (যেমন: example@gmail.com)"
                                         class="w-full rounded-xl border border-stone-300 bg-cream-50/60 px-4 py-3 text-sm sm:text-base text-charcoal-900 focus:border-emerald-850 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-850/20 transition-all">
                                 </div>
 
@@ -1580,6 +1597,10 @@
                                     <div class="flex justify-between">
                                         <span class="text-cream-200">Transaction ID:</span>
                                         <span id="summary-trxid" class="font-mono font-bold text-gold-300"></span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-cream-200">ইমেইল (Gmail):</span>
+                                        <span id="summary-email" class="font-mono font-bold text-white"></span>
                                     </div>
                                     <div class="flex justify-between pt-2 border-t border-emerald-800">
                                         <span class="text-cream-200">স্ট্যাটাস:</span>
@@ -2091,6 +2112,13 @@
                 return;
             }
 
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!contact || !emailRegex.test(contact)) {
+                showFormError('অনুগ্রহ করে PDF পাওয়ার জন্য আপনার সঠিক Gmail / ইমেইল এড্রেস লিখুন।');
+                contactEl.focus();
+                return;
+            }
+
             // Generate Order Reference ID
             const orderRef = 'SC-' + Math.floor(100000 + Math.random() * 900000);
             lastSubmittedOrder = {
@@ -2100,7 +2128,7 @@
                 customerName: name,
                 customerBkashNumber: bkash,
                 transactionId: trxId,
-                deliveryContact: contact || bkash,
+                deliveryContact: contact,
                 submittedAt: new Date().toISOString()
             };
 
@@ -2109,6 +2137,7 @@
             document.getElementById('summary-name').textContent = name;
             document.getElementById('summary-bkash').textContent = bkash;
             document.getElementById('summary-trxid').textContent = trxId;
+            document.getElementById('summary-email').textContent = contact;
 
             // Hide form, display confirmation card
             document.getElementById('order-submission-form').classList.add('hidden');
@@ -2143,7 +2172,7 @@
 
         function copyOrderSummary() {
             if (!lastSubmittedOrder) return;
-            const summaryText = `অর্ডার রেফারেন্স: ${lastSubmittedOrder.orderId}\nপ্রোডাক্ট: ৫০০টি সেলাই ও কাটিং চার্ট (PDF)\nমূল্য: ৳১৯৯ টাকা\nনাম: ${lastSubmittedOrder.customerName}\nবিকাশ নম্বর: ${lastSubmittedOrder.customerBkashNumber}\nTrxID: ${lastSubmittedOrder.transactionId}`;
+            const summaryText = `অর্ডার রেফারেন্স: ${lastSubmittedOrder.orderId}\nপ্রোডাক্ট: ৫০০টি সেলাই ও কাটিং চার্ট (PDF)\nমূল্য: ৳১৯৯ টাকা\nনাম: ${lastSubmittedOrder.customerName}\nবিকাশ নম্বর: ${lastSubmittedOrder.customerBkashNumber}\nTrxID: ${lastSubmittedOrder.transactionId}\nGmail: ${lastSubmittedOrder.deliveryContact}`;
             copyTextToClipboard(summaryText);
         }
 
@@ -2154,4 +2183,5 @@
         }
     </script>
 </body>
+</html>
 </html>
