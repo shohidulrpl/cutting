@@ -179,6 +179,7 @@
             bkashNumber: "01722984756",
             bkashAccountType: "Personal",
             bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
+            heroBgVideoUrl: "https://videos.pexels.com/video-files/4621688/4621688-hd_1080_1920_25fps.mp4",
             supportPhone: "+880 1XXX-XXXXXX",
             metaPixelId: "YOUR_PIXEL_ID_HERE",
             orderWebhookUrl: "" // Optional backend endpoint to receive order JSON
@@ -270,12 +271,24 @@
          SECTION 01: HERO SECTION
          ===================================================================== -->
     <section id="hero" class="relative bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-850 text-cream-50 pt-8 pb-16 md:py-20 overflow-hidden">
+        <!-- Silent Autoplay Background Video with Low Opacity & Emerald Contrast Overlay -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <video id="hero-bg-video" autoplay loop muted playsinline webkit-playsinline preload="auto"
+                class="w-full h-full object-cover object-center opacity-20 mix-blend-luminosity scale-105">
+                <source src="https://videos.pexels.com/video-files/4621688/4621688-hd_1080_1920_25fps.mp4" type="video/mp4">
+                <source src="https://videos.pexels.com/video-files/4621688/4621688-sd_506_960_25fps.mp4" type="video/mp4">
+                <source src="https://videos.pexels.com/video-files/4621690/4621690-hd_1920_1080_25fps.mp4" type="video/mp4">
+            </video>
+            <!-- Deep Emerald Readability Overlay so White & Gold Bengali Text Remains 100% Crisp -->
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/75 to-emerald-900/85"></div>
+        </div>
+
         <!-- Decorative Background Pattern -->
         <div class="absolute inset-0 bg-tailor-grid opacity-50 pointer-events-none"></div>
         <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gold-500/10 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
 
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
                 
                 <!-- Left Column: Persuasive Bengali Copy & Primary CTA -->
@@ -1839,6 +1852,14 @@
     <script>
         // 1. Initialize Configurable Placeholders & Scroll Reveal on Load
         window.addEventListener('DOMContentLoaded', () => {
+            // Ensure Hero background video is strictly muted and autoplays smoothly on mobile & desktop
+            const heroVideo = document.getElementById('hero-bg-video');
+            if (heroVideo) {
+                heroVideo.muted = true;
+                heroVideo.defaultMuted = true;
+                heroVideo.play().catch(() => {});
+            }
+
             // Sync configurable bKash details from STORE_CONFIG
             const numDisplay = document.getElementById('bkash-number-display');
             const typeDisplay = document.getElementById('bkash-account-type-label');
@@ -2183,5 +2204,4 @@
         }
     </script>
 </body>
-</html>
 </html>
