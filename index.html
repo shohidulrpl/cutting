@@ -14,6 +14,9 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- PDF.js CDN for In-Page Interactive 15-Page Sample PDF Reader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
     <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
@@ -179,6 +182,8 @@
             bkashNumber: "01722984756",
             bkashAccountType: "Personal",
             bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
+            // Free 15-Page Sample PDF File (Place in same folder or set hosted PDF URL):
+            freeSamplePdfUrl: "Tech_Probiotic_Free_Sample.pdf",
             // Sample Chart Images (Place these JPG files in the same folder or replace with hosted URLs):
             sampleCharts: {
                 blouse: {
@@ -371,6 +376,14 @@
                                 </svg>
                                 <span>নমুনা চার্ট দেখুন</span>
                             </a>
+
+                            <!-- Interactive 15-Page Free Sample PDF Reader Trigger -->
+                            <button type="button" onclick="openSampleReader(1)" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-cream-50/10 hover:bg-cream-50/20 text-gold-300 border border-gold-400/50 font-bold text-base transition-all cursor-pointer">
+                                <svg class="w-5 h-5 text-gold-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                                <span>ফ্রি স্যাম্পল PDF (১৫ পৃষ্ঠা)</span>
+                            </button>
                         </div>
 
                         <!-- Payment & Delivery Reassurance Micro-copy -->
@@ -924,6 +937,46 @@
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Interactive 15-Page Free Sample PDF Book Banner -->
+            <div class="mt-8 bg-gradient-to-r from-emerald-900 via-emerald-850 to-emerald-900 rounded-3xl p-5 sm:p-7 border-2 border-gold-500/45 shadow-2xl reveal">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2 text-center lg:text-left max-w-2xl">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-xs font-bold">
+                            📖 সম্পূর্ণ ফ্রি স্যাম্পল ই-বুক প্রিভিউ (১৫ পৃষ্ঠা)
+                        </span>
+                        <h3 class="font-serif text-xl sm:text-2xl font-bold text-white">
+                            সূচিপত্র, চার্ট পড়ার নিয়ম ও ১০টি ডিজাইনের ফ্রি স্যাম্পল বই পড়ে দেখুন!
+                        </h3>
+                        <p class="text-xs sm:text-sm text-cream-200 leading-relaxed">
+                            কেনার আগে আমাদের ১৫ পৃষ্ঠার ফ্রি স্যাম্পল PDF ক্যাটালগটি ওয়েবসাইটের ভেতরেই পাতা উল্টে দেখুন অথবা সরাসরি ডাউনলোড করে যাচাই করুন।
+                        </p>
+                        <!-- Quick Chapter Jump Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
+                            <button type="button" onclick="openSampleReader(1)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ১: কভার</button>
+                            <button type="button" onclick="openSampleReader(2)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ২-৪: সূচিপত্র ও নিয়ম</button>
+                            <button type="button" onclick="openSampleReader(5)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ৫: কেপ কুর্তি</button>
+                            <button type="button" onclick="openSampleReader(8)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ৮: সারারা সেট</button>
+                            <button type="button" onclick="openSampleReader(10)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ১০: ২৪-কলি লেহেঙ্গা</button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto shrink-0">
+                        <button type="button" onclick="openSampleReader(1)" class="btn-emerald border border-gold-400 text-gold-300 hover:text-white font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-2xl shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                            <span>১৫ পৃষ্ঠার স্যাম্পল পড়ুন</span>
+                        </button>
+                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="trackMetaEvent('ViewContent', { content_name: 'Free Sample PDF Direct Download' })" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors">
+                            <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            <span>ফ্রি স্যাম্পল PDF ডাউনলোড</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Gallery Bottom CTA -->
@@ -1667,6 +1720,85 @@
     </div>
 
     <!-- =====================================================================
+         INTERACTIVE 15-PAGE FREE SAMPLE PDF READER MODAL (OPTION A)
+         ===================================================================== -->
+    <div id="sample-pdf-modal" class="fixed inset-0 z-50 hidden bg-charcoal-900/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-5">
+        <div class="bg-cream-50 rounded-3xl max-w-5xl w-full h-[94vh] flex flex-col overflow-hidden border-2 border-gold-500 shadow-2xl">
+            
+            <!-- Top Reader Bar -->
+            <div class="bg-emerald-950 text-cream-50 px-3.5 sm:px-5 py-3 flex items-center justify-between gap-2 border-b border-gold-500/30 shrink-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <span class="px-2.5 py-1 rounded-lg bg-gold-500 text-emerald-950 font-extrabold text-[11px] sm:text-xs shrink-0">FREE SAMPLE</span>
+                    <div class="min-w-0">
+                        <h3 id="sample-page-heading" class="text-xs sm:text-base font-bold text-white truncate">পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার</h3>
+                        <span class="text-[11px] text-gold-300 block">৫০০+ সেলাই ও কাটিং চার্ট — ১৫ পৃষ্ঠার ফ্রি নমুনা</span>
+                    </div>
+                </div>
+
+                <!-- Zoom & Download Controls -->
+                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    <button type="button" onclick="changeSampleZoom(-0.2)" class="w-8 h-8 rounded-lg bg-emerald-900 hover:bg-emerald-800 text-cream-100 font-bold text-sm flex items-center justify-center border border-gold-500/20" title="Zoom Out">−</button>
+                    <span id="sample-zoom-label" class="hidden sm:inline-block text-xs font-mono text-gold-300 w-11 text-center">100%</span>
+                    <button type="button" onclick="changeSampleZoom(0.2)" class="w-8 h-8 rounded-lg bg-emerald-900 hover:bg-emerald-800 text-cream-100 font-bold text-sm flex items-center justify-center border border-gold-500/20" title="Zoom In">+</button>
+
+                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1" title="Download Free Sample PDF">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span class="hidden sm:inline">PDF ডাউনলোড</span>
+                    </a>
+
+                    <button type="button" onclick="closeSampleReader()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-900 hover:bg-red-600 text-white font-bold flex items-center justify-center transition-colors ml-1" aria-label="Close Sample Reader">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Scrollable 15-Page Quick Index Pills -->
+            <div id="sample-page-pills" class="bg-emerald-900/95 px-3 py-2 flex items-center gap-1.5 overflow-x-auto border-b border-gold-500/20 shrink-0">
+                <!-- Populated dynamically via JS for all 15 pages -->
+            </div>
+
+            <!-- Main Interactive Page Viewport (Supports Touch Swipe & Zoom) -->
+            <div id="sample-reader-viewport" class="flex-1 overflow-auto bg-[#1E1C1A] p-3 sm:p-6 flex flex-col items-center justify-start relative select-none">
+                <!-- Loading Spinner -->
+                <div id="sample-pdf-loading" class="my-auto text-center space-y-2 text-cream-200">
+                    <div class="w-9 h-9 border-4 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <p class="text-xs sm:text-sm font-medium">ফ্রি স্যাম্পল পৃষ্ঠা লোড হচ্ছে...</p>
+                </div>
+
+                <!-- PDF.js Canvas Container -->
+                <div id="sample-canvas-wrapper" class="hidden my-auto shadow-2xl rounded-xl overflow-hidden bg-white border border-gold-500/30 transition-transform duration-200">
+                    <canvas id="sample-pdf-canvas" class="block max-w-full h-auto"></canvas>
+                </div>
+
+                <!-- Graceful Fallback Interactive Page Card (If local file:// CORS or PDF file not yet uploaded) -->
+                <div id="sample-fallback-card" class="hidden my-auto max-w-xl w-full"></div>
+            </div>
+
+            <!-- Bottom Page Flip & Conversion Footer -->
+            <div class="bg-cream-100 px-3.5 sm:px-6 py-3 border-t border-stone-300 flex flex-col sm:flex-row items-center justify-between gap-2.5 shrink-0">
+                <!-- Page Flip Controls -->
+                <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto gap-3">
+                    <button type="button" id="sample-prev-btn" onclick="changeSamplePage(-1)" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-900 text-charcoal-900 hover:text-white border border-stone-300 font-bold text-xs sm:text-sm transition-colors disabled:opacity-40 disabled:pointer-events-none">
+                        ← আগের পৃষ্ঠা
+                    </button>
+                    <span id="sample-page-counter" class="text-xs sm:text-sm font-extrabold text-emerald-950 bg-gold-300/50 px-3 py-1.5 rounded-lg border border-gold-500/40">
+                        পৃষ্ঠা ১ / ১৫
+                    </span>
+                    <button type="button" id="sample-next-btn" onclick="changeSamplePage(1)" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-900 text-charcoal-900 hover:text-white border border-stone-300 font-bold text-xs sm:text-sm transition-colors disabled:opacity-40 disabled:pointer-events-none">
+                        পরবর্তী পৃষ্ঠা →
+                    </button>
+                </div>
+
+                <!-- Direct Order CTA inside Reader -->
+                <button type="button" onclick="closeSampleReader(); scrollToCheckout('Sample_Reader_CTA');" class="w-full sm:w-auto btn-gold-shimmer text-emerald-950 font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1.5">
+                    <span>সম্পূর্ণ ৫০০ চার্ট অর্ডার করুন — ৳১৯৯</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
          APPLICATION JAVASCRIPT
          ===================================================================== -->
     <script>
@@ -1812,11 +1944,281 @@
 
         // Close modal on Escape key or backdrop click
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeChartModal();
+            if (e.key === 'Escape') {
+                closeChartModal();
+                closeSampleReader();
+            }
+            const sampleModal = document.getElementById('sample-pdf-modal');
+            if (sampleModal && !sampleModal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') changeSamplePage(1);
+                if (e.key === 'ArrowLeft') changeSamplePage(-1);
+            }
         });
         document.getElementById('chart-lightbox-modal').addEventListener('click', (e) => {
             if (e.target.id === 'chart-lightbox-modal') closeChartModal();
         });
+        document.getElementById('sample-pdf-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'sample-pdf-modal') closeSampleReader();
+        });
+
+        // =====================================================================
+        // 4B. INTERACTIVE 15-PAGE FREE SAMPLE PDF READER ENGINE
+        // =====================================================================
+        const SAMPLE_BOOK_PAGES = [
+            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: ৫০০+ কাটিং চার্ট — বিশেষ ডিজিটাল ই-বুক", badge: "কভার পেজ", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
+            { page: 2, short: "২. সূচিপত্র", title: "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)", badge: "সূচিপত্র ও বৈশিষ্ট্য", summary: "• ৫০১টি কাটিং চার্ট: কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন\n• ২৩টি বিভাগ: ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ\n• সব বয়স ও সাইজ: নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত\n• প্রতিটি চার্টে গাইড ও মোবাইলে সহজে দেখার উপযোগী" },
+            { page: 3, short: "৩. কার জন্য", title: "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?", badge: "ব্যবহারকারী গাইড", summary: "১. নতুন শিক্ষার্থী: প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।\n২. টেইলার ও কারিগর: নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।\n৩. বুটিক ব্যবসায়ী: কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।\n৪. সেলাই-শখীন মেয়েরা: নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।" },
+            { page: 4, short: "৪. পড়ার নিয়ম", title: "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন? (৪টি সহজ নির্দেশিকা)", badge: "কাটিং চিহ্ন পরিচিতি", summary: "১. কাঁচির চিহ্ন: কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।\n২. তীর ও মাপ: দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।\n৩. ড্যাশ দাগ: ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।\n৪. গ্রেন লাইন ও ফোল্ড লাইন: গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।" },
+            { page: 5, short: "৫. কেপ কুর্তি", title: "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)", badge: "কামিজ ও কুর্তি", summary: "সাইজ - ৪০ | কেপের গলা: ১৬\", বুক: ৪০\", কোমর: ৩৬\", ঝুল: ৪৪\", কেপের ঝুল: ১৪\"। এক কুর্তি, দুই লুক।", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
+            { page: 6, short: "৬. ডিপ নেক ব্লাউজ", title: "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)", badge: "ব্লাউজ কাটিং", summary: "সাইজ - ৩৮ | গলার চওড়া: ৬\", গলার গভীরতা: ৮\", ফেসিং পট্টি: ১.৫\" চওড়া ও ডোরি মাপসহ।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
+            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।" },
+            { page: 8, short: "৮. সারারা সেট", title: "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)", badge: "পার্টি ও সারারা", summary: "সাইজ - ৩৮ | বিয়ে-পার্টির গর্জিয়াস সারারা। কোমর, হাঁটুর কাটিং, ঘের ও লম্বার গোপন হিসাব।" },
+            { page: 9, short: "৯. ৬-কলি ছায়া", title: "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)", badge: "পেটিকোট ও ছায়া", summary: "সাইজ - ৩৮ | কোমরপট্টি: ৩৮\" × ৫\" | কলির কাটিং: উপরে ৭.৫\", নিচে ১৪.৫\", লম্বা ৩৬\" ও সেলাই মার্জিন।" },
+            { page: 10, short: "১০. ২৪-কলি লেহেঙ্গা", title: "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)", badge: "ব্রাইডাল ও লেহেঙ্গা", summary: "সাইজ - ৩৮ | ২৪ পিস কাটুন | উপরে ২\", নিচে ১২\", লম্বা ৪০\", ১.৫\" হেম ফোল্ড ও কোমরপট্টি ৩২\" × ৩\"।" },
+            { page: 11, short: "১১. ম্যাক্সি ড্রেস", title: "পৃষ্ঠা ১১: ৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (চার্ট #১৮২)", badge: "গাউন ও ম্যাক্সি", summary: "সাইজ - ৪২ | আংরাখা স্টাইলের ওভারল্যাপ ডিজাইন, বগল ২১\" ও লম্বা ৫২\" মাপসহ।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
+            { page: 12, short: "১২. প্লিটেড স্কার্ট", title: "পৃষ্ঠা ১২: ৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (চার্ট #২১০)", badge: "স্কার্ট কাটিং", summary: "সাইজ - ৪০ | লম্বা ২৮\", বেল্ট ৩২\" × ২\", কাপড় বহর ৮০\", ২\" পর পর প্লিট ও জিপার প্লেকেট।" },
+            { page: 13, short: "১৩. ফ্রিল ফ্রক", title: "পৃষ্ঠা ১৩: ২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (চার্ট #২৬৭)", badge: "বাচ্চাদের পোশাক", summary: "বয়স ২-৩ বছর | বডি পার্ট: ছাতি ১১\", লম্বা ৯\" | হাতার ফ্রিল: ২৪\" × ২\" | নিচের কুঁচি পার্ট: চওড়া ৪০\", লম্বা ১২\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
+            { page: 14, short: "১৪. ব্লেজার চার্ট", title: "পৃষ্ঠা ১৪: ৪২ সাইজ ব্লেজার কাটিং চার্ট (চার্ট #৩৫২)", badge: "শীতের পোশাক", summary: "সাইজ - ৪২ | Shoulder: 18\", Chest: 22\", Length: 30\", Sleeve Length: 25\", Collar, Flap Pocket (6\" × 2\") ও লাইনিং।" },
+            { page: 15, short: "১৫. সম্পূর্ণ বই", title: "পৃষ্ঠা ১৫: পুরো বই পেতে এখনই অর্ডার করুন (৫০০+ চার্ট)", badge: "সমাপনী পৃষ্ঠা", summary: "এটি শুধু ১৫ পৃষ্ঠার ফ্রি নমুনা। পুরো ই-বুকে আছে ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ। এককালীন মূল্য মাত্র ৳১৯৯ টাকা।" }
+        ];
+
+        let samplePdfDoc = null;
+        let currentSamplePage = 1;
+        let sampleZoomScale = 1.0;
+        let sampleRenderTask = null;
+
+        function initSamplePills() {
+            const pillsContainer = document.getElementById('sample-page-pills');
+            if (!pillsContainer || pillsContainer.children.length > 0) return;
+
+            SAMPLE_BOOK_PAGES.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.id = `sample-pill-${item.page}`;
+                btn.textContent = item.short;
+                btn.onclick = () => goToSamplePage(item.page);
+                btn.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors bg-emerald-950/70 text-cream-200 hover:bg-gold-500 hover:text-emerald-950 border border-gold-500/20 cursor-pointer';
+                pillsContainer.appendChild(btn);
+            });
+        }
+
+        function openSampleReader(startPage = 1) {
+            const modal = document.getElementById('sample-pdf-modal');
+            if (!modal) return;
+
+            initSamplePills();
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Update download links with configurable PDF path
+            const pdfUrl = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample.pdf';
+            const dlLink = document.getElementById('sample-modal-download-link');
+            if (dlLink) dlLink.href = pdfUrl;
+
+            trackMetaEvent('ViewContent', {
+                content_name: '15-Page Free Sample PDF Reader',
+                page_number: startPage,
+                value: window.STORE_CONFIG.priceBDT,
+                currency: 'BDT'
+            });
+
+            currentSamplePage = startPage;
+            sampleZoomScale = 1.0;
+            updateSampleZoomUI();
+
+            if (samplePdfDoc) {
+                renderSamplePage(currentSamplePage);
+            } else if (window.pdfjsLib) {
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                document.getElementById('sample-pdf-loading').classList.remove('hidden');
+                document.getElementById('sample-canvas-wrapper').classList.add('hidden');
+                document.getElementById('sample-fallback-card').classList.add('hidden');
+
+                pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+                    samplePdfDoc = pdf;
+                    renderSamplePage(currentSamplePage);
+                }).catch(err => {
+                    console.warn('PDF.js fallback activated (PDF file local/CORS):', err);
+                    renderSampleFallbackPage(currentSamplePage);
+                });
+            } else {
+                renderSampleFallbackPage(currentSamplePage);
+            }
+        }
+
+        function closeSampleReader() {
+            const modal = document.getElementById('sample-pdf-modal');
+            if (modal) modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function goToSamplePage(pageNum) {
+            const total = samplePdfDoc ? samplePdfDoc.numPages : SAMPLE_BOOK_PAGES.length;
+            if (pageNum < 1 || pageNum > total) return;
+            currentSamplePage = pageNum;
+            if (samplePdfDoc) {
+                renderSamplePage(currentSamplePage);
+            } else {
+                renderSampleFallbackPage(currentSamplePage);
+            }
+        }
+
+        function changeSamplePage(delta) {
+            goToSamplePage(currentSamplePage + delta);
+        }
+
+        function changeSampleZoom(delta) {
+            sampleZoomScale = Math.min(2.2, Math.max(0.7, +(sampleZoomScale + delta).toFixed(2)));
+            updateSampleZoomUI();
+            if (samplePdfDoc) {
+                renderSamplePage(currentSamplePage);
+            } else {
+                const fb = document.getElementById('sample-fallback-card');
+                if (fb) fb.style.transform = `scale(${sampleZoomScale})`;
+            }
+        }
+
+        function updateSampleZoomUI() {
+            const label = document.getElementById('sample-zoom-label');
+            if (label) label.textContent = `${Math.round(sampleZoomScale * 100)}%`;
+        }
+
+        function updateSampleHeaderAndControls(pageNum, totalPages) {
+            const meta = SAMPLE_BOOK_PAGES[pageNum - 1] || {
+                title: `পৃষ্ঠা ${pageNum}: ফ্রি স্যাম্পল ক্যাটালগ`,
+                short: `পৃষ্ঠা ${pageNum}`
+            };
+
+            const heading = document.getElementById('sample-page-heading');
+            const counter = document.getElementById('sample-page-counter');
+            const prevBtn = document.getElementById('sample-prev-btn');
+            const nextBtn = document.getElementById('sample-next-btn');
+
+            if (heading) heading.textContent = meta.title;
+            if (counter) counter.textContent = `পৃষ্ঠা ${pageNum} / ${totalPages}`;
+            if (prevBtn) prevBtn.disabled = pageNum <= 1;
+            if (nextBtn) nextBtn.disabled = pageNum >= totalPages;
+
+            // Highlight active pill and scroll it into view
+            SAMPLE_BOOK_PAGES.forEach(item => {
+                const pill = document.getElementById(`sample-pill-${item.page}`);
+                if (!pill) return;
+                if (item.page === pageNum) {
+                    pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold whitespace-nowrap transition-colors bg-gold-500 text-emerald-950 shadow-sm cursor-pointer';
+                    pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors bg-emerald-950/70 text-cream-200 hover:bg-gold-500 hover:text-emerald-950 border border-gold-500/20 cursor-pointer';
+                }
+            });
+        }
+
+        function renderSamplePage(pageNum) {
+            const loading = document.getElementById('sample-pdf-loading');
+            const wrapper = document.getElementById('sample-canvas-wrapper');
+            const fallback = document.getElementById('sample-fallback-card');
+            const canvas = document.getElementById('sample-pdf-canvas');
+            const viewportEl = document.getElementById('sample-reader-viewport');
+
+            if (!samplePdfDoc || !canvas) return;
+            updateSampleHeaderAndControls(pageNum, samplePdfDoc.numPages);
+
+            samplePdfDoc.getPage(pageNum).then(page => {
+                const unscaledViewport = page.getViewport({ scale: 1 });
+                const availableWidth = Math.min((viewportEl.clientWidth || 360) - 24, 620);
+                const baseScale = availableWidth / unscaledViewport.width;
+                const outputScale = window.devicePixelRatio || 1;
+                const finalScale = baseScale * sampleZoomScale;
+                const viewport = page.getViewport({ scale: finalScale });
+
+                canvas.width = Math.floor(viewport.width * outputScale);
+                canvas.height = Math.floor(viewport.height * outputScale);
+                canvas.style.width = `${Math.floor(viewport.width)}px`;
+                canvas.style.height = `${Math.floor(viewport.height)}px`;
+
+                const ctx = canvas.getContext('2d');
+                ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+
+                if (sampleRenderTask) {
+                    try { sampleRenderTask.cancel(); } catch (e) {}
+                }
+
+                sampleRenderTask = page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+
+                sampleRenderTask.promise.then(() => {
+                    loading.classList.add('hidden');
+                    fallback.classList.add('hidden');
+                    wrapper.classList.remove('hidden');
+                    viewportEl.scrollTop = 0;
+                }).catch(() => {});
+            });
+        }
+
+        function renderSampleFallbackPage(pageNum) {
+            const loading = document.getElementById('sample-pdf-loading');
+            const wrapper = document.getElementById('sample-canvas-wrapper');
+            const fallback = document.getElementById('sample-fallback-card');
+            const total = SAMPLE_BOOK_PAGES.length;
+            const info = SAMPLE_BOOK_PAGES[pageNum - 1] || SAMPLE_BOOK_PAGES[0];
+
+            updateSampleHeaderAndControls(pageNum, total);
+            loading.classList.add('hidden');
+            wrapper.classList.add('hidden');
+            fallback.classList.remove('hidden');
+
+            const linesHtml = info.summary.split('\n').map(line => `<p class="leading-relaxed">${line}</p>`).join('');
+            const imageHtml = info.img
+                ? `<div class="mb-4 rounded-2xl overflow-hidden border border-gold-500/40 bg-emerald-950/5 flex justify-center">
+                       <img src="${info.img}" alt="${info.title}" class="max-h-96 w-auto object-contain" onerror="this.parentElement.style.display='none'">
+                   </div>`
+                : '';
+
+            fallback.innerHTML = `
+                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-5 sm:p-8 border-2 border-gold-500 shadow-2xl space-y-4">
+                    <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-3">
+                        <span class="px-3 py-1 rounded-full bg-emerald-900 text-gold-300 text-xs font-bold">${info.badge}</span>
+                        <span class="text-xs font-bold text-stone-500">ফ্রি স্যাম্পল পৃষ্ঠা ${pageNum} / ${total}</span>
+                    </div>
+                    <h4 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950">${info.title}</h4>
+                    ${imageHtml}
+                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 text-sm sm:text-base text-charcoal-800 space-y-2.5">
+                        ${linesHtml}
+                    </div>
+                    <div class="pt-2 flex items-center justify-between text-xs text-stone-500">
+                        <span>টেক প্রোবায়োটিক • ৫০০+ সেলাই ও কাটিং চার্ট</span>
+                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" class="text-emerald-900 font-bold underline">সম্পূর্ণ ১৫ পৃষ্ঠার PDF ডাউনলোড করুন</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Touch Swipe Support (Left/Right) inside Mobile Sample Reader
+        (function setupSampleSwipe() {
+            const viewport = document.getElementById('sample-reader-viewport');
+            if (!viewport) return;
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            viewport.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            viewport.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length === 1 && sampleZoomScale <= 1.05) {
+                    const dx = e.changedTouches[0].clientX - touchStartX;
+                    const dy = e.changedTouches[0].clientY - touchStartY;
+                    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+                        if (dx < 0) changeSamplePage(1);
+                        else changeSamplePage(-1);
+                    }
+                }
+            }, { passive: true });
+        })();
 
         // 5. Fallback Full-Resolution SVG Generators (If local JPG files are not yet in the directory)
         function getKameezDetailedSvg() {
