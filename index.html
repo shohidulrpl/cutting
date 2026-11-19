@@ -269,7 +269,7 @@
             supportPhone: "+880 1XXX-XXXXXX",
             metaPixelId: "YOUR_PIXEL_ID_HERE", // এখানে আপনার ১৫-১৬ ডিজিটের Facebook Pixel ID বসান
             debugPixel: false, // টেস্ট করার সময় true করলে স্ক্রিনে ইভেন্ট নোটিফিকেশন দেখাবে, লাইভ সাইটে false রাখুন
-            orderWebhookUrl: "" // Optional: Google Sheet বা Webhook URL দিলে অর্ডার ডাটা অটো চলে যাবে
+            orderWebhookUrl: "https://rpl2.app.n8n.cloud-test/webhook/pdf" // n8n Production Webhook URL
         };
 
         // Auto-Initialize Official Meta Pixel (fbevents.js) when a valid numeric metaPixelId is set
@@ -1512,16 +1512,20 @@
 
                             <!-- Order Confirmation State (Displayed after valid form submission) -->
                             <div id="order-success-panel" class="hidden rounded-2xl bg-emerald-950 text-cream-50 p-6 sm:p-8 border-2 border-gold-500 space-y-5">
-                                <div class="w-14 h-14 rounded-2xl bg-gold-500 text-emerald-950 flex items-center justify-center mx-auto shadow-lg">
-                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-300 to-gold-500 text-emerald-950 flex items-center justify-center mx-auto shadow-gold-glow">
+                                    <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                     </svg>
                                 </div>
-                                <div class="text-center space-y-2">
-                                    <span class="inline-block px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold">অর্ডার রিকোয়েস্ট গৃহীত হয়েছে</span>
-                                    <h3 class="text-xl sm:text-2xl font-bold text-white">ধন্যবাদ! আপনার পেমেন্ট তথ্য জমা হয়েছে</h3>
+                                <div class="text-center space-y-2.5">
+                                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-xs font-bold">
+                                        ✓ অর্ডার সফলভাবে গৃহীত হয়েছে
+                                    </span>
+                                    <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug">
+                                        অভিনন্দন, <span id="summary-greeting-name" class="text-gold-300">প্রিয় গ্রাহক</span>! আপনার অর্ডারটি সম্পন্ন হয়েছে
+                                    </h3>
                                     <p class="text-xs sm:text-sm text-cream-200 leading-relaxed">
-                                        আপনার প্রদত্ত বিকাশ Transaction ID যাচাই করার পর আপনার যোগাযোগের মাধ্যমে <strong>৫০০টি সেলাই ও কাপড় কাটিংয়ের মাপের চার্ট PDF</strong> ক্যাটালগটি ডেলিভারি করা হবে।
+                                        আমাদের সাথে থাকার জন্য আন্তরিক ধন্যবাদ। আপনার বিকাশ পেমেন্টের তথ্য (<strong class="text-gold-300">TrxID</strong>) আমাদের সিস্টেমে পৌঁছে গেছে। পেমেন্ট যাচাই সম্পন্ন হওয়ার সাথে সাথেই আপনার দেওয়া <strong class="text-white">Gmail-এ ৫০০টি সেলাই ও কাটিং চার্টের সম্পূর্ণ PDF ক্যাটালগটি</strong> পাঠিয়ে দেওয়া হবে।
                                     </p>
                                 </div>
 
@@ -1543,13 +1547,17 @@
                                         <span id="summary-trxid" class="font-mono font-bold text-gold-300"></span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-cream-200">ইমেইল (Gmail):</span>
+                                        <span class="text-cream-200">ডেলিভারি Gmail:</span>
                                         <span id="summary-email" class="font-mono font-bold text-white"></span>
                                     </div>
                                     <div class="flex justify-between pt-2 border-t border-emerald-800">
-                                        <span class="text-cream-200">স্ট্যাটাস:</span>
-                                        <span class="text-gold-300 font-bold">পেমেন্ট যাচাই চলছে (Verification Pending)</span>
+                                        <span class="text-cream-200">বর্তমান অবস্থা:</span>
+                                        <span class="text-gold-300 font-bold">পেমেন্ট যাচাই ও PDF প্রস্তুতি চলছে</span>
                                     </div>
+                                </div>
+
+                                <div class="rounded-xl bg-emerald-900/50 border border-gold-500/30 p-3.5 text-xs text-cream-100 leading-relaxed text-center">
+                                    📩 অনুগ্রহ করে কিছুক্ষণের মধ্যে আপনার <strong class="text-gold-300">Gmail Inbox</strong> (এবং প্রয়োজনে <strong>Spam / Updates</strong> ফোল্ডার) চেক করবেন। ভবিষ্যতের প্রয়োজনে নিচের বাটন থেকে আপনার অর্ডার তথ্যটি কপি করে রাখতে পারেন।
                                 </div>
 
                                 <div class="flex flex-col sm:flex-row gap-3">
@@ -2650,7 +2658,7 @@
         // 7. Order Form Validation & Submission Handler
         let lastSubmittedOrder = null;
 
-        function handleOrderSubmit(event) {
+        async function handleOrderSubmit(event) {
             event.preventDefault();
 
             const nameEl = document.getElementById('customerName');
@@ -2658,6 +2666,7 @@
             const trxEl = document.getElementById('transactionId');
             const contactEl = document.getElementById('deliveryContact');
             const errorBox = document.getElementById('form-error-box');
+            const submitBtn = document.getElementById('submit-order-btn');
 
             const name = nameEl.value.trim();
             const bkash = bkashEl.value.trim();
@@ -2695,20 +2704,66 @@
                 return;
             }
 
+            // Show instant submitting feedback on button
+            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>অর্ডার পাঠানো হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</span>';
+            }
+
             // Generate Order Reference ID
             const orderRef = 'SC-' + Math.floor(100000 + Math.random() * 900000);
             lastSubmittedOrder = {
                 orderId: orderRef,
                 product: window.STORE_CONFIG.productName,
                 amountBDT: window.STORE_CONFIG.priceBDT,
+                currency: window.STORE_CONFIG.currency || 'BDT',
                 customerName: name,
                 customerBkashNumber: bkash,
                 transactionId: trxId,
+                email: contact,
                 deliveryContact: contact,
+                pageUrl: window.location.href,
                 submittedAt: new Date().toISOString()
             };
 
-            // Populate Confirmation UI
+            // Send order details immediately to n8n Webhook workflow
+            const webhookUrl = (window.STORE_CONFIG && window.STORE_CONFIG.orderWebhookUrl || '').trim();
+            if (webhookUrl) {
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(lastSubmittedOrder)
+                    });
+                } catch (corsOrNetErr) {
+                    // Fallback with no-cors so browser preflight restrictions never prevent n8n from receiving the payload
+                    try {
+                        await fetch(webhookUrl, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {
+                                'Content-Type': 'text/plain;charset=UTF-8'
+                            },
+                            body: JSON.stringify(lastSubmittedOrder)
+                        });
+                    } catch (fallbackErr) {
+                        console.error('n8n Webhook dispatch error:', fallbackErr);
+                    }
+                }
+            }
+
+            // Restore button state
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            }
+
+            // Populate Personalized Confirmation UI
+            const greetingNameEl = document.getElementById('summary-greeting-name');
+            if (greetingNameEl) greetingNameEl.textContent = name;
             document.getElementById('summary-order-id').textContent = orderRef;
             document.getElementById('summary-name').textContent = name;
             document.getElementById('summary-bkash').textContent = bkash;
