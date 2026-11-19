@@ -20,6 +20,9 @@
     <!-- StPageFlip CDN for Realistic 3D Book Page-Curl & Magazine Flip Effect -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
+    <!-- jsPDF CDN for Guaranteed Client-Side Fallback PDF Generation (Prevents 404 Download Failed) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
@@ -1005,7 +1008,7 @@
                             </svg>
                             <span>১৫ পৃষ্ঠার স্যাম্পল পড়ুন</span>
                         </button>
-                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="trackMetaEvent('ViewContent', { content_name: 'Free Sample PDF Direct Download' })" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors">
+                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
                             <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                             </svg>
@@ -1777,7 +1780,7 @@
                     <span id="sample-zoom-label" class="hidden sm:inline-block text-xs font-mono text-gold-300 w-11 text-center">100%</span>
                     <button type="button" onclick="changeSampleZoom(0.2)" class="w-8 h-8 rounded-lg bg-emerald-900 hover:bg-emerald-800 text-cream-100 font-bold text-sm flex items-center justify-center border border-gold-500/20" title="Zoom In">+</button>
 
-                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1" title="Download Free Sample PDF">
+                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer" title="Download Free Sample PDF">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                         <span class="hidden sm:inline">PDF ডাউনলোড</span>
                     </a>
@@ -2306,6 +2309,151 @@
                     });
                 });
             });
+        }
+
+        // Bulletproof Free Sample PDF Downloader (Checks hosted PDF first; if 404/missing, generates valid 15-page PDF on the fly)
+        async function downloadFreeSamplePdf(event, triggerEl) {
+            if (event) event.preventDefault();
+
+            const pdfUrl = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample.pdf';
+            const fileName = 'Tech_Probiotic_Free_Sample.pdf';
+            const labelSpan = triggerEl ? triggerEl.querySelector('span') : null;
+            const originalText = labelSpan ? labelSpan.textContent : '';
+
+            if (labelSpan) labelSpan.textContent = 'ডাউনলোড হচ্ছে...';
+
+            trackMetaEvent('ViewContent', {
+                content_name: 'Free Sample PDF Download',
+                value: window.STORE_CONFIG.priceBDT,
+                currency: 'BDT'
+            });
+
+            try {
+                // 1. Try fetching the real hosted PDF file if uploaded alongside index.html
+                const response = await fetch(pdfUrl, { cache: 'no-store' });
+                const contentType = (response.headers.get('content-type') || '').toLowerCase();
+
+                if (response.ok && (contentType.includes('pdf') || contentType.includes('octet-stream'))) {
+                    const blob = await response.blob();
+                    if (blob.size > 1024) {
+                        triggerBlobDownload(blob, fileName);
+                        if (labelSpan) labelSpan.textContent = originalText;
+                        return false;
+                    }
+                }
+            } catch (err) {
+                console.warn('Hosted PDF file not found on server, generating client-side 15-page PDF:', err);
+            }
+
+            // 2. Fallback: Generate a real, valid 15-page PDF with crisp Bengali typography so download NEVER fails
+            try {
+                if (window.jspdf && window.jspdf.jsPDF) {
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF({ orientation: 'portrait', unit: 'px', format: [595, 842] });
+
+                    SAMPLE_BOOK_PAGES.forEach((item, idx) => {
+                        if (idx > 0) doc.addPage();
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 1190;
+                        canvas.height = 1684;
+                        const ctx = canvas.getContext('2d');
+
+                        // Cream paper background & emerald frame
+                        ctx.fillStyle = '#FFFDF9';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                        ctx.strokeStyle = '#D4AF37';
+                        ctx.lineWidth = 10;
+                        ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
+
+                        // Top Emerald Header Banner
+                        ctx.fillStyle = '#04392A';
+                        ctx.fillRect(64, 68, canvas.width - 128, 120);
+
+                        ctx.fillStyle = '#F3D87D';
+                        ctx.font = 'bold 30px "Hind Siliguri", sans-serif';
+                        ctx.fillText(`টেক প্রোবায়োটিক • ৫০০+ সেলাই ও কাটিং চার্ট (${item.badge})`, 96, 120);
+
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.font = '600 24px "Hind Siliguri", sans-serif';
+                        ctx.fillText(`ফ্রি স্যাম্পল ক্যাটালগ — পৃষ্ঠা ${item.page} / ${SAMPLE_BOOK_PAGES.length}`, 96, 162);
+
+                        // Page Title
+                        ctx.fillStyle = '#02231A';
+                        ctx.font = 'bold 40px "Hind Siliguri", sans-serif';
+                        wrapCanvasText(ctx, item.title, 76, 265, canvas.width - 152, 54);
+
+                        // Summary Content Box
+                        ctx.fillStyle = '#FAF6EE';
+                        ctx.fillRect(72, 380, canvas.width - 144, 920);
+                        ctx.strokeStyle = '#E5D5B8';
+                        ctx.lineWidth = 4;
+                        ctx.strokeRect(72, 380, canvas.width - 144, 920);
+
+                        ctx.fillStyle = '#191715';
+                        ctx.font = '500 32px "Hind Siliguri", sans-serif';
+                        let currentY = 450;
+                        item.summary.split('\n').forEach(line => {
+                            currentY = wrapCanvasText(ctx, line, 108, currentY, canvas.width - 216, 48) + 28;
+                        });
+
+                        // Bottom Conversion Footer inside PDF
+                        ctx.fillStyle = '#064E3B';
+                        ctx.fillRect(72, 1360, canvas.width - 144, 190);
+
+                        ctx.fillStyle = '#F3D87D';
+                        ctx.font = 'bold 34px "Hind Siliguri", sans-serif';
+                        ctx.fillText('সম্পূর্ণ ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ একসাথে পেতে ভিজিট করুন:', 104, 1425);
+
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.font = 'bold 32px "Hind Siliguri", sans-serif';
+                        ctx.fillText('https://katasohoj.netlify.app  |  এককালীন মূল্য: মাত্র ৳১৯৯ টাকা', 104, 1485);
+
+                        const imgData = canvas.toDataURL('image/jpeg', 0.88);
+                        doc.addImage(imgData, 'JPEG', 0, 0, 595, 842);
+                    });
+
+                    const generatedBlob = doc.output('blob');
+                    triggerBlobDownload(generatedBlob, fileName);
+                } else {
+                    window.open(pdfUrl, '_blank');
+                }
+            } catch (genErr) {
+                console.error('PDF generation fallback error:', genErr);
+            } finally {
+                if (labelSpan) labelSpan.textContent = originalText;
+            }
+
+            return false;
+        }
+
+        function triggerBlobDownload(blob, fileName) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 4000);
+        }
+
+        function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+                    ctx.fillText(line.trim(), x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line.trim(), x, y);
+            return y + lineHeight;
         }
 
         // 5. Fallback Full-Resolution SVG Generators (If local JPG files are not yet in the directory)
