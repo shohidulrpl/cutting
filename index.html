@@ -230,8 +230,9 @@
             bkashNumber: "01722984756",
             bkashAccountType: "Personal",
             bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
-            // Free 15-Page Sample PDF File (Place in same folder or set hosted PDF URL):
-            freeSamplePdfUrl: "Tech_Probiotic_Free_Sample.pdf",
+            // Free 15-Page Sample PDF File (Place Tech_Probiotic_Free_Sample_2.pdf in same folder or set hosted PDF URL):
+            freeSamplePdfUrl: "Tech_Probiotic_Free_Sample_2.pdf",
+            freeSamplePdfFallbacks: ["Tech_Probiotic_Free_Sample_2.pdf", "Tech_Probiotic_Free_Sample.pdf"],
             // Sample Chart Images (Place these JPG files in the same folder or replace with hosted URLs):
             sampleCharts: {
                 blouse: {
@@ -452,53 +453,93 @@
                 <div class="lg:col-span-5">
                     <div class="relative mx-auto max-w-md lg:max-w-none">
                         
-                        <!-- Interactive Click-to-Flip 3D Book Showcase Card -->
-                        <div onclick="openSampleReader(1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSampleReader(1);}" aria-label="3D বইটিতে ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল উল্টে দেখুন" class="group cursor-pointer bg-gradient-to-b from-[#3A0C12] via-[#2A080D] to-emerald-950 rounded-3xl p-3.5 sm:p-4 shadow-2xl border-2 border-gold-500/55 hover:border-gold-300 transition-all duration-300 relative overflow-hidden">
+                        <!-- Suggestion 2: Top 3D Book Showcase + Bottom 2 Quick Sample Chart Previews -->
+                        <div class="bg-gradient-to-b from-[#3A0C12] via-[#240B10] to-emerald-950 rounded-3xl p-3.5 sm:p-4 shadow-2xl border-2 border-gold-500/55 relative overflow-hidden">
                             
                             <!-- Ambient Gold Spotlight Behind 3D Book -->
-                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(243,216,125,0.22),transparent_68%)] pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_32%,rgba(243,216,125,0.22),transparent_65%)] pointer-events-none"></div>
 
                             <!-- Top Interactive Click-to-Flip Pill -->
-                            <div class="relative z-10 flex items-center justify-between gap-2 mb-2.5 px-1">
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-[11px] sm:text-xs font-bold">
-                                    <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
-                                    <span>3D ডিজিটাল ক্যাটালগ</span>
-                                </span>
-                                <span class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-cream-100 bg-black/35 group-hover:bg-gold-500 group-hover:text-emerald-950 px-2.5 py-1 rounded-full border border-gold-500/30 transition-colors">
-                                    <span>পাতা উল্টে দেখুন</span>
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
-                                </span>
-                            </div>
-
-                            <!-- Cropped 3D Hardcover Book + Floating Side Charts + ৳199 Badge from photo.jpg -->
-                            <div class="relative z-10 aspect-[10/9] w-full rounded-2xl overflow-hidden border border-gold-500/30 bg-[#3B0B11] shadow-inner">
-                                <img src="photo.jpg"
-                                     alt="৫০০+ কাটিং চার্ট 3D ডিজিটাল বই — মাত্র ১৯৯ টাকা"
-                                     style="object-position: 50% 84%;"
-                                     class="w-full h-full object-cover book-3d-float group-hover:scale-[1.03] transition-transform duration-500"
-                                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                                
-                                <!-- Graceful Fallback if photo.jpg is not placed in the folder yet -->
-                                <div class="hidden w-full h-full bg-gradient-to-br from-emerald-900 to-emerald-950 p-6 flex flex-col items-center justify-center text-center text-cream-50">
-                                    <div class="w-20 h-24 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 font-extrabold flex flex-col items-center justify-center shadow-xl mb-3">
-                                        <span class="text-2xl leading-none">৫০০+</span>
-                                        <span class="text-[11px] mt-1">কাটিং চার্ট</span>
-                                    </div>
-                                    <p class="font-serif text-lg font-bold text-gold-300">ডিজিটাল PDF ক্যাটালগ</p>
-                                    <p class="text-xs text-cream-200 mt-1">ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল দেখুন</p>
+                            <div onclick="openSampleReader(1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSampleReader(1);}" class="group cursor-pointer relative z-10">
+                                <div class="flex items-center justify-between gap-2 mb-2 px-1">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-[11px] font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping"></span>
+                                        <span>3D ডিজিটাল ক্যাটালগ</span>
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 text-[11px] font-bold text-cream-100 bg-black/40 group-hover:bg-gold-500 group-hover:text-emerald-950 px-2.5 py-0.5 rounded-full border border-gold-500/30 transition-colors">
+                                        <span>১৫ পৃষ্ঠা উল্টে দেখুন</span>
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+                                    </span>
                                 </div>
 
-                                <!-- Soft Edge Vignette for Seamless Studio Blend -->
-                                <div class="absolute inset-0 shadow-[inset_0_0_26px_rgba(20,4,7,0.65)] pointer-events-none"></div>
+                                <!-- Cropped 3D Hardcover Book + Floating Side Charts + ৳199 Badge from photo.jpg -->
+                                <div class="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-gold-500/35 bg-[#3B0B11] shadow-inner">
+                                    <img src="photo.jpg"
+                                         alt="৫০০+ কাটিং চার্ট 3D ডিজিটাল বই — মাত্র ১৯৯ টাকা"
+                                         style="object-position: 50% 84%;"
+                                         class="w-full h-full object-cover book-3d-float group-hover:scale-[1.03] transition-transform duration-500"
+                                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                                    
+                                    <!-- Graceful Fallback if photo.jpg is not placed in the folder yet -->
+                                    <div class="hidden w-full h-full bg-gradient-to-br from-emerald-900 to-emerald-950 p-4 flex flex-col items-center justify-center text-center text-cream-50">
+                                        <div class="px-4 py-2 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 font-extrabold shadow-lg mb-1.5">
+                                            <span class="text-xl">৫০০+ কাটিং চার্ট</span>
+                                        </div>
+                                        <p class="text-xs text-gold-300 font-bold">ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল দেখুন</p>
+                                    </div>
+
+                                    <!-- Soft Edge Vignette -->
+                                    <div class="absolute inset-0 shadow-[inset_0_0_22px_rgba(20,4,7,0.65)] pointer-events-none"></div>
+                                </div>
                             </div>
 
-                            <!-- Interactive Click-to-Flip Prompt Bar -->
-                            <div class="relative z-10 mt-3 pt-2.5 border-t border-gold-500/25 flex items-center justify-between gap-2 text-xs">
-                                <span class="text-cream-100 font-semibold flex items-center gap-1.5">
+                            <!-- Bottom 2 Quick Sample Chart Previews -->
+                            <div class="relative z-10 mt-3 pt-3 border-t border-gold-500/25">
+                                <div class="flex items-center justify-between text-[11px] text-gold-300 font-bold mb-2 px-0.5">
+                                    <span>ভেতরের নমুনা চার্ট (ক্লিক করে জুম করুন):</span>
+                                    <span class="text-cream-200/80 font-normal">৫০০ চার্টের ২টি নমুনা</span>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    <!-- Mini Sample 01: Blouse Cutting Chart -->
+                                    <div onclick="openChartModal('blouse')" class="group/card cursor-pointer bg-cream-50/95 hover:bg-white rounded-xl p-2 border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm flex items-center gap-2.5">
+                                        <div class="w-11 h-14 rounded-lg overflow-hidden bg-[#4A0E17] shrink-0 border border-stone-300">
+                                            <img src="Blouse_cutting_chart_layout_78f992c3.jpg"
+                                                 alt="ব্লাউজ কাটিং চার্ট"
+                                                 class="w-full h-full object-cover object-top group-hover/card:scale-105 transition-transform"
+                                                 onerror="this.style.display='none';">
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <span class="block text-[10px] font-bold text-emerald-900">নমুনা #০১</span>
+                                            <p class="text-xs font-bold text-charcoal-900 truncate">ব্লাউজ কাটিং চার্ট</p>
+                                            <span class="inline-flex items-center gap-0.5 text-[10px] font-bold text-gold-700 mt-0.5">জুম করুন 🔍</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mini Sample 02: Angrakha Kameez Chart -->
+                                    <div onclick="openChartModal('angrakha')" class="group/card cursor-pointer bg-cream-50/95 hover:bg-white rounded-xl p-2 border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm flex items-center gap-2.5">
+                                        <div class="w-11 h-14 rounded-lg overflow-hidden bg-[#F7F1E5] shrink-0 border border-stone-300">
+                                            <img src="৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg"
+                                                 alt="আংরাখা কামিজ চার্ট"
+                                                 class="w-full h-full object-cover object-top group-hover/card:scale-105 transition-transform"
+                                                 onerror="this.style.display='none';">
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <span class="block text-[10px] font-bold text-emerald-900">নমুনা #০২</span>
+                                            <p class="text-xs font-bold text-charcoal-900 truncate">আংরাখা কামিজ</p>
+                                            <span class="inline-flex items-center gap-0.5 text-[10px] font-bold text-gold-700 mt-0.5">জুম করুন 🔍</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Click-to-Flip Footer Strip -->
+                            <div onclick="openSampleReader(1)" class="cursor-pointer relative z-10 mt-2.5 pt-2 border-t border-gold-500/20 flex items-center justify-between gap-2 text-xs">
+                                <span class="text-cream-100 font-medium flex items-center gap-1.5">
                                     <span>📖</span>
-                                    <span>বইটিতে ক্লিক করে ১৫ পৃষ্ঠা উল্টে দেখুন</span>
+                                    <span>বইটিতে ক্লিক করে ১৫ পৃষ্ঠা পড়ুন</span>
                                 </span>
-                                <span class="px-2.5 py-1 rounded-lg bg-gold-500 group-hover:bg-gold-400 text-emerald-950 font-extrabold shrink-0 transition-colors">
+                                <span class="px-2.5 py-1 rounded-lg bg-gold-500 hover:bg-gold-400 text-emerald-950 font-extrabold shrink-0 transition-colors">
                                     ফ্রি স্যাম্পল →
                                 </span>
                             </div>
@@ -972,7 +1013,7 @@
                             </svg>
                             <span>১৫ পৃষ্ঠার স্যাম্পল পড়ুন</span>
                         </button>
-                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
+                        <a href="Tech_Probiotic_Free_Sample_2.pdf" download="Tech_Probiotic_Free_Sample_2.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
                             <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                             </svg>
@@ -1726,7 +1767,7 @@
          INTERACTIVE 15-PAGE FREE SAMPLE PDF READER MODAL (OPTION A)
          ===================================================================== -->
     <div id="sample-pdf-modal" class="fixed inset-0 z-50 hidden bg-charcoal-900/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-5">
-        <div class="bg-cream-50 rounded-3xl max-w-5xl w-full h-[94vh] flex flex-col overflow-hidden border-2 border-gold-500 shadow-2xl">
+        <div class="bg-cream-50 rounded-3xl max-w-5xl w-full h-[92vh] h-[92dvh] flex flex-col overflow-hidden border-2 border-gold-500 shadow-2xl">
             
             <!-- Top Reader Bar -->
             <div class="bg-emerald-950 text-cream-50 px-3.5 sm:px-5 py-3 flex items-center justify-between gap-2 border-b border-gold-500/30 shrink-0">
@@ -1744,7 +1785,7 @@
                     <span id="sample-zoom-label" class="hidden sm:inline-block text-xs font-mono text-gold-300 w-11 text-center">100%</span>
                     <button type="button" onclick="changeSampleZoom(0.2)" class="w-8 h-8 rounded-lg bg-emerald-900 hover:bg-emerald-800 text-cream-100 font-bold text-sm flex items-center justify-center border border-gold-500/20" title="Zoom In">+</button>
 
-                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer" title="Download Free Sample PDF">
+                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample_2.pdf" download="Tech_Probiotic_Free_Sample_2.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer" title="Download Free Sample PDF">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                         <span class="hidden sm:inline">PDF ডাউনলোড</span>
                     </a>
@@ -1974,28 +2015,30 @@
         // 4B. INTERACTIVE 15-PAGE REALISTIC 3D BOOK FLIPBOOK READER ENGINE
         // =====================================================================
         const SAMPLE_BOOK_PAGES = [
-            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার (৫০০+ কাটিং চার্ট)", badge: "কভার পেজ", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
-            { page: 2, short: "২. সূচিপত্র", title: "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)", badge: "সূচিপত্র ও বৈশিষ্ট্য", summary: "• ৫০১টি কাটিং চার্ট: কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন\n• ২৩টি বিভাগ: ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ\n• সব বয়স ও সাইজ: নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত\n• প্রতিটি চার্টে গাইড ও মোবাইলে সহজে দেখার উপযোগী" },
-            { page: 3, short: "৩. কার জন্য", title: "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?", badge: "ব্যবহারকারী গাইড", summary: "১. নতুন শিক্ষার্থী: প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।\n২. টেইলার ও কারিগর: নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।\n৩. বুটিক ব্যবসায়ী: কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।\n৪. সেলাই-শখীন মেয়েরা: নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।" },
-            { page: 4, short: "৪. পড়ার নিয়ম", title: "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন? (৪টি সহজ নির্দেশিকা)", badge: "কাটিং চিহ্ন পরিচিতি", summary: "১. কাঁচির চিহ্ন: কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।\n২. তীর ও মাপ: দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।\n৩. ড্যাশ দাগ: ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।\n৪. গ্রেন লাইন ও ফোল্ড লাইন: গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।" },
-            { page: 5, short: "৫. কেপ কুর্তি", title: "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)", badge: "কামিজ ও কুর্তি", summary: "সাইজ - ৪০ | কেপের গলা: ১৬\", বুক: ৪০\", কোমর: ৩৬\", ঝুল: ৪৪\", কেপের ঝুল: ১৪\"। এক কুর্তি, দুই লুক।", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
-            { page: 6, short: "৬. ডিপ নেক ব্লাউজ", title: "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)", badge: "ব্লাউজ কাটিং", summary: "সাইজ - ৩৮ | গলার চওড়া: ৬\", গলার গভীরতা: ৮\", ফেসিং পট্টি: ১.৫\" চওড়া ও ডোরি মাপসহ।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
-            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
-            { page: 8, short: "৮. সারারা সেট", title: "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)", badge: "পার্টি ও সারারা", summary: "সাইজ - ৩৮ | বিয়ে-পার্টির গর্জিয়াস সারারা। কোমর, হাঁটুর কাটিং, ঘের ও লম্বার গোপন হিসাব।" },
-            { page: 9, short: "৯. ৬-কলি ছায়া", title: "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)", badge: "পেটিকোট ও ছায়া", summary: "সাইজ - ৩৮ | কোমরপট্টি: ৩৮\" × ৫\" | কলির কাটিং: উপরে ৭.৫\", নিচে ১৪.৫\", লম্বা ৩৬\" ও সেলাই মার্জিন।" },
-            { page: 10, short: "১০. ২৪-কলি লেহেঙ্গা", title: "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)", badge: "ব্রাইডাল ও লেহেঙ্গা", summary: "সাইজ - ৩৮ | ২৪ পিস কাটুন | উপরে ২\", নিচে ১২\", লম্বা ৪০\", ১.৫\" হেম ফোল্ড ও কোমরপট্টি ৩২\" × ৩\"।" },
-            { page: 11, short: "১১. ম্যাক্সি ড্রেস", title: "পৃষ্ঠা ১১: ৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (চার্ট #১৮২)", badge: "গাউন ও ম্যাক্সি", summary: "সাইজ - ৪২ | আংরাখা স্টাইলের ওভারল্যাপ ডিজাইন, বগল ২১\" ও লম্বা ৫২\" মাপসহ।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
-            { page: 12, short: "১২. প্লিটেড স্কার্ট", title: "পৃষ্ঠা ১২: ৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (চার্ট #২১০)", badge: "স্কার্ট কাটিং", summary: "সাইজ - ৪০ | লম্বা ২৮\", বেল্ট ৩২\" × ২\", কাপড় বহর ৮০\", ২\" পর পর প্লিট ও জিপার প্লেকেট।" },
-            { page: 13, short: "১৩. ফ্রিল ফ্রক", title: "পৃষ্ঠা ১৩: ২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (চার্ট #২৬৭)", badge: "বাচ্চাদের পোশাক", summary: "বয়স ২-৩ বছর | বডি পার্ট: ছাতি ১১\", লম্বা ৯\" | হাতার ফ্রিল: ২৪\" × ২\" | নিচের কুঁচি পার্ট: চওড়া ৪০\", লম্বা ১২\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
-            { page: 14, short: "১৪. ব্লেজার চার্ট", title: "পৃষ্ঠা ১৪: ৪২ সাইজ ব্লেজার কাটিং চার্ট (চার্ট #৩৫২)", badge: "শীতের পোশাক", summary: "সাইজ - ৪২ | Shoulder: 18\", Chest: 22\", Length: 30\", Sleeve Length: 25\", Collar, Flap Pocket (6\" × 2\") ও লাইনিং।" },
-            { page: 15, short: "১৫. সম্পূর্ণ বই", title: "পৃষ্ঠা ১৫: পুরো বই পেতে এখনই অর্ডার করুন (৫০০+ চার্ট)", badge: "সমাপনী পৃষ্ঠা", summary: "এটি শুধু ১৫ পৃষ্ঠার ফ্রি নমুনা। পুরো ই-বুকে আছে ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ। এককালীন মূল্য মাত্র ৳১৯৯ টাকা।" }
+            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার (৫০০+ কাটিং চার্ট)", badge: "কভার পেজ", theme: "#3B0B11", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "photo.jpg" },
+            { page: 2, short: "২. সূচিপত্র", title: "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)", badge: "সূচিপত্র ও বৈশিষ্ট্য", theme: "#04392A", summary: "• ৫০১টি কাটিং চার্ট: কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন\n• ২৩টি বিভাগ: ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ\n• সব বয়স ও সাইজ: নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত\n• প্রতিটি চার্টে গাইড ও মোবাইলে সহজে দেখার উপযোগী", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
+            { page: 3, short: "৩. কার জন্য", title: "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?", badge: "ব্যবহারকারী গাইড", theme: "#064E3B", summary: "১. নতুন শিক্ষার্থী: প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।\n২. টেইলার ও কারিগর: নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।\n৩. বুটিক ব্যবসায়ী: কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।\n৪. সেলাই-শখীন মেয়েরা: নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
+            { page: 4, short: "৪. পড়ার নিয়ম", title: "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন? (৪টি সহজ নির্দেশিকা)", badge: "কাটিং চিহ্ন পরিচিতি", theme: "#8F6F13", summary: "১. কাঁচির চিহ্ন: কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।\n২. তীর ও মাপ: দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।\n৩. ড্যাশ দাগ: ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।\n৪. গ্রেন লাইন ও ফোল্ড লাইন: গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
+            { page: 5, short: "৫. কেপ কুর্তি", title: "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)", badge: "কামিজ ও কুর্তি", theme: "#0B2545", summary: "সাইজ - ৪০ | কেপের গলা: ১৬\", বুক: ৪০\", কোমর: ৩৬\", ঝুল: ৪৪\", কেপের ঝুল: ১৪\"। এক কুর্তি, দুই লুক।", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
+            { page: 6, short: "৬. ডিপ নেক ব্লাউজ", title: "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)", badge: "ব্লাউজ কাটিং", theme: "#0A2342", summary: "সাইজ - ৩৮ | গলার চওড়া: ৬\", গলার গভীরতা: ৮\", ফেসিং পট্টি: ১.৫\" চওড়া ও ডোরি মাপসহ।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
+            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", theme: "#0E4D78", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
+            { page: 8, short: "৮. সারারা সেট", title: "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)", badge: "পার্টি ও সারারা", theme: "#4A154B", summary: "সাইজ - ৩৮ | বিয়ে-পার্টির গর্জিয়াস সারারা। কোমর, হাঁটুর কাটিং, ঘের ও লম্বার গোপন হিসাব।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
+            { page: 9, short: "৯. ৬-কলি ছায়া", title: "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)", badge: "পেটিকোট ও ছায়া", theme: "#1E5631", summary: "সাইজ - ৩৮ | কোমরপট্টি: ৩৮\" × ৫\" | কলির কাটিং: উপরে ৭.৫\", নিচে ১৪.৫\", লম্বা ৩৬\" ও সেলাই মার্জিন।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
+            { page: 10, short: "১০. ২৪-কলি লেহেঙ্গা", title: "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)", badge: "ব্রাইডাল ও লেহেঙ্গা", theme: "#5C0A1B", summary: "সাইজ - ৩৮ | ২৪ পিস কাটুন | উপরে ২\", নিচে ১২\", লম্বা ৪০\", ১.৫\" হেম ফোল্ড ও কোমরপট্টি ৩২\" × ৩\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
+            { page: 11, short: "১১. ম্যাক্সি ড্রেস", title: "পৃষ্ঠা ১১: ৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (চার্ট #১৮২)", badge: "গাউন ও ম্যাক্সি", theme: "#283618", summary: "সাইজ - ৪২ | আংরাখা স্টাইলের ওভারল্যাপ ডিজাইন, বগল ২১\" ও লম্বা ৫২\" মাপসহ।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
+            { page: 12, short: "১২. প্লিটেড স্কার্ট", title: "পৃষ্ঠা ১২: ৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (চার্ট #২১০)", badge: "স্কার্ট কাটিং", theme: "#6B2D5C", summary: "সাইজ - ৪০ | লম্বা ২৮\", বেল্ট ৩২\" × ২\", কাপড় বহর ৮০\", ২\" পর পর প্লিট ও জিপার প্লেকেট।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
+            { page: 13, short: "১৩. ফ্রিল ফ্রক", title: "পৃষ্ঠা ১৩: ২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (চার্ট #২৬৭)", badge: "বাচ্চাদের পোশাক", theme: "#6D3B7A", summary: "বয়স ২-৩ বছর | বডি পার্ট: ছাতি ১১\", লম্বা ৯\" | হাতার ফ্রিল: ২৪\" × ২\" | নিচের কুঁচি পার্ট: চওড়া ৪০\", লম্বা ১২\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
+            { page: 14, short: "১৪. ব্লেজার চার্ট", title: "পৃষ্ঠা ১৪: ৪২ সাইজ ব্লেজার কাটিং চার্ট (চার্ট #৩৫২)", badge: "শীতের পোশাক", theme: "#0F2537", summary: "সাইজ - ৪২ | Shoulder: 18\", Chest: 22\", Length: 30\", Sleeve Length: 25\", Collar, Flap Pocket (6\" × 2\") ও লাইনিং।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
+            { page: 15, short: "১৫. সম্পূর্ণ বই", title: "পৃষ্ঠা ১৫: পুরো বই পেতে এখনই অর্ডার করুন (৫০০+ চার্ট)", badge: "সমাপনী পৃষ্ঠা", theme: "#02231A", summary: "এটি শুধু ১৫ পৃষ্ঠার ফ্রি নমুনা। পুরো ই-বুকে আছে ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ। এককালীন মূল্য মাত্র ৳১৯৯ টাকা।", img: "photo.jpg" }
         ];
 
         let samplePdfDoc = null;
+        let resolvedPdfUrl = null;
         let samplePageFlip = null;
         let currentSamplePage = 1;
         let sampleZoomScale = 1.0;
-        const renderedPdfPages = new Set();
+        let lastFlipbookWindowWidth = window.innerWidth;
+        const pdfPageImageCache = {};
 
         function initSamplePills() {
             const pillsContainer = document.getElementById('sample-page-pills');
@@ -2013,41 +2056,51 @@
         }
 
         function buildFlipbookDOM() {
+            const stage = document.getElementById('sample-flipbook-stage');
+            if (!stage) return null;
+
+            // Always create a fresh container because St.PageFlip.destroy() removes the element from DOM
+            stage.innerHTML = '<div id="sample-flipbook-container" class="mx-auto"></div>';
             const container = document.getElementById('sample-flipbook-container');
-            if (!container || container.children.length > 0) return;
+            if (!container) return null;
 
             const total = SAMPLE_BOOK_PAGES.length;
             SAMPLE_BOOK_PAGES.forEach(info => {
                 const pageDiv = document.createElement('div');
-                pageDiv.className = 'flip-page-item relative border border-stone-300 select-none';
+                pageDiv.className = 'flip-page-item relative border border-stone-300 select-none bg-white';
                 pageDiv.setAttribute('data-page', info.page);
                 if (info.page === 1 || info.page === total) {
                     pageDiv.setAttribute('data-density', 'hard');
                 }
 
+                const cachedImgSrc = pdfPageImageCache[info.page];
                 const linesHtml = info.summary.split('\n').map(line => `<p class="leading-snug">${line}</p>`).join('');
-                const imageHtml = info.img
-                    ? `<div class="my-2 flex-1 min-h-0 rounded-xl overflow-hidden border border-gold-500/40 bg-emerald-950/5 flex items-center justify-center">
-                           <img src="${info.img}" alt="${info.title}" class="max-h-full max-w-full object-contain" onerror="this.parentElement.style.display='none'">
-                       </div>`
-                    : '';
+                const inlineSvgPreview = getSamplePageVisualGraphic(info.page);
 
                 pageDiv.innerHTML = `
-                    <!-- PDF Canvas Layer (Shown automatically when real PDF renders) -->
-                    <canvas id="flip-pdf-canvas-${info.page}" class="hidden w-full h-full object-contain bg-white"></canvas>
+                    <!-- High-Resolution Rendered PDF Page Image (Shown immediately if cached or once PDF.js renders) -->
+                    <img id="flip-pdf-img-${info.page}"
+                         src="${cachedImgSrc || ''}"
+                         alt="${info.title}"
+                         class="${cachedImgSrc ? '' : 'hidden'} w-full h-full object-contain bg-white select-none pointer-events-none" />
 
-                    <!-- Styled Paper Fallback Layer (Always ready immediately, zero blank white pages) -->
-                    <div id="flip-fallback-layer-${info.page}" class="w-full h-full p-3.5 sm:p-5 flex flex-col justify-between bg-[#FFFDF9] text-charcoal-900">
-                        <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-2 shrink-0">
-                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-900 text-gold-300 text-[10px] sm:text-xs font-bold">${info.badge}</span>
+                    <!-- Richly Illustrated Fallback Page (Ensures every page has visual chart graphics even before PDF file upload) -->
+                    <div id="flip-fallback-layer-${info.page}" class="${cachedImgSrc ? 'hidden' : ''} w-full h-full p-3 sm:p-4 flex flex-col justify-between bg-[#FFFDF9] text-charcoal-900">
+                        <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-1.5 shrink-0">
+                            <span class="px-2.5 py-0.5 rounded-full text-gold-300 text-[10px] sm:text-xs font-bold" style="background-color: ${info.theme};">${info.badge}</span>
                             <span class="text-[11px] font-bold text-stone-500">পৃষ্ঠা ${info.page} / ${total}</span>
                         </div>
-                        <h4 class="font-serif text-sm sm:text-base font-bold text-emerald-950 mt-2 shrink-0">${info.title}</h4>
-                        ${imageHtml}
-                        <div class="bg-cream-100/90 rounded-xl p-2.5 sm:p-3.5 border border-stone-200/80 text-[11px] sm:text-xs text-charcoal-800 space-y-1.5 overflow-y-auto">
+                        <h4 class="font-serif text-xs sm:text-sm font-bold text-emerald-950 mt-1.5 shrink-0">${info.title}</h4>
+                        <div class="my-1.5 flex-1 min-h-0 rounded-xl overflow-hidden border border-gold-500/40 bg-cream-100/70 flex items-center justify-center relative">
+                            ${info.img ? `<img src="${info.img}" alt="${info.title}" class="w-full h-full object-cover object-top" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">` : ''}
+                            <div class="${info.img ? 'hidden' : ''} w-full h-full p-1.5 flex items-center justify-center">
+                                ${inlineSvgPreview}
+                            </div>
+                        </div>
+                        <div class="bg-cream-100/95 rounded-xl p-2 sm:p-2.5 border border-stone-200/80 text-[10.5px] sm:text-xs text-charcoal-800 space-y-1 shrink-0">
                             ${linesHtml}
                         </div>
-                        <div class="pt-2 border-t border-stone-200/70 flex items-center justify-between text-[10px] text-stone-500 shrink-0">
+                        <div class="pt-1.5 border-t border-stone-200/70 flex items-center justify-between text-[10px] text-stone-500 shrink-0">
                             <span>টেক প্রোবায়োটিক • ৫০০+ কাটিং চার্ট</span>
                             <span class="font-bold text-emerald-900">পৃষ্ঠা ${info.page}</span>
                         </div>
@@ -2055,34 +2108,68 @@
                 `;
                 container.appendChild(pageDiv);
             });
+
+            return container;
+        }
+
+        function getSamplePageVisualGraphic(pageNum) {
+            if (pageNum === 1 || pageNum === 15) {
+                return `<svg viewBox="0 0 260 150" class="w-full h-full rounded-lg bg-[#3B0B11]">
+                    <rect x="10" y="10" width="240" height="130" rx="8" fill="#59121B" stroke="#D4AF37" stroke-width="2"/>
+                    <text x="130" y="54" text-anchor="middle" fill="#F3D87D" font-size="24" font-weight="bold">৫০০+ কাটিং চার্ট</text>
+                    <text x="130" y="80" text-anchor="middle" fill="#FAF6EE" font-size="11">ঘরে বসে বুটিক-মানের ড্রেস বানানোর গাইড</text>
+                    <rect x="75" y="96" width="110" height="28" rx="14" fill="#D4AF37"/>
+                    <text x="130" y="114" text-anchor="middle" fill="#02231A" font-size="13" font-weight="bold">মাত্র ৳১৯৯ টাকা</text>
+                </svg>`;
+            }
+            if (pageNum >= 2 && pageNum <= 4) {
+                return `<svg viewBox="0 0 260 140" class="w-full h-full rounded-lg bg-[#04392A]">
+                    <rect x="12" y="12" width="112" height="52" rx="6" fill="#064E3B" stroke="#D4AF37" stroke-width="1.2"/>
+                    <text x="68" y="36" text-anchor="middle" fill="#F3D87D" font-size="13" font-weight="bold">৫০১টি চার্ট</text>
+                    <text x="68" y="52" text-anchor="middle" fill="#FAF6EE" font-size="8.5">২৩টি সুবিন্যস্ত বিভাগ</text>
+                    <rect x="136" y="12" width="112" height="52" rx="6" fill="#064E3B" stroke="#D4AF37" stroke-width="1.2"/>
+                    <text x="192" y="36" text-anchor="middle" fill="#F3D87D" font-size="13" font-weight="bold">সব সাইজ</text>
+                    <text x="192" y="52" text-anchor="middle" fill="#FAF6EE" font-size="8.5">নবজাতক থেকে ৫২ সাইজ</text>
+                    <rect x="12" y="74" width="236" height="54" rx="6" fill="#FAF6EE"/>
+                    <text x="130" y="97" text-anchor="middle" fill="#04392A" font-size="11" font-weight="bold">✂ কাঁচির চিহ্ন • ↔ ইঞ্চি মাপ • ┄ সেলাই মার্জিন</text>
+                    <text x="130" y="115" text-anchor="middle" fill="#57534E" font-size="9">মোবাইল ও কম্পিউটারে জুম করে স্পষ্ট দেখার উপযোগী</text>
+                </svg>`;
+            }
+            return `<svg viewBox="0 0 260 150" class="w-full h-full rounded-lg bg-[#FFFDF9]">
+                <rect x="8" y="8" width="244" height="134" rx="6" fill="#FAF6EE" stroke="#064E3B" stroke-width="1.5"/>
+                <path d="M 48 26 L 76 26 C 76 42, 94 42, 94 26 L 118 30 L 112 124 L 48 124 Z" fill="#DCFCE7" stroke="#064E3B" stroke-width="1.8"/>
+                <line x1="36" y1="26" x2="36" y2="124" stroke="#DC2626" stroke-width="1.2"/>
+                <text x="83" y="82" text-anchor="middle" fill="#064E3B" font-size="9.5" font-weight="bold">প্যাটার্ন ড্রাফট</text>
+                <path d="M 146 42 C 166 22, 206 22, 224 42 L 216 116 L 154 116 Z" fill="#FEF3C7" stroke="#8F6F13" stroke-width="1.8"/>
+                <text x="185" y="82" text-anchor="middle" fill="#8F6F13" font-size="9.5" font-weight="bold">হাতা / ঘের মাপ</text>
+            </svg>`;
         }
 
         function initStPageFlipInstance(startPage = 1) {
-            const container = document.getElementById('sample-flipbook-container');
             const viewportEl = document.getElementById('sample-reader-viewport');
-            if (!container || !window.St || !window.St.PageFlip) return;
+            if (!viewportEl || !window.St || !window.St.PageFlip) return;
 
             if (samplePageFlip) {
                 try { samplePageFlip.destroy(); } catch (e) {}
                 samplePageFlip = null;
             }
 
-            // Re-build clean leaves before initializing St.PageFlip
-            container.innerHTML = '';
-            renderedPdfPages.clear();
-            buildFlipbookDOM();
+            const container = buildFlipbookDOM();
+            if (!container) return;
 
             const isMobile = window.innerWidth < 768;
-            const availH = Math.max(380, (viewportEl.clientHeight || 540) - 56);
-            const availW = Math.max(270, (viewportEl.clientWidth || 340) - 24);
+            const safeW = viewportEl.clientWidth > 100 ? viewportEl.clientWidth : window.innerWidth - 20;
+            const safeH = viewportEl.clientHeight > 150 ? viewportEl.clientHeight : Math.max(380, window.innerHeight - 210);
+            const availH = Math.max(360, safeH - 48);
+            const availW = Math.max(260, safeW - 20);
 
             // Calculate proportional book dimensions (Desktop: 2-page open book spread, Mobile: 1-page full curl)
             let pageWidth, pageHeight;
             if (isMobile) {
-                pageWidth = Math.min(availW, 420);
-                pageHeight = Math.min(availH, Math.round(pageWidth * 1.45));
+                pageWidth = Math.min(availW, 410);
+                pageHeight = Math.min(availH, Math.round(pageWidth * 1.46));
             } else {
-                pageHeight = Math.min(availH, 640);
+                pageHeight = Math.min(availH, 630);
                 pageWidth = Math.min(Math.floor((availW - 24) / 2), Math.round(pageHeight * 0.68));
             }
 
@@ -2090,15 +2177,15 @@
                 width: pageWidth,
                 height: pageHeight,
                 size: 'fixed',
-                minWidth: 250,
+                minWidth: 240,
                 maxWidth: 540,
-                minHeight: 350,
+                minHeight: 340,
                 maxHeight: 740,
                 maxShadowOpacity: 0.55,
                 showCover: true,
                 usePortrait: isMobile,
                 mobileScrollSupport: false,
-                flippingTime: 750,
+                flippingTime: 700,
                 drawShadow: true,
                 startPage: Math.max(0, startPage - 1)
             });
@@ -2113,6 +2200,46 @@
             });
         }
 
+        // Only re-initialize flipbook if screen width actually changes (ignores Android address-bar vertical scroll resize)
+        window.addEventListener('resize', () => {
+            const modal = document.getElementById('sample-pdf-modal');
+            if (!modal || modal.classList.contains('hidden')) return;
+            if (Math.abs(window.innerWidth - lastFlipbookWindowWidth) > 30) {
+                lastFlipbookWindowWidth = window.innerWidth;
+                initStPageFlipInstance(currentSamplePage);
+                renderAdjacentPdfPages(currentSamplePage);
+            }
+        });
+
+        async function resolveAvailablePdfDocument() {
+            if (samplePdfDoc) return samplePdfDoc;
+            if (!window.pdfjsLib) return null;
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            const candidates = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfFallbacks) || [
+                'Tech_Probiotic_Free_Sample_2.pdf',
+                'Tech_Probiotic_Free_Sample.pdf'
+            ];
+
+            for (const candidateUrl of candidates) {
+                try {
+                    const res = await fetch(candidateUrl, { cache: 'no-store' });
+                    const cType = (res.headers.get('content-type') || '').toLowerCase();
+                    // Verify it's actually a PDF file and not Netlify's HTML 404 fallback page
+                    if (res.ok && !cType.includes('text/html')) {
+                        const arrayBuf = await res.arrayBuffer();
+                        const pdf = await pdfjsLib.getDocument({ data: arrayBuf }).promise;
+                        samplePdfDoc = pdf;
+                        resolvedPdfUrl = candidateUrl;
+                        return pdf;
+                    }
+                } catch (e) {
+                    console.warn(`Candidate PDF not available (${candidateUrl}):`, e);
+                }
+            }
+            return null;
+        }
+
         function openSampleReader(startPage = 1) {
             const modal = document.getElementById('sample-pdf-modal');
             if (!modal) return;
@@ -2121,7 +2248,7 @@
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
 
-            const pdfUrl = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample.pdf';
+            const pdfUrl = resolvedPdfUrl || (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample_2.pdf';
             const dlLink = document.getElementById('sample-modal-download-link');
             if (dlLink) dlLink.href = pdfUrl;
 
@@ -2134,6 +2261,7 @@
 
             currentSamplePage = startPage;
             sampleZoomScale = 1.0;
+            lastFlipbookWindowWidth = window.innerWidth;
             updateSampleZoomUI();
 
             const loading = document.getElementById('sample-pdf-loading');
@@ -2141,24 +2269,20 @@
 
             loading.classList.add('hidden');
             stage.classList.remove('hidden');
+            stage.style.transform = 'scale(1)';
 
-            // Initialize 3D Flipbook immediately so user sees the open book without waiting
+            // Wait 2 animation frames so mobile modal layout dimensions are 100% settled
             requestAnimationFrame(() => {
-                initStPageFlipInstance(startPage);
-                updateSampleHeaderAndControls(startPage, SAMPLE_BOOK_PAGES.length);
+                requestAnimationFrame(() => {
+                    initStPageFlipInstance(startPage);
+                    updateSampleHeaderAndControls(startPage, SAMPLE_BOOK_PAGES.length);
 
-                // Load real PDF.js document and render crisp pages onto the flipbook leaves
-                if (samplePdfDoc) {
-                    renderAdjacentPdfPages(startPage);
-                } else if (window.pdfjsLib) {
-                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-                    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-                        samplePdfDoc = pdf;
-                        renderAdjacentPdfPages(currentSamplePage);
-                    }).catch(err => {
-                        console.warn('Using styled 3D flipbook fallback pages (PDF local/CORS):', err);
+                    resolveAvailablePdfDocument().then(pdf => {
+                        if (pdf) {
+                            renderAdjacentPdfPages(currentSamplePage);
+                        }
                     });
-                }
+                });
             });
         }
 
@@ -2240,7 +2364,7 @@
             });
         }
 
-        // Lazy-render current page + neighboring spread pages at high Retina DPI onto the 3D Flipbook leaves
+        // Lazy-render & cache current page + neighboring spread pages at high Retina DPI onto the 3D Flipbook leaves
         function renderAdjacentPdfPages(centerPage) {
             if (!samplePdfDoc) return;
             const total = samplePdfDoc.numPages;
@@ -2248,39 +2372,48 @@
                 .filter(p => p >= 1 && p <= total);
 
             pagesToRender.forEach(pNum => {
-                if (renderedPdfPages.has(pNum)) return;
-                renderedPdfPages.add(pNum);
-
-                const canvas = document.getElementById(`flip-pdf-canvas-${pNum}`);
+                const imgEl = document.getElementById(`flip-pdf-img-${pNum}`);
                 const fallbackLayer = document.getElementById(`flip-fallback-layer-${pNum}`);
-                if (!canvas) return;
+                if (!imgEl) return;
+
+                if (pdfPageImageCache[pNum]) {
+                    imgEl.src = pdfPageImageCache[pNum];
+                    imgEl.classList.remove('hidden');
+                    if (fallbackLayer) fallbackLayer.classList.add('hidden');
+                    return;
+                }
 
                 samplePdfDoc.getPage(pNum).then(page => {
                     const unscaled = page.getViewport({ scale: 1 });
-                    const targetWidth = 720; // High resolution for crisp zoom
+                    const targetWidth = 760;
                     const scale = targetWidth / unscaled.width;
                     const viewport = page.getViewport({ scale });
 
-                    canvas.width = Math.floor(viewport.width);
-                    canvas.height = Math.floor(viewport.height);
+                    const offscreenCanvas = document.createElement('canvas');
+                    offscreenCanvas.width = Math.floor(viewport.width);
+                    offscreenCanvas.height = Math.floor(viewport.height);
 
-                    const ctx = canvas.getContext('2d');
+                    const ctx = offscreenCanvas.getContext('2d');
                     page.render({ canvasContext: ctx, viewport }).promise.then(() => {
-                        canvas.classList.remove('hidden');
+                        const dataUrl = offscreenCanvas.toDataURL('image/jpeg', 0.9);
+                        pdfPageImageCache[pNum] = dataUrl;
+                        imgEl.src = dataUrl;
+                        imgEl.classList.remove('hidden');
                         if (fallbackLayer) fallbackLayer.classList.add('hidden');
-                    }).catch(() => {
-                        renderedPdfPages.delete(pNum);
                     });
                 });
             });
         }
 
-        // Bulletproof Free Sample PDF Downloader (Checks hosted PDF first; if 404/missing, generates valid 15-page PDF on the fly)
+        // Bulletproof Free Sample PDF Downloader (Checks Tech_Probiotic_Free_Sample_2.pdf first; if missing on server, generates 15-page visual PDF on the fly)
         async function downloadFreeSamplePdf(event, triggerEl) {
             if (event) event.preventDefault();
 
-            const pdfUrl = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample.pdf';
-            const fileName = 'Tech_Probiotic_Free_Sample.pdf';
+            const candidates = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfFallbacks) || [
+                'Tech_Probiotic_Free_Sample_2.pdf',
+                'Tech_Probiotic_Free_Sample.pdf'
+            ];
+            const fileName = 'Tech_Probiotic_Free_Sample_2.pdf';
             const labelSpan = triggerEl ? triggerEl.querySelector('span') : null;
             const originalText = labelSpan ? labelSpan.textContent : '';
 
@@ -2292,24 +2425,26 @@
                 currency: 'BDT'
             });
 
-            try {
-                // 1. Try fetching the real hosted PDF file if uploaded alongside index.html
-                const response = await fetch(pdfUrl, { cache: 'no-store' });
-                const contentType = (response.headers.get('content-type') || '').toLowerCase();
+            // 1. Try fetching the real hosted PDF file if uploaded alongside index.html
+            for (const pdfUrl of candidates) {
+                try {
+                    const response = await fetch(pdfUrl, { cache: 'no-store' });
+                    const contentType = (response.headers.get('content-type') || '').toLowerCase();
 
-                if (response.ok && (contentType.includes('pdf') || contentType.includes('octet-stream'))) {
-                    const blob = await response.blob();
-                    if (blob.size > 1024) {
-                        triggerBlobDownload(blob, fileName);
-                        if (labelSpan) labelSpan.textContent = originalText;
-                        return false;
+                    if (response.ok && !contentType.includes('text/html')) {
+                        const blob = await response.blob();
+                        if (blob.size > 1024) {
+                            triggerBlobDownload(blob, fileName);
+                            if (labelSpan) labelSpan.textContent = originalText;
+                            return false;
+                        }
                     }
+                } catch (err) {
+                    console.warn(`Hosted PDF file not found (${pdfUrl}):`, err);
                 }
-            } catch (err) {
-                console.warn('Hosted PDF file not found on server, generating client-side 15-page PDF:', err);
             }
 
-            // 2. Fallback: Generate a real, valid 15-page PDF with crisp Bengali typography so download NEVER fails
+            // 2. Fallback: Generate a real, valid 15-page visual PDF so download NEVER fails on mobile
             try {
                 if (window.jspdf && window.jspdf.jsPDF) {
                     const { jsPDF } = window.jspdf;
@@ -2323,7 +2458,6 @@
                         canvas.height = 1684;
                         const ctx = canvas.getContext('2d');
 
-                        // Cream paper background & emerald frame
                         ctx.fillStyle = '#FFFDF9';
                         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -2331,8 +2465,7 @@
                         ctx.lineWidth = 10;
                         ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
 
-                        // Top Emerald Header Banner
-                        ctx.fillStyle = '#04392A';
+                        ctx.fillStyle = item.theme || '#04392A';
                         ctx.fillRect(64, 68, canvas.width - 128, 120);
 
                         ctx.fillStyle = '#F3D87D';
@@ -2343,12 +2476,10 @@
                         ctx.font = '600 24px "Hind Siliguri", sans-serif';
                         ctx.fillText(`ফ্রি স্যাম্পল ক্যাটালগ — পৃষ্ঠা ${item.page} / ${SAMPLE_BOOK_PAGES.length}`, 96, 162);
 
-                        // Page Title
                         ctx.fillStyle = '#02231A';
                         ctx.font = 'bold 40px "Hind Siliguri", sans-serif';
                         wrapCanvasText(ctx, item.title, 76, 265, canvas.width - 152, 54);
 
-                        // Summary Content Box
                         ctx.fillStyle = '#FAF6EE';
                         ctx.fillRect(72, 380, canvas.width - 144, 920);
                         ctx.strokeStyle = '#E5D5B8';
@@ -2362,7 +2493,6 @@
                             currentY = wrapCanvasText(ctx, line, 108, currentY, canvas.width - 216, 48) + 28;
                         });
 
-                        // Bottom Conversion Footer inside PDF
                         ctx.fillStyle = '#064E3B';
                         ctx.fillRect(72, 1360, canvas.width - 144, 190);
 
@@ -2380,8 +2510,6 @@
 
                     const generatedBlob = doc.output('blob');
                     triggerBlobDownload(generatedBlob, fileName);
-                } else {
-                    window.open(pdfUrl, '_blank');
                 }
             } catch (genErr) {
                 console.error('PDF generation fallback error:', genErr);
