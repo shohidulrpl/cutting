@@ -267,17 +267,29 @@
                 }
             },
             supportPhone: "+880 1XXX-XXXXXX",
-            metaPixelId: "YOUR_PIXEL_ID_HERE",
-            orderWebhookUrl: "" // Optional backend endpoint to receive order JSON
+            metaPixelId: "YOUR_PIXEL_ID_HERE", // এখানে আপনার ১৫-১৬ ডিজিটের Facebook Pixel ID বসান
+            debugPixel: false, // টেস্ট করার সময় true করলে স্ক্রিনে ইভেন্ট নোটিফিকেশন দেখাবে, লাইভ সাইটে false রাখুন
+            orderWebhookUrl: "" // Optional: Google Sheet বা Webhook URL দিলে অর্ডার ডাটা অটো চলে যাবে
         };
 
-        // Safe Meta Pixel Wrapper (fires real fbq if configured, plus updates UI event log)
+        // Auto-Initialize Official Meta Pixel (fbevents.js) when a valid numeric metaPixelId is set
+        (function initMetaPixel() {
+            const pixelId = (window.STORE_CONFIG && window.STORE_CONFIG.metaPixelId || '').trim();
+            if (pixelId && pixelId !== 'YOUR_PIXEL_ID_HERE' && /^\d+$/.test(pixelId)) {
+                !function(f,b,e,v,n,t,s){
+                    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)
+                }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                window.fbq('init', pixelId);
+            }
+        })();
+
+        // Safe Meta Pixel Wrapper (fires real fbq if configured, plus updates UI event log in debug mode)
         function trackMetaEvent(eventName, params = {}) {
-            const eventPayload = {
-                event: eventName,
-                timestamp: new Date().toLocaleTimeString(),
-                params: params
-            };
             console.log(`[Meta Pixel Event] ${eventName}`, params);
 
             // If real Facebook Pixel script is initialized on production domain:
@@ -285,16 +297,18 @@
                 window.fbq('track', eventName, params);
             }
 
-            // Update developer event status badge if present
-            const pixelToast = document.getElementById('pixel-debug-indicator');
-            const pixelText = document.getElementById('pixel-debug-text');
-            if (pixelToast && pixelText) {
-                pixelText.textContent = `Pixel: ${eventName} (${params.value ? '৳' + params.value : 'Tracked'})`;
-                pixelToast.classList.remove('opacity-0', 'translate-y-2');
-                clearTimeout(window._pixelToastTimer);
-                window._pixelToastTimer = setTimeout(() => {
-                    pixelToast.classList.add('opacity-0', 'translate-y-2');
-                }, 3200);
+            // Show visual toast badge only when debugPixel is set to true
+            if (window.STORE_CONFIG && window.STORE_CONFIG.debugPixel) {
+                const pixelToast = document.getElementById('pixel-debug-indicator');
+                const pixelText = document.getElementById('pixel-debug-text');
+                if (pixelToast && pixelText) {
+                    pixelText.textContent = `Pixel: ${eventName} (${params.value ? '৳' + params.value : 'Tracked'})`;
+                    pixelToast.classList.remove('opacity-0', 'translate-y-2');
+                    clearTimeout(window._pixelToastTimer);
+                    window._pixelToastTimer = setTimeout(() => {
+                        pixelToast.classList.add('opacity-0', 'translate-y-2');
+                    }, 3200);
+                }
             }
         }
     </script>
