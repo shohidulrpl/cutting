@@ -17,6 +17,9 @@
     <!-- PDF.js CDN for In-Page Interactive 15-Page Sample PDF Reader -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
+    <!-- StPageFlip CDN for Realistic 3D Book Page-Curl & Magazine Flip Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+
     <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
@@ -166,6 +169,39 @@
             background-size: 1.5px 100%, 100% 1.5px, 1.5px 100%, 100% 1.5px;
             background-position: 0 0, 0 0, 100% 0, 0 100%;
             background-repeat: no-repeat;
+        }
+
+        /* Realistic 3D Book Flipbook & Spine Crease Shadows */
+        .flip-page-item {
+            background-color: #FFFDF9;
+            box-shadow: inset 0 0 24px rgba(25, 23, 21, 0.05);
+            overflow: hidden;
+        }
+        .flip-page-item.--left::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 26px;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.04) 45%, transparent 100%);
+            pointer-events: none;
+            z-index: 15;
+        }
+        .flip-page-item.--right::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 26px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.04) 45%, transparent 100%);
+            pointer-events: none;
+            z-index: 15;
+        }
+        .stf__parent {
+            margin: 0 auto;
+            filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.48));
         }
     </style>
 
@@ -1757,21 +1793,27 @@
                 <!-- Populated dynamically via JS for all 15 pages -->
             </div>
 
-            <!-- Main Interactive Page Viewport (Supports Touch Swipe & Zoom) -->
-            <div id="sample-reader-viewport" class="flex-1 overflow-auto bg-[#1E1C1A] p-3 sm:p-6 flex flex-col items-center justify-start relative select-none">
+            <!-- Main Interactive 3D Book Flipbook Viewport -->
+            <div id="sample-reader-viewport" class="flex-1 overflow-auto bg-gradient-to-b from-[#23201E] via-[#1B1917] to-[#141311] p-2.5 sm:p-5 flex flex-col items-center justify-center relative select-none">
+                
+                <!-- Subtle Instruction Hint Above Book -->
+                <div id="flipbook-hint-bar" class="mb-2 px-3 py-1 rounded-full bg-white/10 border border-gold-500/25 text-[11px] sm:text-xs text-cream-200 flex items-center gap-2 shrink-0">
+                    <span class="text-gold-400">📖</span>
+                    <span>পৃষ্ঠার কোণা ধরে টেনে উল্টান অথবা নিচের বাটন ব্যবহার করুন (ডেস্কটপে ২ পৃষ্ঠা, মোবাইলে ১ পৃষ্ঠা)</span>
+                </div>
+
                 <!-- Loading Spinner -->
                 <div id="sample-pdf-loading" class="my-auto text-center space-y-2 text-cream-200">
                     <div class="w-9 h-9 border-4 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                    <p class="text-xs sm:text-sm font-medium">ফ্রি স্যাম্পল পৃষ্ঠা লোড হচ্ছে...</p>
+                    <p class="text-xs sm:text-sm font-medium">৩ডি ফ্লিপবুক স্যাম্পল লোড হচ্ছে...</p>
                 </div>
 
-                <!-- PDF.js Canvas Container -->
-                <div id="sample-canvas-wrapper" class="hidden my-auto shadow-2xl rounded-xl overflow-hidden bg-white border border-gold-500/30 transition-transform duration-200">
-                    <canvas id="sample-pdf-canvas" class="block max-w-full h-auto"></canvas>
+                <!-- 3D Flipbook Stage Container -->
+                <div id="sample-flipbook-stage" class="hidden w-full flex-1 flex items-center justify-center overflow-visible transition-transform duration-200 origin-center">
+                    <div id="sample-flipbook-container" class="mx-auto">
+                        <!-- 15 Book Leaves Dynamically Populated Here -->
+                    </div>
                 </div>
-
-                <!-- Graceful Fallback Interactive Page Card (If local file:// CORS or PDF file not yet uploaded) -->
-                <div id="sample-fallback-card" class="hidden my-auto max-w-xl w-full"></div>
             </div>
 
             <!-- Bottom Page Flip & Conversion Footer -->
@@ -1962,16 +2004,16 @@
         });
 
         // =====================================================================
-        // 4B. INTERACTIVE 15-PAGE FREE SAMPLE PDF READER ENGINE
+        // 4B. INTERACTIVE 15-PAGE REALISTIC 3D BOOK FLIPBOOK READER ENGINE
         // =====================================================================
         const SAMPLE_BOOK_PAGES = [
-            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: ৫০০+ কাটিং চার্ট — বিশেষ ডিজিটাল ই-বুক", badge: "কভার পেজ", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
+            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার (৫০০+ কাটিং চার্ট)", badge: "কভার পেজ", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
             { page: 2, short: "২. সূচিপত্র", title: "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)", badge: "সূচিপত্র ও বৈশিষ্ট্য", summary: "• ৫০১টি কাটিং চার্ট: কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন\n• ২৩টি বিভাগ: ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ\n• সব বয়স ও সাইজ: নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত\n• প্রতিটি চার্টে গাইড ও মোবাইলে সহজে দেখার উপযোগী" },
             { page: 3, short: "৩. কার জন্য", title: "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?", badge: "ব্যবহারকারী গাইড", summary: "১. নতুন শিক্ষার্থী: প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।\n২. টেইলার ও কারিগর: নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।\n৩. বুটিক ব্যবসায়ী: কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।\n৪. সেলাই-শখীন মেয়েরা: নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।" },
             { page: 4, short: "৪. পড়ার নিয়ম", title: "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন? (৪টি সহজ নির্দেশিকা)", badge: "কাটিং চিহ্ন পরিচিতি", summary: "১. কাঁচির চিহ্ন: কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।\n২. তীর ও মাপ: দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।\n৩. ড্যাশ দাগ: ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।\n৪. গ্রেন লাইন ও ফোল্ড লাইন: গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।" },
             { page: 5, short: "৫. কেপ কুর্তি", title: "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)", badge: "কামিজ ও কুর্তি", summary: "সাইজ - ৪০ | কেপের গলা: ১৬\", বুক: ৪০\", কোমর: ৩৬\", ঝুল: ৪৪\", কেপের ঝুল: ১৪\"। এক কুর্তি, দুই লুক।", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
             { page: 6, short: "৬. ডিপ নেক ব্লাউজ", title: "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)", badge: "ব্লাউজ কাটিং", summary: "সাইজ - ৩৮ | গলার চওড়া: ৬\", গলার গভীরতা: ৮\", ফেসিং পট্টি: ১.৫\" চওড়া ও ডোরি মাপসহ।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
-            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।" },
+            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
             { page: 8, short: "৮. সারারা সেট", title: "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)", badge: "পার্টি ও সারারা", summary: "সাইজ - ৩৮ | বিয়ে-পার্টির গর্জিয়াস সারারা। কোমর, হাঁটুর কাটিং, ঘের ও লম্বার গোপন হিসাব।" },
             { page: 9, short: "৯. ৬-কলি ছায়া", title: "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)", badge: "পেটিকোট ও ছায়া", summary: "সাইজ - ৩৮ | কোমরপট্টি: ৩৮\" × ৫\" | কলির কাটিং: উপরে ৭.৫\", নিচে ১৪.৫\", লম্বা ৩৬\" ও সেলাই মার্জিন।" },
             { page: 10, short: "১০. ২৪-কলি লেহেঙ্গা", title: "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)", badge: "ব্রাইডাল ও লেহেঙ্গা", summary: "সাইজ - ৩৮ | ২৪ পিস কাটুন | উপরে ২\", নিচে ১২\", লম্বা ৪০\", ১.৫\" হেম ফোল্ড ও কোমরপট্টি ৩২\" × ৩\"।" },
@@ -1983,9 +2025,10 @@
         ];
 
         let samplePdfDoc = null;
+        let samplePageFlip = null;
         let currentSamplePage = 1;
         let sampleZoomScale = 1.0;
-        let sampleRenderTask = null;
+        const renderedPdfPages = new Set();
 
         function initSamplePills() {
             const pillsContainer = document.getElementById('sample-page-pills');
@@ -2002,6 +2045,107 @@
             });
         }
 
+        function buildFlipbookDOM() {
+            const container = document.getElementById('sample-flipbook-container');
+            if (!container || container.children.length > 0) return;
+
+            const total = SAMPLE_BOOK_PAGES.length;
+            SAMPLE_BOOK_PAGES.forEach(info => {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'flip-page-item relative border border-stone-300 select-none';
+                pageDiv.setAttribute('data-page', info.page);
+                if (info.page === 1 || info.page === total) {
+                    pageDiv.setAttribute('data-density', 'hard');
+                }
+
+                const linesHtml = info.summary.split('\n').map(line => `<p class="leading-snug">${line}</p>`).join('');
+                const imageHtml = info.img
+                    ? `<div class="my-2 flex-1 min-h-0 rounded-xl overflow-hidden border border-gold-500/40 bg-emerald-950/5 flex items-center justify-center">
+                           <img src="${info.img}" alt="${info.title}" class="max-h-full max-w-full object-contain" onerror="this.parentElement.style.display='none'">
+                       </div>`
+                    : '';
+
+                pageDiv.innerHTML = `
+                    <!-- PDF Canvas Layer (Shown automatically when real PDF renders) -->
+                    <canvas id="flip-pdf-canvas-${info.page}" class="hidden w-full h-full object-contain bg-white"></canvas>
+
+                    <!-- Styled Paper Fallback Layer (Always ready immediately, zero blank white pages) -->
+                    <div id="flip-fallback-layer-${info.page}" class="w-full h-full p-3.5 sm:p-5 flex flex-col justify-between bg-[#FFFDF9] text-charcoal-900">
+                        <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-2 shrink-0">
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-900 text-gold-300 text-[10px] sm:text-xs font-bold">${info.badge}</span>
+                            <span class="text-[11px] font-bold text-stone-500">পৃষ্ঠা ${info.page} / ${total}</span>
+                        </div>
+                        <h4 class="font-serif text-sm sm:text-base font-bold text-emerald-950 mt-2 shrink-0">${info.title}</h4>
+                        ${imageHtml}
+                        <div class="bg-cream-100/90 rounded-xl p-2.5 sm:p-3.5 border border-stone-200/80 text-[11px] sm:text-xs text-charcoal-800 space-y-1.5 overflow-y-auto">
+                            ${linesHtml}
+                        </div>
+                        <div class="pt-2 border-t border-stone-200/70 flex items-center justify-between text-[10px] text-stone-500 shrink-0">
+                            <span>টেক প্রোবায়োটিক • ৫০০+ কাটিং চার্ট</span>
+                            <span class="font-bold text-emerald-900">পৃষ্ঠা ${info.page}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(pageDiv);
+            });
+        }
+
+        function initStPageFlipInstance(startPage = 1) {
+            const container = document.getElementById('sample-flipbook-container');
+            const viewportEl = document.getElementById('sample-reader-viewport');
+            if (!container || !window.St || !window.St.PageFlip) return;
+
+            if (samplePageFlip) {
+                try { samplePageFlip.destroy(); } catch (e) {}
+                samplePageFlip = null;
+            }
+
+            // Re-build clean leaves before initializing St.PageFlip
+            container.innerHTML = '';
+            renderedPdfPages.clear();
+            buildFlipbookDOM();
+
+            const isMobile = window.innerWidth < 768;
+            const availH = Math.max(380, (viewportEl.clientHeight || 540) - 56);
+            const availW = Math.max(270, (viewportEl.clientWidth || 340) - 24);
+
+            // Calculate proportional book dimensions (Desktop: 2-page open book spread, Mobile: 1-page full curl)
+            let pageWidth, pageHeight;
+            if (isMobile) {
+                pageWidth = Math.min(availW, 420);
+                pageHeight = Math.min(availH, Math.round(pageWidth * 1.45));
+            } else {
+                pageHeight = Math.min(availH, 640);
+                pageWidth = Math.min(Math.floor((availW - 24) / 2), Math.round(pageHeight * 0.68));
+            }
+
+            samplePageFlip = new St.PageFlip(container, {
+                width: pageWidth,
+                height: pageHeight,
+                size: 'fixed',
+                minWidth: 250,
+                maxWidth: 540,
+                minHeight: 350,
+                maxHeight: 740,
+                maxShadowOpacity: 0.55,
+                showCover: true,
+                usePortrait: isMobile,
+                mobileScrollSupport: false,
+                flippingTime: 750,
+                drawShadow: true,
+                startPage: Math.max(0, startPage - 1)
+            });
+
+            samplePageFlip.loadFromHTML(container.querySelectorAll('.flip-page-item'));
+
+            samplePageFlip.on('flip', (e) => {
+                const newPageNum = (e.data || 0) + 1;
+                currentSamplePage = newPageNum;
+                updateSampleHeaderAndControls(newPageNum, SAMPLE_BOOK_PAGES.length);
+                renderAdjacentPdfPages(newPageNum);
+            });
+        }
+
         function openSampleReader(startPage = 1) {
             const modal = document.getElementById('sample-pdf-modal');
             if (!modal) return;
@@ -2010,13 +2154,12 @@
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
 
-            // Update download links with configurable PDF path
             const pdfUrl = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample.pdf';
             const dlLink = document.getElementById('sample-modal-download-link');
             if (dlLink) dlLink.href = pdfUrl;
 
             trackMetaEvent('ViewContent', {
-                content_name: '15-Page Free Sample PDF Reader',
+                content_name: '15-Page 3D Flipbook Sample Reader',
                 page_number: startPage,
                 value: window.STORE_CONFIG.priceBDT,
                 currency: 'BDT'
@@ -2026,24 +2169,30 @@
             sampleZoomScale = 1.0;
             updateSampleZoomUI();
 
-            if (samplePdfDoc) {
-                renderSamplePage(currentSamplePage);
-            } else if (window.pdfjsLib) {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-                document.getElementById('sample-pdf-loading').classList.remove('hidden');
-                document.getElementById('sample-canvas-wrapper').classList.add('hidden');
-                document.getElementById('sample-fallback-card').classList.add('hidden');
+            const loading = document.getElementById('sample-pdf-loading');
+            const stage = document.getElementById('sample-flipbook-stage');
 
-                pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-                    samplePdfDoc = pdf;
-                    renderSamplePage(currentSamplePage);
-                }).catch(err => {
-                    console.warn('PDF.js fallback activated (PDF file local/CORS):', err);
-                    renderSampleFallbackPage(currentSamplePage);
-                });
-            } else {
-                renderSampleFallbackPage(currentSamplePage);
-            }
+            loading.classList.add('hidden');
+            stage.classList.remove('hidden');
+
+            // Initialize 3D Flipbook immediately so user sees the open book without waiting
+            requestAnimationFrame(() => {
+                initStPageFlipInstance(startPage);
+                updateSampleHeaderAndControls(startPage, SAMPLE_BOOK_PAGES.length);
+
+                // Load real PDF.js document and render crisp pages onto the flipbook leaves
+                if (samplePdfDoc) {
+                    renderAdjacentPdfPages(startPage);
+                } else if (window.pdfjsLib) {
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+                        samplePdfDoc = pdf;
+                        renderAdjacentPdfPages(currentSamplePage);
+                    }).catch(err => {
+                        console.warn('Using styled 3D flipbook fallback pages (PDF local/CORS):', err);
+                    });
+                }
+            });
         }
 
         function closeSampleReader() {
@@ -2053,28 +2202,41 @@
         }
 
         function goToSamplePage(pageNum) {
-            const total = samplePdfDoc ? samplePdfDoc.numPages : SAMPLE_BOOK_PAGES.length;
+            const total = SAMPLE_BOOK_PAGES.length;
             if (pageNum < 1 || pageNum > total) return;
             currentSamplePage = pageNum;
-            if (samplePdfDoc) {
-                renderSamplePage(currentSamplePage);
-            } else {
-                renderSampleFallbackPage(currentSamplePage);
+            if (samplePageFlip) {
+                samplePageFlip.flip(pageNum - 1);
             }
+            updateSampleHeaderAndControls(pageNum, total);
+            renderAdjacentPdfPages(pageNum);
         }
 
         function changeSamplePage(delta) {
-            goToSamplePage(currentSamplePage + delta);
+            if (!samplePageFlip) {
+                goToSamplePage(currentSamplePage + delta);
+                return;
+            }
+            if (delta > 0) {
+                samplePageFlip.flipNext();
+            } else {
+                samplePageFlip.flipPrev();
+            }
         }
 
         function changeSampleZoom(delta) {
-            sampleZoomScale = Math.min(2.2, Math.max(0.7, +(sampleZoomScale + delta).toFixed(2)));
+            sampleZoomScale = Math.min(1.8, Math.max(1.0, +(sampleZoomScale + delta).toFixed(2)));
             updateSampleZoomUI();
-            if (samplePdfDoc) {
-                renderSamplePage(currentSamplePage);
-            } else {
-                const fb = document.getElementById('sample-fallback-card');
-                if (fb) fb.style.transform = `scale(${sampleZoomScale})`;
+
+            const stage = document.getElementById('sample-flipbook-stage');
+            const container = document.getElementById('sample-flipbook-container');
+            if (stage) {
+                stage.style.transform = `scale(${sampleZoomScale})`;
+                stage.style.transformOrigin = sampleZoomScale > 1 ? 'top center' : 'center center';
+            }
+            // Lock corner-drag flipping while zoomed in so user can pan/read comfortably
+            if (container) {
+                container.style.pointerEvents = sampleZoomScale > 1.05 ? 'none' : 'auto';
             }
         }
 
@@ -2099,7 +2261,6 @@
             if (prevBtn) prevBtn.disabled = pageNum <= 1;
             if (nextBtn) nextBtn.disabled = pageNum >= totalPages;
 
-            // Highlight active pill and scroll it into view
             SAMPLE_BOOK_PAGES.forEach(item => {
                 const pill = document.getElementById(`sample-pill-${item.page}`);
                 if (!pill) return;
@@ -2112,113 +2273,40 @@
             });
         }
 
-        function renderSamplePage(pageNum) {
-            const loading = document.getElementById('sample-pdf-loading');
-            const wrapper = document.getElementById('sample-canvas-wrapper');
-            const fallback = document.getElementById('sample-fallback-card');
-            const canvas = document.getElementById('sample-pdf-canvas');
-            const viewportEl = document.getElementById('sample-reader-viewport');
+        // Lazy-render current page + neighboring spread pages at high Retina DPI onto the 3D Flipbook leaves
+        function renderAdjacentPdfPages(centerPage) {
+            if (!samplePdfDoc) return;
+            const total = samplePdfDoc.numPages;
+            const pagesToRender = [centerPage, centerPage - 1, centerPage + 1, centerPage + 2]
+                .filter(p => p >= 1 && p <= total);
 
-            if (!samplePdfDoc || !canvas) return;
-            updateSampleHeaderAndControls(pageNum, samplePdfDoc.numPages);
+            pagesToRender.forEach(pNum => {
+                if (renderedPdfPages.has(pNum)) return;
+                renderedPdfPages.add(pNum);
 
-            samplePdfDoc.getPage(pageNum).then(page => {
-                const unscaledViewport = page.getViewport({ scale: 1 });
-                const availableWidth = Math.min((viewportEl.clientWidth || 360) - 24, 620);
-                const baseScale = availableWidth / unscaledViewport.width;
-                const outputScale = window.devicePixelRatio || 1;
-                const finalScale = baseScale * sampleZoomScale;
-                const viewport = page.getViewport({ scale: finalScale });
+                const canvas = document.getElementById(`flip-pdf-canvas-${pNum}`);
+                const fallbackLayer = document.getElementById(`flip-fallback-layer-${pNum}`);
+                if (!canvas) return;
 
-                canvas.width = Math.floor(viewport.width * outputScale);
-                canvas.height = Math.floor(viewport.height * outputScale);
-                canvas.style.width = `${Math.floor(viewport.width)}px`;
-                canvas.style.height = `${Math.floor(viewport.height)}px`;
+                samplePdfDoc.getPage(pNum).then(page => {
+                    const unscaled = page.getViewport({ scale: 1 });
+                    const targetWidth = 720; // High resolution for crisp zoom
+                    const scale = targetWidth / unscaled.width;
+                    const viewport = page.getViewport({ scale });
 
-                const ctx = canvas.getContext('2d');
-                ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+                    canvas.width = Math.floor(viewport.width);
+                    canvas.height = Math.floor(viewport.height);
 
-                if (sampleRenderTask) {
-                    try { sampleRenderTask.cancel(); } catch (e) {}
-                }
-
-                sampleRenderTask = page.render({
-                    canvasContext: ctx,
-                    viewport: viewport
+                    const ctx = canvas.getContext('2d');
+                    page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+                        canvas.classList.remove('hidden');
+                        if (fallbackLayer) fallbackLayer.classList.add('hidden');
+                    }).catch(() => {
+                        renderedPdfPages.delete(pNum);
+                    });
                 });
-
-                sampleRenderTask.promise.then(() => {
-                    loading.classList.add('hidden');
-                    fallback.classList.add('hidden');
-                    wrapper.classList.remove('hidden');
-                    viewportEl.scrollTop = 0;
-                }).catch(() => {});
             });
         }
-
-        function renderSampleFallbackPage(pageNum) {
-            const loading = document.getElementById('sample-pdf-loading');
-            const wrapper = document.getElementById('sample-canvas-wrapper');
-            const fallback = document.getElementById('sample-fallback-card');
-            const total = SAMPLE_BOOK_PAGES.length;
-            const info = SAMPLE_BOOK_PAGES[pageNum - 1] || SAMPLE_BOOK_PAGES[0];
-
-            updateSampleHeaderAndControls(pageNum, total);
-            loading.classList.add('hidden');
-            wrapper.classList.add('hidden');
-            fallback.classList.remove('hidden');
-
-            const linesHtml = info.summary.split('\n').map(line => `<p class="leading-relaxed">${line}</p>`).join('');
-            const imageHtml = info.img
-                ? `<div class="mb-4 rounded-2xl overflow-hidden border border-gold-500/40 bg-emerald-950/5 flex justify-center">
-                       <img src="${info.img}" alt="${info.title}" class="max-h-96 w-auto object-contain" onerror="this.parentElement.style.display='none'">
-                   </div>`
-                : '';
-
-            fallback.innerHTML = `
-                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-5 sm:p-8 border-2 border-gold-500 shadow-2xl space-y-4">
-                    <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-3">
-                        <span class="px-3 py-1 rounded-full bg-emerald-900 text-gold-300 text-xs font-bold">${info.badge}</span>
-                        <span class="text-xs font-bold text-stone-500">ফ্রি স্যাম্পল পৃষ্ঠা ${pageNum} / ${total}</span>
-                    </div>
-                    <h4 class="font-serif text-xl sm:text-2xl font-bold text-emerald-950">${info.title}</h4>
-                    ${imageHtml}
-                    <div class="bg-white rounded-2xl p-4 sm:p-5 border border-stone-200 text-sm sm:text-base text-charcoal-800 space-y-2.5">
-                        ${linesHtml}
-                    </div>
-                    <div class="pt-2 flex items-center justify-between text-xs text-stone-500">
-                        <span>টেক প্রোবায়োটিক • ৫০০+ সেলাই ও কাটিং চার্ট</span>
-                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" class="text-emerald-900 font-bold underline">সম্পূর্ণ ১৫ পৃষ্ঠার PDF ডাউনলোড করুন</a>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Touch Swipe Support (Left/Right) inside Mobile Sample Reader
-        (function setupSampleSwipe() {
-            const viewport = document.getElementById('sample-reader-viewport');
-            if (!viewport) return;
-            let touchStartX = 0;
-            let touchStartY = 0;
-
-            viewport.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                }
-            }, { passive: true });
-
-            viewport.addEventListener('touchend', (e) => {
-                if (e.changedTouches.length === 1 && sampleZoomScale <= 1.05) {
-                    const dx = e.changedTouches[0].clientX - touchStartX;
-                    const dy = e.changedTouches[0].clientY - touchStartY;
-                    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
-                        if (dx < 0) changeSamplePage(1);
-                        else changeSamplePage(-1);
-                    }
-                }
-            }, { passive: true });
-        })();
 
         // 5. Fallback Full-Resolution SVG Generators (If local JPG files are not yet in the directory)
         function getKameezDetailedSvg() {
