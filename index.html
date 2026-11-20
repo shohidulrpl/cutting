@@ -218,8 +218,7 @@
     </style>
 
     <!-- =====================================================================
-         FACEBOOK PIXEL & CONVERSION TRACKING PLACEHOLDER
-         Replace 'YOUR_PIXEL_ID_HERE' with your actual Meta Pixel ID in production.
+         FACEBOOK PIXEL, MICROSOFT CLARITY & GOOGLE ANALYTICS 4 CONFIGURATION
          ===================================================================== -->
     <script>
         window.STORE_CONFIG = {
@@ -267,9 +266,11 @@
                 }
             },
             supportPhone: "+880 1XXX-XXXXXX",
-            metaPixelId: "1832568634859441", // এখানে আপনার ১৫-১৬ ডিজিটের Facebook Pixel ID বসান
+            metaPixelId: "1832568634859441", // আপনার সচল Facebook Pixel ID
+            clarityProjectId: "", // লাইভ ভিজিটর ও স্ক্রিন রেকর্ডিং দেখতে Microsoft Clarity Project ID বসান
+            gaMeasurementId: "", // Google Analytics 4 Measurement ID বসান (যেমন: "G-XXXXXXXXXX")
             debugPixel: false, // টেস্ট করার সময় true করলে স্ক্রিনে ইভেন্ট নোটিফিকেশন দেখাবে, লাইভ সাইটে false রাখুন
-            orderWebhookUrl: "https://rpl2.app.n8n.cloud/webhook/katasohoj" // n8n Production Webhook URL
+            orderWebhookUrl: "https://rpl2.app.n8n.cloud/webhook/pdf" // n8n Production Webhook URL
         };
 
         // Auto-Initialize Official Meta Pixel (fbevents.js) when a valid numeric metaPixelId is set
@@ -285,6 +286,34 @@
                     s.parentNode.insertBefore(t,s)
                 }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
                 window.fbq('init', pixelId);
+            }
+        })();
+
+        // Auto-Initialize Microsoft Clarity (Free Live Visitors, Heatmaps & Screen Recordings)
+        (function initMicrosoftClarity() {
+            const clarityId = (window.STORE_CONFIG && window.STORE_CONFIG.clarityProjectId || '').trim();
+            if (clarityId && clarityId !== 'YOUR_CLARITY_ID') {
+                (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", clarityId);
+            }
+        })();
+
+        // Auto-Initialize Google Analytics 4 (Realtime Visitor Dashboard & Mobile App)
+        (function initGoogleAnalytics() {
+            const gaId = (window.STORE_CONFIG && window.STORE_CONFIG.gaMeasurementId || '').trim();
+            if (gaId && gaId.startsWith('G-')) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+                document.head.appendChild(script);
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', gaId);
             }
         })();
 
@@ -450,112 +479,111 @@
                         </div>
 
                         <!-- Payment & Delivery Reassurance Micro-copy -->
-                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm text-cream-200/90">
-                            <span class="inline-flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-bkash"></span>
-                                সহজ বিকাশ পেমেন্ট (৳১৯৯ এককালীন)
-                            </span>
-                            <span class="inline-flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                পেমেন্ট যাচাইয়ের পর ডিজিটাল PDF ডেলিভারি
-                            </span>
-                        </div>
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm text-cream-200/90">
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-bkash"></span>
+                            বিকাশ Send Money (৳১৯৯ এককালীন)
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-gold-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            ৫–১৫ মিনিটের মধ্যে Gmail-এ PDF ডেলিভারি
+                        </span>
                     </div>
                 </div>
 
                 <!-- Right Column: 3D Digital PDF Catalog Mockup + Live Sample Previews -->
-                <div class="lg:col-span-5">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        
-                        <!-- Suggestion 2: Top 3D Book Showcase + Bottom 2 Quick Sample Chart Previews -->
-                        <div class="bg-gradient-to-b from-[#3A0C12] via-[#240B10] to-emerald-950 rounded-3xl p-3.5 sm:p-4 shadow-2xl border-2 border-gold-500/55 relative overflow-hidden">
-                            
-                            <!-- Ambient Gold Spotlight Behind 3D Book -->
-                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_32%,rgba(243,216,125,0.22),transparent_65%)] pointer-events-none"></div>
+            supportPhone: "+880 1348-166644",
+            whatsappNumber: "8801348166644",
+            whatsappDisplay: "01348166644",
+            metaPixelId: "1832568634859441", // আপনার সচল Facebook Pixel ID
+// ... existing code ... -->
+                        <!-- Left Column: Payment Instructions & Number Placeholder -->
+                        <div class="lg:col-span-5 space-y-5">
+                            <div class="bg-bkash-light border border-bkash/25 rounded-2xl p-5">
+                                <h3 class="font-bold text-charcoal-900 text-base flex items-center gap-2 mb-3">
+                                    <span class="w-6 h-6 rounded-full bg-bkash text-white text-xs flex items-center justify-center font-bold">১</span>
+                                    <span>প্রথমে বিকাশে ৳১৯৯ "Send Money" করুন</span>
+                                </h3>
+                                <p class="text-xs sm:text-sm text-stone-700 leading-relaxed mb-3">
+                                    বিকাশ অ্যাপ থেকে নিচের QR কোড স্ক্যান করে অথবা Personal নম্বরে <strong class="text-bkash">Send Money (সেন্ড মানি)</strong> অপশন থেকে <strong>৳১৯৯ টাকা</strong> পাঠান:
+                                </p>
 
-                            <!-- Top Interactive Click-to-Flip Pill -->
-                            <div onclick="openSampleReader(1)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSampleReader(1);}" class="group cursor-pointer relative z-10">
-                                <div class="flex items-center justify-between gap-2 mb-2 px-1">
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-[11px] font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping"></span>
-                                        <span>3D ডিজিটাল ক্যাটালগ</span>
-                                    </span>
-                                    <span class="inline-flex items-center gap-1 text-[11px] font-bold text-cream-100 bg-black/40 group-hover:bg-gold-500 group-hover:text-emerald-950 px-2.5 py-0.5 rounded-full border border-gold-500/30 transition-colors">
-                                        <span>১৫ পৃষ্ঠা উল্টে দেখুন</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
-                                    </span>
+                                <!-- Clear Send Money Alert Pill -->
+                                <div class="mb-3 px-3 py-2 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-950 font-semibold flex items-center gap-2">
+                                    <span class="text-base">⚠️</span>
+                                    <span>এটি Personal নম্বর — বিকাশ অ্যাপ থেকে অবশ্যই <strong>"Send Money"</strong> করবেন (Make Payment নয়)।</span>
                                 </div>
 
-                                <!-- Cropped 3D Hardcover Book + Floating Side Charts + ৳199 Badge from photo.jpg -->
-                                <div class="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-gold-500/35 bg-[#3B0B11] shadow-inner">
-                                    <img src="photo.jpg"
-                                         alt="৫০০+ কাটিং চার্ট 3D ডিজিটাল বই — মাত্র ১৯৯ টাকা"
-                                         style="object-position: 50% 84%;"
-                                         class="w-full h-full object-cover book-3d-float group-hover:scale-[1.03] transition-transform duration-500"
-                                         onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                                    
-                                    <!-- Graceful Fallback if photo.jpg is not placed in the folder yet -->
-                                    <div class="hidden w-full h-full bg-gradient-to-br from-emerald-900 to-emerald-950 p-4 flex flex-col items-center justify-center text-center text-cream-50">
-                                        <div class="px-4 py-2 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 text-emerald-950 font-extrabold shadow-lg mb-1.5">
-                                            <span class="text-xl">৫০০+ কাটিং চার্ট</span>
+                                <!-- Configurable bKash QR Code & Number Box -->
+                                <div class="bg-white rounded-xl p-3.5 border-2 border-dashed border-bkash/50 space-y-3">
+                                    <!-- QR Code Display -->
+                                    <div class="text-center">
+                                        <span class="inline-block text-[11px] font-bold text-bkash bg-bkash-light px-3 py-1 rounded-full mb-2 border border-bkash/20">
+                                            বিকাশ অ্যাপ দিয়ে QR কোড স্ক্যান করুন
+                                        </span>
+                                        <div class="bg-white p-2 rounded-xl border border-stone-200 inline-block shadow-sm">
+                                            <img src="https://i.ibb.co.com/6c4b6wCr/199.jpg"
+                                                 alt="bKash Payment QR Code - 199 BDT"
+                                                 class="w-48 sm:w-52 h-auto mx-auto rounded-lg object-contain"
+                                                 onerror="this.onerror=null;this.src='https://placehold.co/220x220/FDF2F7/E2136E?text=bKash+QR+199+TK';">
                                         </div>
-                                        <p class="text-xs text-gold-300 font-bold">ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল দেখুন</p>
                                     </div>
 
-                                    <!-- Soft Edge Vignette -->
-                                    <div class="absolute inset-0 shadow-[inset_0_0_22px_rgba(20,4,7,0.65)] pointer-events-none"></div>
+                                    <!-- bKash Number & Copy Button -->
+                                    <div class="pt-2.5 border-t border-stone-200/80">
+                                        <div class="flex items-center justify-between text-xs text-stone-500 mb-1">
+                                            <span>বিকাশ নম্বর (Send Money):</span>
+                                            <span id="bkash-account-type-label" class="font-bold text-bkash">Personal</span>
+                                        </div>
+                                        <div class="flex items-center justify-between gap-2">
+                                            <code id="bkash-number-display" class="text-sm sm:text-base font-extrabold text-charcoal-900 select-all">01722984756</code>
+                                            <button type="button" onclick="copyBkashNumber()" class="px-3 py-1.5 rounded-lg bg-bkash hover:bg-bkash-dark text-white text-xs font-bold transition-colors flex items-center gap-1 shrink-0">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                                <span id="copy-btn-text">কপি করুন</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <ul class="mt-4 space-y-2 text-xs sm:text-sm text-stone-700">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-bkash font-bold">•</span>
+                                        <span>পেমেন্টের পরিমাণ: <strong>৳১৯৯ টাকা (Send Money)</strong></span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-bkash font-bold">•</span>
+                                        <span>টাকা পাঠানোর পর বিকাশ মেসেজ থেকে <strong>Transaction ID (TrxID)</strong> কপি করে ডান পাশের ফর্মে দিন।</span>
+                                    </li>
+                                </ul>
                             </div>
 
-                            <!-- Bottom 2 Quick Sample Chart Previews -->
-                            <div class="relative z-10 mt-3 pt-3 border-t border-gold-500/25">
-                                <div class="flex items-center justify-between text-[11px] text-gold-300 font-bold mb-2 px-0.5">
-                                    <span>ভেতরের নমুনা চার্ট (ক্লিক করে জুম করুন):</span>
-                                    <span class="text-cream-200/80 font-normal">৫০০ চার্টের ২টি নমুনা</span>
+                            <!-- Important Delivery Verification Notice -->
+                            <div class="bg-cream-100 border border-gold-500/40 rounded-2xl p-4 text-xs sm:text-sm text-stone-700 space-y-1.5">
+                                <div class="font-bold text-emerald-950 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4 text-gold-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                    <span>দ্রুত ডিজিটাল PDF ডেলিভারি (৫–১৫ মিনিট):</span>
                                 </div>
-
-                                <div class="grid grid-cols-2 gap-2.5">
-                                    <!-- Mini Sample 01: Blouse Cutting Chart -->
-                                    <div onclick="openChartModal('blouse')" class="group/card cursor-pointer bg-cream-50/95 hover:bg-white rounded-xl p-2 border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm flex items-center gap-2.5">
-                                        <div class="w-11 h-14 rounded-lg overflow-hidden bg-[#4A0E17] shrink-0 border border-stone-300">
-                                            <img src="Blouse_cutting_chart_layout_78f992c3.jpg"
-                                                 alt="ব্লাউজ কাটিং চার্ট"
-                                                 class="w-full h-full object-cover object-top group-hover/card:scale-105 transition-transform"
-                                                 onerror="this.style.display='none';">
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <span class="block text-[10px] font-bold text-emerald-900">নমুনা #০১</span>
-                                            <p class="text-xs font-bold text-charcoal-900 truncate">ব্লাউজ কাটিং চার্ট</p>
-                                            <span class="inline-flex items-center gap-0.5 text-[10px] font-bold text-gold-700 mt-0.5">জুম করুন 🔍</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Mini Sample 02: Angrakha Kameez Chart -->
-                                    <div onclick="openChartModal('angrakha')" class="group/card cursor-pointer bg-cream-50/95 hover:bg-white rounded-xl p-2 border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm flex items-center gap-2.5">
-                                        <div class="w-11 h-14 rounded-lg overflow-hidden bg-[#F7F1E5] shrink-0 border border-stone-300">
-                                            <img src="৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg"
-                                                 alt="আংরাখা কামিজ চার্ট"
-                                                 class="w-full h-full object-cover object-top group-hover/card:scale-105 transition-transform"
-                                                 onerror="this.style.display='none';">
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <span class="block text-[10px] font-bold text-emerald-900">নমুনা #০২</span>
-                                            <p class="text-xs font-bold text-charcoal-900 truncate">আংরাখা কামিজ</p>
-                                            <span class="inline-flex items-center gap-0.5 text-[10px] font-bold text-gold-700 mt-0.5">জুম করুন 🔍</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="leading-relaxed">
+                                    ফর্ম সাবমিট করার পর আপনার বিকাশ TrxID যাচাই করে <strong>৫–১৫ মিনিটের মধ্যেই</strong> আপনার দেওয়া <strong>Gmail-এ</strong> ৫০০টি কাটিং চার্টের সম্পূর্ণ PDF লিংক পাঠিয়ে দেওয়া হবে।
+                                </p>
                             </div>
 
-                            <!-- Interactive Click-to-Flip Footer Strip -->
-                            <div onclick="openSampleReader(1)" class="cursor-pointer relative z-10 mt-2.5 pt-2 border-t border-gold-500/20 flex items-center justify-between gap-2 text-xs">
-                                <span class="text-cream-100 font-medium flex items-center gap-1.5">
-                                    <span>📖</span>
-                                    <span>বইটিতে ক্লিক করে ১৫ পৃষ্ঠা পড়ুন</span>
-                                </span>
-                                <span class="px-2.5 py-1 rounded-lg bg-gold-500 hover:bg-gold-400 text-emerald-950 font-extrabold shrink-0 transition-colors">
-                                    ফ্রি স্যাম্পল →
-                                </span>
+                            <!-- Direct WhatsApp Helpline Support Box -->
+                            <div class="bg-[#ECFDF5] border border-emerald-600/30 rounded-2xl p-4 space-y-2.5">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="text-xs font-bold text-emerald-950">যেকোনো প্রয়োজনে সরাসরি কথা বলুন:</span>
+                                    <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white">WhatsApp সাপোর্ট</span>
+                                </div>
+                                <p class="text-xs text-stone-700 leading-relaxed">
+                                    পেমেন্ট করতে বা ফর্ম পূরণে কোনো সমস্যা হলে নিচের বাটনে চাপ দিয়ে সরাসরি আমাদের হোয়াটসঅ্যাপে মেসেজ করুন:
+                                </p>
+                                <a href="https://wa.me/8801348166644?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A7%AB%E0%A7%A6%E0%A7%A6%E0%A6%9F%E0%A6%BF%20%E0%A6%95%E0%A6%BE%E0%A6%9F%E0%A6%BF%E0%A6%82%20%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%20PDF%20(%E0%A7%B3%E0%A7%A7%E0%A7%AF%E0%A7%AF)%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A1%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%B0%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="w-full py-2.5 px-4 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-colors">
+                                    <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                                    <span>WhatsApp হেল্পলাইন: 01348166644</span>
+                                </a>
                             </div>
                         </div>
 
@@ -1561,11 +1589,15 @@
                                 </div>
 
                                 <div class="flex flex-col sm:flex-row gap-3">
-                                    <button type="button" onclick="copyOrderSummary()" class="flex-1 py-3 px-4 rounded-xl bg-gold-500 text-emerald-950 font-bold text-xs sm:text-sm hover:bg-gold-400 transition-colors">
-                                        অর্ডার তথ্য কপি করে রাখুন
+                                    <button type="button" onclick="sendOrderToWhatsApp()" class="flex-1 py-3 px-4 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 shadow-md">
+                                        <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                                        <span>WhatsApp-এ TrxID পাঠান</span>
+                                    </button>
+                                    <button type="button" onclick="copyOrderSummary()" class="py-3 px-4 rounded-xl bg-gold-500 text-emerald-950 font-bold text-xs sm:text-sm hover:bg-gold-400 transition-colors">
+                                        তথ্য কপি করুন
                                     </button>
                                     <button type="button" onclick="resetOrderForm()" class="py-3 px-4 rounded-xl bg-emerald-900 text-cream-200 hover:text-white font-semibold text-xs sm:text-sm border border-emerald-700">
-                                        নতুন অর্ডার ফর্ম
+                                        নতুন অর্ডার
                                     </button>
                                 </div>
                             </div>
@@ -1713,7 +1745,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
                 <p class="font-bold text-cream-100">৫০০টি সেলাই ও কাপড় কাটিংয়ের মাপের চার্ট (Digital PDF Catalog)</p>
-                <p class="mt-0.5 text-xs text-cream-200/60">পেমেন্ট মাধ্যম: বিকাশ (৳১৯৯ BDT) • পেমেন্ট যাচাইয়ের পর ডিজিটাল ডেলিভারি</p>
+                <p class="mt-0.5 text-xs text-cream-200/70">পেমেন্ট মাধ্যম: বিকাশ Send Money (৳১৯৯ BDT) • WhatsApp সাপোর্ট: <a href="https://wa.me/8801348166644" target="_blank" rel="noopener noreferrer" class="text-gold-300 font-bold hover:underline">01348166644</a></p>
             </div>
             <div class="flex items-center gap-4">
                 <a href="#preview-gallery" class="hover:text-gold-300 transition-colors">নমুনা চার্ট</a>
@@ -1726,10 +1758,7 @@
     </footer>
 
     <!-- =====================================================================
-         PERSISTENT STICKY MOBILE BUY BAR (Requirement #7)
-         Remains visible on mobile while scrolling, automatically hides when
-         the user is actively inside the bKash payment form section so it never
-         interferes with typing or submitting the order.
+         PERSISTENT STICKY MOBILE BUY BAR
          ===================================================================== -->
     <div id="mobile-sticky-bar" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-emerald-950/95 backdrop-blur-md border-t-2 border-gold-500/50 px-4 py-3 shadow-2xl transition-transform duration-300">
         <div class="flex items-center justify-between gap-3 max-w-md mx-auto">
@@ -1748,6 +1777,16 @@
             </button>
         </div>
     </div>
+
+    <!-- Floating Quick WhatsApp Support Button -->
+    <a href="https://wa.me/8801348166644?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A7%AB%E0%A7%A6%E0%A7%A6%E0%A6%9F%E0%A6%BF%20%E0%A6%95%E0%A6%BE%E0%A6%9F%E0%A6%BF%E0%A6%82%20%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9F%20PDF%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="WhatsApp Support 01348166644"
+       class="fixed bottom-20 md:bottom-6 right-4 z-40 bg-[#16A34A] hover:bg-[#15803D] text-white px-3.5 py-2.5 rounded-full shadow-xl border-2 border-white/80 flex items-center gap-2 text-xs sm:text-sm font-bold transition-transform hover:scale-105">
+        <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+        <span class="hidden sm:inline">WhatsApp সাহায্য</span>
+    </a>
 
     <!-- =====================================================================
          CLICK-TO-ZOOM LIGHTBOX MODAL FOR SAMPLE CHARTS
@@ -1786,7 +1825,7 @@
     </div>
 
     <!-- =====================================================================
-         INTERACTIVE 15-PAGE FREE SAMPLE PDF READER MODAL (OPTION A)
+         INTERACTIVE 15-PAGE FREE SAMPLE PDF READER MODAL
          ===================================================================== -->
     <div id="sample-pdf-modal" class="fixed inset-0 z-50 hidden bg-charcoal-900/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-5">
         <div class="bg-cream-50 rounded-3xl max-w-5xl w-full h-[92vh] h-[92dvh] flex flex-col overflow-hidden border-2 border-gold-500 shadow-2xl">
@@ -1894,45 +1933,35 @@
             // Open first FAQ item by default for helpfulness
             toggleFaq(0);
 
-            // IntersectionObserver for smooth scroll-triggered section animations
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            revealElements.forEach(el => revealObserver.observe(el));
-
-            // Hide sticky mobile buy bar when user is looking directly at the bKash form
-            const checkoutSection = document.getElementById('bkash-order-section');
-            const stickyBar = document.getElementById('mobile-sticky-bar');
-            if (checkoutSection && stickyBar) {
-                const checkoutObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            stickyBar.classList.add('translate-y-full');
-                        } else {
-                            stickyBar.classList.remove('translate-y-full');
+            // Track genuine InitiateCheckout only once when user starts filling payment fields
+            ['customerBkashNumber', 'transactionId', 'deliveryContact'].forEach(fieldId => {
+                const inputEl = document.getElementById(fieldId);
+                if (inputEl) {
+                    inputEl.addEventListener('input', () => {
+                        if (inputEl.value.trim().length >= 3) {
+                            fireRealInitiateCheckout(`Form_Input_${fieldId}`);
                         }
                     });
-                }, { threshold: 0.25 });
-                checkoutObserver.observe(checkoutSection);
-            }
-        });
+                }
+            });
 
-        // 2. Smooth Scroll to Checkout & Fire Meta InitiateCheckout Event
-        function scrollToCheckout(sourceLabel = 'CTA_Button') {
+            // IntersectionObserver for smooth scroll-triggered section animations
+// ... existing code ... -->
+        // 2. Smooth Scroll to Checkout (Does NOT fire fake InitiateCheckout on casual clicks)
+        window._hasFiredRealInitiateCheckout = false;
+        function fireRealInitiateCheckout(triggerSource = 'Payment_Form') {
+            if (window._hasFiredRealInitiateCheckout) return;
+            window._hasFiredRealInitiateCheckout = true;
             trackMetaEvent('InitiateCheckout', {
                 content_name: window.STORE_CONFIG.productName,
                 content_category: 'Digital PDF Catalog',
                 value: window.STORE_CONFIG.priceBDT,
                 currency: 'BDT',
-                source: sourceLabel
+                source: triggerSource
             });
+        }
 
+        function scrollToCheckout(sourceLabel = 'CTA_Button') {
             const target = document.getElementById('bkash-order-section');
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1945,10 +1974,11 @@
             }
         }
 
-        // 3. Copy bKash Number to Clipboard (Uses execCommand for iframe compatibility)
+        // 3. Copy bKash Number to Clipboard & Track Real Checkout Intent
         function copyBkashNumber() {
             const rawText = window.STORE_CONFIG.bkashNumber.split(' ')[0];
             copyTextToClipboard(rawText);
+            fireRealInitiateCheckout('Copy_bKash_Number');
             const btnText = document.getElementById('copy-btn-text');
             if (btnText) {
                 const original = btnText.textContent;
@@ -1956,862 +1986,24 @@
                 setTimeout(() => { btnText.textContent = original; }, 2200);
             }
         }
-
-        function copyTextToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Copy failed', err);
-            }
-            document.body.removeChild(textarea);
-        }
-
-        // 4. Interactive Sample Chart Lightbox Modal (Loads High-Resolution Chart Image with Safe Fallback)
-        function openChartModal(chartType) {
-            const modal = document.getElementById('chart-lightbox-modal');
-            const titleEl = document.getElementById('modal-chart-title');
-            const badgeEl = document.getElementById('modal-chart-badge');
-            const bodyEl = document.getElementById('modal-chart-body');
-
-            trackMetaEvent('ViewContent', {
-                content_name: `Sample Chart Preview: ${chartType}`,
-                value: window.STORE_CONFIG.priceBDT,
-                currency: 'BDT'
-            });
-
-            const charts = window.STORE_CONFIG && window.STORE_CONFIG.sampleCharts ? window.STORE_CONFIG.sampleCharts : {};
-            const selected = charts[chartType] || charts.blouse;
-
-            badgeEl.textContent = selected ? selected.badge : 'নমুনা চার্ট প্রিভিউ';
-            titleEl.textContent = selected ? selected.title : 'চার্ট প্রিভিউ';
-
-            const fallbackSvgHtml = (chartType === 'blouse' || chartType === 'princess')
-                ? getKameezDetailedSvg()
-                : getSalwarDetailedSvg();
-
-            bodyEl.innerHTML = `
-                <div class="w-full flex flex-col items-center justify-center">
-                    <img src="${selected.src}"
-                         alt="${selected.title}"
-                         class="max-h-[72vh] w-auto max-w-full rounded-2xl shadow-xl border-2 border-gold-500/40 object-contain"
-                         onerror="this.parentElement.innerHTML = decodeURIComponent('${encodeURIComponent(fallbackSvgHtml)}');">
-                </div>
-            `;
-
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeChartModal() {
-            const modal = document.getElementById('chart-lightbox-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // Close modal on Escape key or backdrop click
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeChartModal();
-                closeSampleReader();
-            }
-            const sampleModal = document.getElementById('sample-pdf-modal');
-            if (sampleModal && !sampleModal.classList.contains('hidden')) {
-                if (e.key === 'ArrowRight') changeSamplePage(1);
-                if (e.key === 'ArrowLeft') changeSamplePage(-1);
-            }
-        });
-        document.getElementById('chart-lightbox-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'chart-lightbox-modal') closeChartModal();
-        });
-        document.getElementById('sample-pdf-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'sample-pdf-modal') closeSampleReader();
-        });
-
-        // =====================================================================
-        // 4B. INTERACTIVE 15-PAGE REALISTIC 3D BOOK FLIPBOOK READER ENGINE
-        // =====================================================================
-        const SAMPLE_BOOK_PAGES = [
-            { page: 1, short: "১. কভার", title: "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার (৫০০+ কাটিং চার্ট)", badge: "কভার পেজ", theme: "#3B0B11", summary: "ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড। সব বয়সের সব সাইজ — মাত্র ৳১৯৯ টাকা (একবার কিনুন, সারাজীবন ব্যবহার করুন)।", img: "photo.jpg" },
-            { page: 2, short: "২. সূচিপত্র", title: "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)", badge: "সূচিপত্র ও বৈশিষ্ট্য", theme: "#04392A", summary: "• ৫০১টি কাটিং চার্ট: কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন\n• ২৩টি বিভাগ: ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ\n• সব বয়স ও সাইজ: নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত\n• প্রতিটি চার্টে গাইড ও মোবাইলে সহজে দেখার উপযোগী", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
-            { page: 3, short: "৩. কার জন্য", title: "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?", badge: "ব্যবহারকারী গাইড", theme: "#064E3B", summary: "১. নতুন শিক্ষার্থী: প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।\n২. টেইলার ও কারিগর: নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।\n৩. বুটিক ব্যবসায়ী: কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।\n৪. সেলাই-শখীন মেয়েরা: নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
-            { page: 4, short: "৪. পড়ার নিয়ম", title: "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন? (৪টি সহজ নির্দেশিকা)", badge: "কাটিং চিহ্ন পরিচিতি", theme: "#8F6F13", summary: "১. কাঁচির চিহ্ন: কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।\n২. তীর ও মাপ: দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।\n৩. ড্যাশ দাগ: ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।\n৪. গ্রেন লাইন ও ফোল্ড লাইন: গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
-            { page: 5, short: "৫. কেপ কুর্তি", title: "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)", badge: "কামিজ ও কুর্তি", theme: "#0B2545", summary: "সাইজ - ৪০ | কেপের গলা: ১৬\", বুক: ৪০\", কোমর: ৩৬\", ঝুল: ৪৪\", কেপের ঝুল: ১৪\"। এক কুর্তি, দুই লুক।", img: "৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg" },
-            { page: 6, short: "৬. ডিপ নেক ব্লাউজ", title: "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)", badge: "ব্লাউজ কাটিং", theme: "#0A2342", summary: "সাইজ - ৩৮ | গলার চওড়া: ৬\", গলার গভীরতা: ৮\", ফেসিং পট্টি: ১.৫\" চওড়া ও ডোরি মাপসহ।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
-            { page: 7, short: "৭. প্লাজো ও কুর্তি", title: "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)", badge: "সালোয়ার ও প্লাজো", theme: "#0E4D78", summary: "সাইজ - ৪৪ | লং কুর্তি: বডি ৪৪\", লম্বা ৪৬\", পুট ১৫.৫\", হাতা ১৭\" | প্লাজো: ঝুল ৩৯-৪০\", হাই ১৫.৫\", কোমর ৩২-৪৬\"।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
-            { page: 8, short: "৮. সারারা সেট", title: "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)", badge: "পার্টি ও সারারা", theme: "#4A154B", summary: "সাইজ - ৩৮ | বিয়ে-পার্টির গর্জিয়াস সারারা। কোমর, হাঁটুর কাটিং, ঘের ও লম্বার গোপন হিসাব।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
-            { page: 9, short: "৯. ৬-কলি ছায়া", title: "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)", badge: "পেটিকোট ও ছায়া", theme: "#1E5631", summary: "সাইজ - ৩৮ | কোমরপট্টি: ৩৮\" × ৫\" | কলির কাটিং: উপরে ৭.৫\", নিচে ১৪.৫\", লম্বা ৩৬\" ও সেলাই মার্জিন।", img: "Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg" },
-            { page: 10, short: "১০. ২৪-কলি লেহেঙ্গা", title: "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)", badge: "ব্রাইডাল ও লেহেঙ্গা", theme: "#5C0A1B", summary: "সাইজ - ৩৮ | ২৪ পিস কাটুন | উপরে ২\", নিচে ১২\", লম্বা ৪০\", ১.৫\" হেম ফোল্ড ও কোমরপট্টি ৩২\" × ৩\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
-            { page: 11, short: "১১. ম্যাক্সি ড্রেস", title: "পৃষ্ঠা ১১: ৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (চার্ট #১৮২)", badge: "গাউন ও ম্যাক্সি", theme: "#283618", summary: "সাইজ - ৪২ | আংরাখা স্টাইলের ওভারল্যাপ ডিজাইন, বগল ২১\" ও লম্বা ৫২\" মাপসহ।", img: "Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg" },
-            { page: 12, short: "১২. প্লিটেড স্কার্ট", title: "পৃষ্ঠা ১২: ৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (চার্ট #২১০)", badge: "স্কার্ট কাটিং", theme: "#6B2D5C", summary: "সাইজ - ৪০ | লম্বা ২৮\", বেল্ট ৩২\" × ২\", কাপড় বহর ৮০\", ২\" পর পর প্লিট ও জিপার প্লেকেট।", img: "Patiala_salwar_cutting_measureme_2eaaf554.jpg" },
-            { page: 13, short: "১৩. ফ্রিল ফ্রক", title: "পৃষ্ঠা ১৩: ২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (চার্ট #২৬৭)", badge: "বাচ্চাদের পোশাক", theme: "#6D3B7A", summary: "বয়স ২-৩ বছর | বডি পার্ট: ছাতি ১১\", লম্বা ৯\" | হাতার ফ্রিল: ২৪\" × ২\" | নিচের কুঁচি পার্ট: চওড়া ৪০\", লম্বা ১২\"।", img: "Frok_kamiz_cutting_guide_813ddf46.jpg" },
-            { page: 14, short: "১৪. ব্লেজার চার্ট", title: "পৃষ্ঠা ১৪: ৪২ সাইজ ব্লেজার কাটিং চার্ট (চার্ট #৩৫২)", badge: "শীতের পোশাক", theme: "#0F2537", summary: "সাইজ - ৪২ | Shoulder: 18\", Chest: 22\", Length: 30\", Sleeve Length: 25\", Collar, Flap Pocket (6\" × 2\") ও লাইনিং।", img: "Blouse_cutting_chart_layout_78f992c3.jpg" },
-            { page: 15, short: "১৫. সম্পূর্ণ বই", title: "পৃষ্ঠা ১৫: পুরো বই পেতে এখনই অর্ডার করুন (৫০০+ চার্ট)", badge: "সমাপনী পৃষ্ঠা", theme: "#02231A", summary: "এটি শুধু ১৫ পৃষ্ঠার ফ্রি নমুনা। পুরো ই-বুকে আছে ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ। এককালীন মূল্য মাত্র ৳১৯৯ টাকা।", img: "photo.jpg" }
-        ];
-
-        let samplePdfDoc = null;
-        let resolvedPdfUrl = null;
-        let samplePageFlip = null;
-        let currentSamplePage = 1;
-        let sampleZoomScale = 1.0;
-        let lastFlipbookWindowWidth = window.innerWidth;
-        const pdfPageImageCache = {};
-
-        function initSamplePills() {
-            const pillsContainer = document.getElementById('sample-page-pills');
-            if (!pillsContainer || pillsContainer.children.length > 0) return;
-
-            SAMPLE_BOOK_PAGES.forEach(item => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.id = `sample-pill-${item.page}`;
-                btn.textContent = item.short;
-                btn.onclick = () => goToSamplePage(item.page);
-                btn.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors bg-emerald-950/70 text-cream-200 hover:bg-gold-500 hover:text-emerald-950 border border-gold-500/20 cursor-pointer';
-                pillsContainer.appendChild(btn);
-            });
-        }
-
-        function buildFlipbookDOM() {
-            const stage = document.getElementById('sample-flipbook-stage');
-            if (!stage) return null;
-
-            // Always create a fresh container because St.PageFlip.destroy() removes the element from DOM
-            stage.innerHTML = '<div id="sample-flipbook-container" class="mx-auto"></div>';
-            const container = document.getElementById('sample-flipbook-container');
-            if (!container) return null;
-
-            const total = SAMPLE_BOOK_PAGES.length;
-            SAMPLE_BOOK_PAGES.forEach(info => {
-                const pageDiv = document.createElement('div');
-                pageDiv.className = 'flip-page-item relative border border-stone-300 select-none bg-white';
-                pageDiv.setAttribute('data-page', info.page);
-                if (info.page === 1 || info.page === total) {
-                    pageDiv.setAttribute('data-density', 'hard');
-                }
-
-                const cachedImgSrc = pdfPageImageCache[info.page];
-                const linesHtml = info.summary.split('\n').map(line => `<p class="leading-snug">${line}</p>`).join('');
-                const inlineSvgPreview = getSamplePageVisualGraphic(info.page);
-
-                pageDiv.innerHTML = `
-                    <!-- High-Resolution Rendered PDF Page Image (Shown immediately if cached or once PDF.js renders) -->
-                    <img id="flip-pdf-img-${info.page}"
-                         src="${cachedImgSrc || ''}"
-                         alt="${info.title}"
-                         class="${cachedImgSrc ? '' : 'hidden'} w-full h-full object-contain bg-white select-none pointer-events-none" />
-
-                    <!-- Richly Illustrated Fallback Page (Ensures every page has visual chart graphics even before PDF file upload) -->
-                    <div id="flip-fallback-layer-${info.page}" class="${cachedImgSrc ? 'hidden' : ''} w-full h-full p-3 sm:p-4 flex flex-col justify-between bg-[#FFFDF9] text-charcoal-900">
-                        <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-1.5 shrink-0">
-                            <span class="px-2.5 py-0.5 rounded-full text-gold-300 text-[10px] sm:text-xs font-bold" style="background-color: ${info.theme};">${info.badge}</span>
-                            <span class="text-[11px] font-bold text-stone-500">পৃষ্ঠা ${info.page} / ${total}</span>
-                        </div>
-                        <h4 class="font-serif text-xs sm:text-sm font-bold text-emerald-950 mt-1.5 shrink-0">${info.title}</h4>
-                        <div class="my-1.5 flex-1 min-h-0 rounded-xl overflow-hidden border border-gold-500/40 bg-cream-100/70 flex items-center justify-center relative">
-                            ${info.img ? `<img src="${info.img}" alt="${info.title}" class="w-full h-full object-cover object-top" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">` : ''}
-                            <div class="${info.img ? 'hidden' : ''} w-full h-full p-1.5 flex items-center justify-center">
-                                ${inlineSvgPreview}
-                            </div>
-                        </div>
-                        <div class="bg-cream-100/95 rounded-xl p-2 sm:p-2.5 border border-stone-200/80 text-[10.5px] sm:text-xs text-charcoal-800 space-y-1 shrink-0">
-                            ${linesHtml}
-                        </div>
-                        <div class="pt-1.5 border-t border-stone-200/70 flex items-center justify-between text-[10px] text-stone-500 shrink-0">
-                            <span>টেক প্রোবায়োটিক • ৫০০+ কাটিং চার্ট</span>
-                            <span class="font-bold text-emerald-900">পৃষ্ঠা ${info.page}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(pageDiv);
-            });
-
-            return container;
-        }
-
-        function getSamplePageVisualGraphic(pageNum) {
-            if (pageNum === 1 || pageNum === 15) {
-                return `<svg viewBox="0 0 260 150" class="w-full h-full rounded-lg bg-[#3B0B11]">
-                    <rect x="10" y="10" width="240" height="130" rx="8" fill="#59121B" stroke="#D4AF37" stroke-width="2"/>
-                    <text x="130" y="54" text-anchor="middle" fill="#F3D87D" font-size="24" font-weight="bold">৫০০+ কাটিং চার্ট</text>
-                    <text x="130" y="80" text-anchor="middle" fill="#FAF6EE" font-size="11">ঘরে বসে বুটিক-মানের ড্রেস বানানোর গাইড</text>
-                    <rect x="75" y="96" width="110" height="28" rx="14" fill="#D4AF37"/>
-                    <text x="130" y="114" text-anchor="middle" fill="#02231A" font-size="13" font-weight="bold">মাত্র ৳১৯৯ টাকা</text>
-                </svg>`;
-            }
-            if (pageNum >= 2 && pageNum <= 4) {
-                return `<svg viewBox="0 0 260 140" class="w-full h-full rounded-lg bg-[#04392A]">
-                    <rect x="12" y="12" width="112" height="52" rx="6" fill="#064E3B" stroke="#D4AF37" stroke-width="1.2"/>
-                    <text x="68" y="36" text-anchor="middle" fill="#F3D87D" font-size="13" font-weight="bold">৫০১টি চার্ট</text>
-                    <text x="68" y="52" text-anchor="middle" fill="#FAF6EE" font-size="8.5">২৩টি সুবিন্যস্ত বিভাগ</text>
-                    <rect x="136" y="12" width="112" height="52" rx="6" fill="#064E3B" stroke="#D4AF37" stroke-width="1.2"/>
-                    <text x="192" y="36" text-anchor="middle" fill="#F3D87D" font-size="13" font-weight="bold">সব সাইজ</text>
-                    <text x="192" y="52" text-anchor="middle" fill="#FAF6EE" font-size="8.5">নবজাতক থেকে ৫২ সাইজ</text>
-                    <rect x="12" y="74" width="236" height="54" rx="6" fill="#FAF6EE"/>
-                    <text x="130" y="97" text-anchor="middle" fill="#04392A" font-size="11" font-weight="bold">✂ কাঁচির চিহ্ন • ↔ ইঞ্চি মাপ • ┄ সেলাই মার্জিন</text>
-                    <text x="130" y="115" text-anchor="middle" fill="#57534E" font-size="9">মোবাইল ও কম্পিউটারে জুম করে স্পষ্ট দেখার উপযোগী</text>
-                </svg>`;
-            }
-            return `<svg viewBox="0 0 260 150" class="w-full h-full rounded-lg bg-[#FFFDF9]">
-                <rect x="8" y="8" width="244" height="134" rx="6" fill="#FAF6EE" stroke="#064E3B" stroke-width="1.5"/>
-                <path d="M 48 26 L 76 26 C 76 42, 94 42, 94 26 L 118 30 L 112 124 L 48 124 Z" fill="#DCFCE7" stroke="#064E3B" stroke-width="1.8"/>
-                <line x1="36" y1="26" x2="36" y2="124" stroke="#DC2626" stroke-width="1.2"/>
-                <text x="83" y="82" text-anchor="middle" fill="#064E3B" font-size="9.5" font-weight="bold">প্যাটার্ন ড্রাফট</text>
-                <path d="M 146 42 C 166 22, 206 22, 224 42 L 216 116 L 154 116 Z" fill="#FEF3C7" stroke="#8F6F13" stroke-width="1.8"/>
-                <text x="185" y="82" text-anchor="middle" fill="#8F6F13" font-size="9.5" font-weight="bold">হাতা / ঘের মাপ</text>
-            </svg>`;
-        }
-
-        function initStPageFlipInstance(startPage = 1) {
-            const viewportEl = document.getElementById('sample-reader-viewport');
-            if (!viewportEl || !window.St || !window.St.PageFlip) return;
-
-            if (samplePageFlip) {
-                try { samplePageFlip.destroy(); } catch (e) {}
-                samplePageFlip = null;
-            }
-
-            const container = buildFlipbookDOM();
-            if (!container) return;
-
-            const isMobile = window.innerWidth < 768;
-            const safeW = viewportEl.clientWidth > 100 ? viewportEl.clientWidth : window.innerWidth - 20;
-            const safeH = viewportEl.clientHeight > 150 ? viewportEl.clientHeight : Math.max(380, window.innerHeight - 210);
-            const availH = Math.max(360, safeH - 48);
-            const availW = Math.max(260, safeW - 20);
-
-            // Calculate proportional book dimensions (Desktop: 2-page open book spread, Mobile: 1-page full curl)
-            let pageWidth, pageHeight;
-            if (isMobile) {
-                pageWidth = Math.min(availW, 410);
-                pageHeight = Math.min(availH, Math.round(pageWidth * 1.46));
-            } else {
-                pageHeight = Math.min(availH, 630);
-                pageWidth = Math.min(Math.floor((availW - 24) / 2), Math.round(pageHeight * 0.68));
-            }
-
-            samplePageFlip = new St.PageFlip(container, {
-                width: pageWidth,
-                height: pageHeight,
-                size: 'fixed',
-                minWidth: 240,
-                maxWidth: 540,
-                minHeight: 340,
-                maxHeight: 740,
-                maxShadowOpacity: 0.55,
-                showCover: true,
-                usePortrait: isMobile,
-                mobileScrollSupport: false,
-                flippingTime: 700,
-                drawShadow: true,
-                startPage: Math.max(0, startPage - 1)
-            });
-
-            samplePageFlip.loadFromHTML(container.querySelectorAll('.flip-page-item'));
-
-            samplePageFlip.on('flip', (e) => {
-                const newPageNum = (e.data || 0) + 1;
-                currentSamplePage = newPageNum;
-                updateSampleHeaderAndControls(newPageNum, SAMPLE_BOOK_PAGES.length);
-                renderAdjacentPdfPages(newPageNum);
-            });
-        }
-
-        // Only re-initialize flipbook if screen width actually changes (ignores Android address-bar vertical scroll resize)
-        window.addEventListener('resize', () => {
-            const modal = document.getElementById('sample-pdf-modal');
-            if (!modal || modal.classList.contains('hidden')) return;
-            if (Math.abs(window.innerWidth - lastFlipbookWindowWidth) > 30) {
-                lastFlipbookWindowWidth = window.innerWidth;
-                initStPageFlipInstance(currentSamplePage);
-                renderAdjacentPdfPages(currentSamplePage);
-            }
-        });
-
-        async function resolveAvailablePdfDocument() {
-            if (samplePdfDoc) return samplePdfDoc;
-            if (!window.pdfjsLib) return null;
-
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-            const candidates = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfFallbacks) || [
-                'Tech_Probiotic_Free_Sample_2.pdf',
-                'Tech_Probiotic_Free_Sample.pdf'
-            ];
-
-            for (const candidateUrl of candidates) {
-                try {
-                    const res = await fetch(candidateUrl, { cache: 'no-store' });
-                    const cType = (res.headers.get('content-type') || '').toLowerCase();
-                    // Verify it's actually a PDF file and not Netlify's HTML 404 fallback page
-                    if (res.ok && !cType.includes('text/html')) {
-                        const arrayBuf = await res.arrayBuffer();
-                        const pdf = await pdfjsLib.getDocument({ data: arrayBuf }).promise;
-                        samplePdfDoc = pdf;
-                        resolvedPdfUrl = candidateUrl;
-                        return pdf;
-                    }
-                } catch (e) {
-                    console.warn(`Candidate PDF not available (${candidateUrl}):`, e);
-                }
-            }
-            return null;
-        }
-
-        function openSampleReader(startPage = 1) {
-            const modal = document.getElementById('sample-pdf-modal');
-            if (!modal) return;
-
-            initSamplePills();
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-
-            const pdfUrl = resolvedPdfUrl || (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) || 'Tech_Probiotic_Free_Sample_2.pdf';
-            const dlLink = document.getElementById('sample-modal-download-link');
-            if (dlLink) dlLink.href = pdfUrl;
-
-            trackMetaEvent('ViewContent', {
-                content_name: '15-Page 3D Flipbook Sample Reader',
-                page_number: startPage,
-                value: window.STORE_CONFIG.priceBDT,
-                currency: 'BDT'
-            });
-
-            currentSamplePage = startPage;
-            sampleZoomScale = 1.0;
-            lastFlipbookWindowWidth = window.innerWidth;
-            updateSampleZoomUI();
-
-            const loading = document.getElementById('sample-pdf-loading');
-            const stage = document.getElementById('sample-flipbook-stage');
-
-            loading.classList.add('hidden');
-            stage.classList.remove('hidden');
-            stage.style.transform = 'scale(1)';
-
-            // Wait 2 animation frames so mobile modal layout dimensions are 100% settled
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    initStPageFlipInstance(startPage);
-                    updateSampleHeaderAndControls(startPage, SAMPLE_BOOK_PAGES.length);
-
-                    resolveAvailablePdfDocument().then(pdf => {
-                        if (pdf) {
-                            renderAdjacentPdfPages(currentSamplePage);
-                        }
-                    });
-                });
-            });
-        }
-
-        function closeSampleReader() {
-            const modal = document.getElementById('sample-pdf-modal');
-            if (modal) modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        function goToSamplePage(pageNum) {
-            const total = SAMPLE_BOOK_PAGES.length;
-            if (pageNum < 1 || pageNum > total) return;
-            currentSamplePage = pageNum;
-            if (samplePageFlip) {
-                samplePageFlip.flip(pageNum - 1);
-            }
-            updateSampleHeaderAndControls(pageNum, total);
-            renderAdjacentPdfPages(pageNum);
-        }
-
-        function changeSamplePage(delta) {
-            if (!samplePageFlip) {
-                goToSamplePage(currentSamplePage + delta);
-                return;
-            }
-            if (delta > 0) {
-                samplePageFlip.flipNext();
-            } else {
-                samplePageFlip.flipPrev();
-            }
-        }
-
-        function changeSampleZoom(delta) {
-            sampleZoomScale = Math.min(1.8, Math.max(1.0, +(sampleZoomScale + delta).toFixed(2)));
-            updateSampleZoomUI();
-
-            const stage = document.getElementById('sample-flipbook-stage');
-            const container = document.getElementById('sample-flipbook-container');
-            if (stage) {
-                stage.style.transform = `scale(${sampleZoomScale})`;
-                stage.style.transformOrigin = sampleZoomScale > 1 ? 'top center' : 'center center';
-            }
-            // Lock corner-drag flipping while zoomed in so user can pan/read comfortably
-            if (container) {
-                container.style.pointerEvents = sampleZoomScale > 1.05 ? 'none' : 'auto';
-            }
-        }
-
-        function updateSampleZoomUI() {
-            const label = document.getElementById('sample-zoom-label');
-            if (label) label.textContent = `${Math.round(sampleZoomScale * 100)}%`;
-        }
-
-        function updateSampleHeaderAndControls(pageNum, totalPages) {
-            const meta = SAMPLE_BOOK_PAGES[pageNum - 1] || {
-                title: `পৃষ্ঠা ${pageNum}: ফ্রি স্যাম্পল ক্যাটালগ`,
-                short: `পৃষ্ঠা ${pageNum}`
-            };
-
-            const heading = document.getElementById('sample-page-heading');
-            const counter = document.getElementById('sample-page-counter');
-            const prevBtn = document.getElementById('sample-prev-btn');
-            const nextBtn = document.getElementById('sample-next-btn');
-
-            if (heading) heading.textContent = meta.title;
-            if (counter) counter.textContent = `পৃষ্ঠা ${pageNum} / ${totalPages}`;
-            if (prevBtn) prevBtn.disabled = pageNum <= 1;
-            if (nextBtn) nextBtn.disabled = pageNum >= totalPages;
-
-            SAMPLE_BOOK_PAGES.forEach(item => {
-                const pill = document.getElementById(`sample-pill-${item.page}`);
-                if (!pill) return;
-                if (item.page === pageNum) {
-                    pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold whitespace-nowrap transition-colors bg-gold-500 text-emerald-950 shadow-sm cursor-pointer';
-                    pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                } else {
-                    pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors bg-emerald-950/70 text-cream-200 hover:bg-gold-500 hover:text-emerald-950 border border-gold-500/20 cursor-pointer';
-                }
-            });
-        }
-
-        // Lazy-render & cache current page + neighboring spread pages at high Retina DPI onto the 3D Flipbook leaves
-        function renderAdjacentPdfPages(centerPage) {
-            if (!samplePdfDoc) return;
-            const total = samplePdfDoc.numPages;
-            const pagesToRender = [centerPage, centerPage - 1, centerPage + 1, centerPage + 2]
-                .filter(p => p >= 1 && p <= total);
-
-            pagesToRender.forEach(pNum => {
-                const imgEl = document.getElementById(`flip-pdf-img-${pNum}`);
-                const fallbackLayer = document.getElementById(`flip-fallback-layer-${pNum}`);
-                if (!imgEl) return;
-
-                if (pdfPageImageCache[pNum]) {
-                    imgEl.src = pdfPageImageCache[pNum];
-                    imgEl.classList.remove('hidden');
-                    if (fallbackLayer) fallbackLayer.classList.add('hidden');
-                    return;
-                }
-
-                samplePdfDoc.getPage(pNum).then(page => {
-                    const unscaled = page.getViewport({ scale: 1 });
-                    const targetWidth = 760;
-                    const scale = targetWidth / unscaled.width;
-                    const viewport = page.getViewport({ scale });
-
-                    const offscreenCanvas = document.createElement('canvas');
-                    offscreenCanvas.width = Math.floor(viewport.width);
-                    offscreenCanvas.height = Math.floor(viewport.height);
-
-                    const ctx = offscreenCanvas.getContext('2d');
-                    page.render({ canvasContext: ctx, viewport }).promise.then(() => {
-                        const dataUrl = offscreenCanvas.toDataURL('image/jpeg', 0.9);
-                        pdfPageImageCache[pNum] = dataUrl;
-                        imgEl.src = dataUrl;
-                        imgEl.classList.remove('hidden');
-                        if (fallbackLayer) fallbackLayer.classList.add('hidden');
-                    });
-                });
-            });
-        }
-
-        // Bulletproof Free Sample PDF Downloader (Checks Tech_Probiotic_Free_Sample_2.pdf first; if missing on server, generates 15-page visual PDF on the fly)
-        async function downloadFreeSamplePdf(event, triggerEl) {
-            if (event) event.preventDefault();
-
-            const candidates = (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfFallbacks) || [
-                'Tech_Probiotic_Free_Sample_2.pdf',
-                'Tech_Probiotic_Free_Sample.pdf'
-            ];
-            const fileName = 'Tech_Probiotic_Free_Sample_2.pdf';
-            const labelSpan = triggerEl ? triggerEl.querySelector('span') : null;
-            const originalText = labelSpan ? labelSpan.textContent : '';
-
-            if (labelSpan) labelSpan.textContent = 'ডাউনলোড হচ্ছে...';
-
-            trackMetaEvent('ViewContent', {
-                content_name: 'Free Sample PDF Download',
-                value: window.STORE_CONFIG.priceBDT,
-                currency: 'BDT'
-            });
-
-            // 1. Try fetching the real hosted PDF file if uploaded alongside index.html
-            for (const pdfUrl of candidates) {
-                try {
-                    const response = await fetch(pdfUrl, { cache: 'no-store' });
-                    const contentType = (response.headers.get('content-type') || '').toLowerCase();
-
-                    if (response.ok && !contentType.includes('text/html')) {
-                        const blob = await response.blob();
-                        if (blob.size > 1024) {
-                            triggerBlobDownload(blob, fileName);
-                            if (labelSpan) labelSpan.textContent = originalText;
-                            return false;
-                        }
-                    }
-                } catch (err) {
-                    console.warn(`Hosted PDF file not found (${pdfUrl}):`, err);
-                }
-            }
-
-            // 2. Fallback: Generate a real, valid 15-page visual PDF so download NEVER fails on mobile
-            try {
-                if (window.jspdf && window.jspdf.jsPDF) {
-                    const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF({ orientation: 'portrait', unit: 'px', format: [595, 842] });
-
-                    SAMPLE_BOOK_PAGES.forEach((item, idx) => {
-                        if (idx > 0) doc.addPage();
-
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 1190;
-                        canvas.height = 1684;
-                        const ctx = canvas.getContext('2d');
-
-                        ctx.fillStyle = '#FFFDF9';
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                        ctx.strokeStyle = '#D4AF37';
-                        ctx.lineWidth = 10;
-                        ctx.strokeRect(36, 36, canvas.width - 72, canvas.height - 72);
-
-                        ctx.fillStyle = item.theme || '#04392A';
-                        ctx.fillRect(64, 68, canvas.width - 128, 120);
-
-                        ctx.fillStyle = '#F3D87D';
-                        ctx.font = 'bold 30px "Hind Siliguri", sans-serif';
-                        ctx.fillText(`টেক প্রোবায়োটিক • ৫০০+ সেলাই ও কাটিং চার্ট (${item.badge})`, 96, 120);
-
-                        ctx.fillStyle = '#FFFFFF';
-                        ctx.font = '600 24px "Hind Siliguri", sans-serif';
-                        ctx.fillText(`ফ্রি স্যাম্পল ক্যাটালগ — পৃষ্ঠা ${item.page} / ${SAMPLE_BOOK_PAGES.length}`, 96, 162);
-
-                        ctx.fillStyle = '#02231A';
-                        ctx.font = 'bold 40px "Hind Siliguri", sans-serif';
-                        wrapCanvasText(ctx, item.title, 76, 265, canvas.width - 152, 54);
-
-                        ctx.fillStyle = '#FAF6EE';
-                        ctx.fillRect(72, 380, canvas.width - 144, 920);
-                        ctx.strokeStyle = '#E5D5B8';
-                        ctx.lineWidth = 4;
-                        ctx.strokeRect(72, 380, canvas.width - 144, 920);
-
-                        ctx.fillStyle = '#191715';
-                        ctx.font = '500 32px "Hind Siliguri", sans-serif';
-                        let currentY = 450;
-                        item.summary.split('\n').forEach(line => {
-                            currentY = wrapCanvasText(ctx, line, 108, currentY, canvas.width - 216, 48) + 28;
-                        });
-
-                        ctx.fillStyle = '#064E3B';
-                        ctx.fillRect(72, 1360, canvas.width - 144, 190);
-
-                        ctx.fillStyle = '#F3D87D';
-                        ctx.font = 'bold 34px "Hind Siliguri", sans-serif';
-                        ctx.fillText('সম্পূর্ণ ৫০০+ কাটিং চার্ট ও ২৩টি বিভাগ একসাথে পেতে ভিজিট করুন:', 104, 1425);
-
-                        ctx.fillStyle = '#FFFFFF';
-                        ctx.font = 'bold 32px "Hind Siliguri", sans-serif';
-                        ctx.fillText('https://katasohoj.netlify.app  |  এককালীন মূল্য: মাত্র ৳১৯৯ টাকা', 104, 1485);
-
-                        const imgData = canvas.toDataURL('image/jpeg', 0.88);
-                        doc.addImage(imgData, 'JPEG', 0, 0, 595, 842);
-                    });
-
-                    const generatedBlob = doc.output('blob');
-                    triggerBlobDownload(generatedBlob, fileName);
-                }
-            } catch (genErr) {
-                console.error('PDF generation fallback error:', genErr);
-            } finally {
-                if (labelSpan) labelSpan.textContent = originalText;
-            }
-
-            return false;
-        }
-
-        function triggerBlobDownload(blob, fileName) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(() => URL.revokeObjectURL(url), 4000);
-        }
-
-        function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
-            const words = text.split(' ');
-            let line = '';
-            for (let n = 0; n < words.length; n++) {
-                const testLine = line + words[n] + ' ';
-                if (ctx.measureText(testLine).width > maxWidth && n > 0) {
-                    ctx.fillText(line.trim(), x, y);
-                    line = words[n] + ' ';
-                    y += lineHeight;
-                } else {
-                    line = testLine;
-                }
-            }
-            ctx.fillText(line.trim(), x, y);
-            return y + lineHeight;
-        }
-
-        // 5. Fallback Full-Resolution SVG Generators (If local JPG files are not yet in the directory)
-        function getKameezDetailedSvg() {
-            return `
-            <svg viewBox="0 0 600 380" class="w-full h-auto bg-[#FFFDF9] rounded-xl border border-stone-200">
-                <rect x="14" y="12" width="572" height="34" rx="6" fill="#064E3B"/>
-                <text x="300" y="34" text-anchor="middle" fill="#FAF6EE" font-size="14" font-weight="bold">কামিজ ও কুর্তি কাটিং মাপের চার্ট (বডি, কোমর, হিপ ও ঘের ডায়াগ্রাম)</text>
-                
-                <g transform="translate(25, 60)">
-                    <path d="M 55 15 L 105 15 C 105 48, 145 48, 145 15 L 195 22 C 185 62, 208 82, 228 86 L 212 145 L 222 200 L 245 295 L 55 295 Z" fill="#DCFCE7" fill-opacity="0.7" stroke="#064E3B" stroke-width="2.2"/>
-                    <line x1="55" y1="86" x2="228" y2="86" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="4,3"/>
-                    <text x="140" y="80" text-anchor="middle" fill="#DC2626" font-size="10" font-weight="bold">ছাতি/বডি লাইন: ৩৮" (ভাঁজে ৯.৫" + ১.৫")</text>
-
-                    <line x1="55" y1="145" x2="212" y2="145" stroke="#B45309" stroke-width="1.4" stroke-dasharray="4,3"/>
-                    <text x="135" y="139" text-anchor="middle" fill="#B45309" font-size="10" font-weight="bold">কোমরের মাপ (১৪" নিচে): ৩৪" (ভাঁজে ৮.৫")</text>
-
-                    <line x1="55" y1="200" x2="222" y2="200" stroke="#065F46" stroke-width="1.4" stroke-dasharray="4,3"/>
-                    <text x="138" y="194" text-anchor="middle" fill="#065F46" font-size="10" font-weight="bold">হিপ / সাইড ফাঁড়া (২০" নিচে): ৪০" (ভাঁজে ১০")</text>
-
-                    <text x="150" y="275" text-anchor="middle" fill="#064E3B" font-size="11" font-weight="bold">নিচের দামান / ঘের: ২৪ ইঞ্চি (ভাঁজে ১২" + ১" মার্জিন)</text>
-                </g>
-
-                <g transform="translate(310, 65)">
-                    <rect x="0" y="0" width="265" height="285" rx="6" fill="#FFFFFF" stroke="#064E3B" stroke-width="1.5"/>
-                    <rect x="0" y="0" width="265" height="28" rx="5" fill="#064E3B"/>
-                    <text x="132" y="18" text-anchor="middle" fill="#FDE68A" font-size="11" font-weight="bold">কামিজের সাইজ অনুযায়ী মাপের তালিকা</text>
-                    <text x="18" y="55" fill="#1F2937" font-size="10.5" font-weight="bold">• ৩৬" বডি: কাঁধ ১২", মহড়া ৬.২৫", কোমর ৩২"</text>
-                    <text x="18" y="85" fill="#1F2937" font-size="10.5" font-weight="bold">• ৩৮" বডি: কাঁধ ১২.৫", মহড়া ৬.৫", কোমর ৩৪"</text>
-                    <text x="18" y="115" fill="#1F2937" font-size="10.5" font-weight="bold">• ৪০" বডি: কাঁধ ১৩", মহড়া ৬.৭৫", কোমর ৩৬"</text>
-                    <text x="18" y="145" fill="#1F2937" font-size="10.5" font-weight="bold">• ৪২" বডি: কাঁধ ১৩.৫", মহড়া ৭.০", কোমর ৩৮"</text>
-                    <text x="18" y="175" fill="#1F2937" font-size="10.5" font-weight="bold">• ৪৪" বডি: কাঁধ ১৪", মহড়া ৭.২৫", কোমর ৪০"</text>
-                    <rect x="16" y="205" width="233" height="62" rx="5" fill="#FEF3C7" stroke="#D4AF37"/>
-                    <text x="132" y="228" text-anchor="middle" fill="#92400E" font-size="10" font-weight="bold">কাটিং টিপস ও সেলাই মার্জিন:</text>
-                    <text x="132" y="246" text-anchor="middle" fill="#374151" font-size="9.5">সাইডে ১.৫" এবং নিচের ঘেরে ১" বাড়তি কাপড় রাখুন</text>
-                </g>
-            </svg>`;
-        }
-
-        function getSalwarDetailedSvg() {
-            return `
-            <svg viewBox="0 0 600 380" class="w-full h-auto bg-[#FFFDF9] rounded-xl border border-stone-200">
-                <rect x="14" y="12" width="572" height="34" rx="6" fill="#8F6F13"/>
-                <text x="300" y="34" text-anchor="middle" fill="#FAF6EE" font-size="14" font-weight="bold">সাধারণ সালোয়ার, প্লাজো ও ৬-কলি পেটিকোট কাটিং চার্ট</text>
-                
-                <g transform="translate(30, 62)">
-                    <rect x="10" y="10" width="220" height="58" rx="4" fill="#FEF3C7" stroke="#8F6F13" stroke-width="2"/>
-                    <text x="120" y="36" text-anchor="middle" fill="#8F6F13" font-size="11" font-weight="bold">১. কোমরের বেল্ট (Belt Part)</text>
-                    <text x="120" y="54" text-anchor="middle" fill="#1F2937" font-size="9.5">লম্বা: ৭" (রাবার ঘর ২" সহ) | চওড়া: ৪০"</text>
-
-                    <path d="M 10 82 L 230 82 L 230 165 C 205 165, 198 185, 195 285 L 45 285 L 45 82 Z" fill="#DCFCE7" fill-opacity="0.7" stroke="#064E3B" stroke-width="2"/>
-                    <text x="125" y="135" text-anchor="middle" fill="#064E3B" font-size="11" font-weight="bold">২. সালোয়ারের কুঁচি ও পা পার্ট</text>
-                    <text x="125" y="156" text-anchor="middle" fill="#DC2626" font-size="9.5" font-weight="bold">হাই (Crotch): ৯" + বেল্ট ৭" = ১৬"</text>
-                    <text x="120" y="272" text-anchor="middle" fill="#064E3B" font-size="10" font-weight="bold">পায়ের মুহুরী: ১২" (ভাঁজে ৬" + ১.৫")</text>
-                </g>
-
-                <g transform="translate(300, 68)">
-                    <rect x="0" y="0" width="275" height="280" rx="6" fill="#FFFFFF" stroke="#8F6F13" stroke-width="1.5"/>
-                    <text x="137" y="26" text-anchor="middle" fill="#064E3B" font-size="12" font-weight="bold">৬-কলি পেটিকোট ও প্লাজো মাপ</text>
-                    <path d="M 45 48 L 105 48 L 135 210 L 25 210 Z" fill="#FCE7F3" stroke="#9D174D" stroke-width="1.6"/>
-                    <path d="M 145 48 L 225 48 L 205 210 L 165 210 Z" fill="#E0F2FE" stroke="#1E40AF" stroke-width="1.6"/>
-                    <text x="80" y="135" text-anchor="middle" fill="#9D174D" font-size="9.5" font-weight="bold">কলি পার্ট (৪টি)</text>
-                    <text x="185" y="135" text-anchor="middle" fill="#1E40AF" font-size="9.5" font-weight="bold">মাঝের পার্ট (২টি)</text>
-                    <text x="137" y="242" text-anchor="middle" fill="#1F2937" font-size="10" font-weight="bold">কোমর পট্টি: লম্বা ৫", চওড়া ৩৮" - ৪২"</text>
-                    <text x="137" y="262" text-anchor="middle" fill="#065F46" font-size="9.5" font-weight="bold">পেটিকোট পূর্ণ লম্বা: ৩৬" - ৩৮" ইঞ্চি</text>
-                </g>
-            </svg>`;
-        }
-
-        // 6. Accordion FAQ Toggle Logic
-        function toggleFaq(index) {
-            const content = document.getElementById(`faq-content-${index}`);
-            const icon = document.getElementById(`faq-icon-${index}`);
-            if (!content || !icon) return;
-
-            const isHidden = content.classList.contains('hidden');
-            if (isHidden) {
-                content.classList.remove('hidden');
-                icon.textContent = '−';
-                icon.classList.add('bg-emerald-900', 'text-gold-300');
-            } else {
-                content.classList.add('hidden');
-                icon.textContent = '+';
-                icon.classList.remove('bg-emerald-900', 'text-gold-300');
-            }
-        }
-
-        // 7. Order Form Validation & Submission Handler
-        let lastSubmittedOrder = null;
-
-        async function handleOrderSubmit(event) {
-            event.preventDefault();
-
-            const nameEl = document.getElementById('customerName');
-            const bkashEl = document.getElementById('customerBkashNumber');
-            const trxEl = document.getElementById('transactionId');
-            const contactEl = document.getElementById('deliveryContact');
-            const errorBox = document.getElementById('form-error-box');
-            const submitBtn = document.getElementById('submit-order-btn');
-
-            const name = nameEl.value.trim();
-            const bkash = bkashEl.value.trim();
-            const trxId = trxEl.value.trim().toUpperCase();
-            const contact = contactEl.value.trim();
-
-            // Clear previous error
-            errorBox.classList.add('hidden');
-            errorBox.textContent = '';
-
-            // Validation Checks
-            if (name.length < 2) {
-                showFormError('অনুগ্রহ করে আপনার সঠিক নাম লিখুন।');
-                nameEl.focus();
-                return;
-            }
-
-            const bdPhoneRegex = /^(?:\+?88)?01[3-9]\d{8}$/;
-            if (!bdPhoneRegex.test(bkash.replace(/[\s-]/g, ''))) {
-                showFormError('অনুগ্রহ করে ১১ ডিজিটের সঠিক বিকাশ মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।');
-                bkashEl.focus();
-                return;
-            }
-
-            if (trxId.length < 5) {
-                showFormError('অনুগ্রহ করে বিকাশ পেমেন্টের সঠিক Transaction ID (TrxID) লিখুন।');
-                trxEl.focus();
-                return;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!contact || !emailRegex.test(contact)) {
-                showFormError('অনুগ্রহ করে PDF পাওয়ার জন্য আপনার সঠিক Gmail / ইমেইল এড্রেস লিখুন।');
-                contactEl.focus();
-                return;
-            }
-
-            // Show instant submitting feedback on button
-            const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span>অর্ডার পাঠানো হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</span>';
-            }
-
-            // Generate Order Reference ID
-            const orderRef = 'SC-' + Math.floor(100000 + Math.random() * 900000);
-            lastSubmittedOrder = {
-                orderId: orderRef,
-                product: window.STORE_CONFIG.productName,
-                amountBDT: window.STORE_CONFIG.priceBDT,
-                currency: window.STORE_CONFIG.currency || 'BDT',
-                customerName: name,
-                customerBkashNumber: bkash,
-                transactionId: trxId,
-                email: contact,
-                deliveryContact: contact,
-                pageUrl: window.location.href,
-                submittedAt: new Date().toISOString()
-            };
-
-            // Send order details immediately to n8n Webhook workflow
-            const webhookUrl = (window.STORE_CONFIG && window.STORE_CONFIG.orderWebhookUrl || '').trim();
-            if (webhookUrl) {
-                try {
-                    await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(lastSubmittedOrder)
-                    });
-                } catch (corsOrNetErr) {
-                    // Fallback with no-cors so browser preflight restrictions never prevent n8n from receiving the payload
-                    try {
-                        await fetch(webhookUrl, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: {
-                                'Content-Type': 'text/plain;charset=UTF-8'
-                            },
-                            body: JSON.stringify(lastSubmittedOrder)
-                        });
-                    } catch (fallbackErr) {
-                        console.error('n8n Webhook dispatch error:', fallbackErr);
-                    }
-                }
-            }
-
-            // Restore button state
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHtml;
-            }
-
-            // Populate Personalized Confirmation UI
-            const greetingNameEl = document.getElementById('summary-greeting-name');
-            if (greetingNameEl) greetingNameEl.textContent = name;
-            document.getElementById('summary-order-id').textContent = orderRef;
-            document.getElementById('summary-name').textContent = name;
-            document.getElementById('summary-bkash').textContent = bkash;
-            document.getElementById('summary-trxid').textContent = trxId;
-            document.getElementById('summary-email').textContent = contact;
-
-            // Hide form, display confirmation card
+// ... existing code ... -->
             document.getElementById('order-submission-form').classList.add('hidden');
             document.getElementById('order-success-panel').classList.remove('hidden');
 
-            // Note: As instructed ("Do not fire a Purchase event before a successful payment confirmation"),
-            // we fire a 'SubmitApplication' / Order Verification Pending event here and provide a dedicated
-            // backend callback hook `window.confirmVerifiedPurchase()` to fire `Purchase` upon verification.
-            trackMetaEvent('SubmitApplication', {
+            // Fire Meta Purchase Event for accurate Sales Campaign Optimization
+            trackMetaEvent('Purchase', {
                 content_name: window.STORE_CONFIG.productName,
+                content_type: 'product',
                 order_id: orderRef,
                 value: window.STORE_CONFIG.priceBDT,
                 currency: 'BDT'
             });
         }
 
-        // Dedicated function for backend/webhook payment confirmation to fire Meta Purchase event
-        window.confirmVerifiedPurchase = function(orderId) {
-            trackMetaEvent('Purchase', {
-                content_name: window.STORE_CONFIG.productName,
-                order_id: orderId || (lastSubmittedOrder && lastSubmittedOrder.orderId),
-                value: window.STORE_CONFIG.priceBDT,
-                currency: 'BDT'
-            });
-        };
-
-        function showFormError(message) {
-            const errorBox = document.getElementById('form-error-box');
-            errorBox.textContent = message;
-            errorBox.classList.remove('hidden');
-        }
-
-        function copyOrderSummary() {
+        function sendOrderToWhatsApp() {
             if (!lastSubmittedOrder) return;
-            const summaryText = `অর্ডার রেফারেন্স: ${lastSubmittedOrder.orderId}\nপ্রোডাক্ট: ৫০০টি সেলাই ও কাটিং চার্ট (PDF)\nমূল্য: ৳১৯৯ টাকা\nনাম: ${lastSubmittedOrder.customerName}\nবিকাশ নম্বর: ${lastSubmittedOrder.customerBkashNumber}\nTrxID: ${lastSubmittedOrder.transactionId}\nGmail: ${lastSubmittedOrder.deliveryContact}`;
-            copyTextToClipboard(summaryText);
+            const waNumber = (window.STORE_CONFIG && window.STORE_CONFIG.whatsappNumber) || '8801348166644';
+            const msg = `আসসালামু আলাইকুম, আমি ৫০০টি কাটিং চার্ট PDF অর্ডার করেছি:\n• অর্ডার আইডি: ${lastSubmittedOrder.orderId}\n• নাম: ${lastSubmittedOrder.customerName}\n• বিকাশ নম্বর: ${lastSubmittedOrder.customerBkashNumber}\n• TrxID: ${lastSubmittedOrder.transactionId}\n• Gmail: ${lastSubmittedOrder.deliveryContact}\nঅনুগ্রহ করে চেক করে PDF পাঠিয়ে দিন।`;
+            window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
         }
-
-        function resetOrderForm() {
-            document.getElementById('order-submission-form').reset();
-            document.getElementById('order-submission-form').classList.remove('hidden');
-            document.getElementById('order-success-panel').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
+// ... existing code ... -->
