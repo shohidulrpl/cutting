@@ -219,8 +219,8 @@
             bkashAccountType: "Personal",
             bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
             // Free 15-Page Sample PDF File:
-            freeSamplePdfUrl: "Tech_Probiotic_Free_Sample_2.pdf",
-            freeSamplePdfFallbacks: ["Tech_Probiotic_Free_Sample_2.pdf", "Tech_Probiotic_Free_Sample.pdf"],
+            freeSamplePdfUrl: "Tech_Probiotic_Free_Sample.pdf",
+            freeSamplePdfFallbacks: ["Tech_Probiotic_Free_Sample.pdf", "Tech_Probiotic_Free_Sample_2.pdf"],
             // Sample Chart Images:
             sampleCharts: {
                 blouse: {
@@ -977,7 +977,7 @@
                             </svg>
                             <span>১৫ পৃষ্ঠার স্যাম্পল পড়ুন</span>
                         </button>
-                        <a href="Tech_Probiotic_Free_Sample_2.pdf" download="Tech_Probiotic_Free_Sample_2.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
+                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
                             <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                             </svg>
@@ -1791,7 +1791,7 @@
                     <span id="sample-zoom-label" class="hidden sm:inline-block text-xs font-mono text-gold-300 w-11 text-center">100%</span>
                     <button type="button" onclick="changeSampleZoom(0.2)" class="w-8 h-8 rounded-lg bg-emerald-900 hover:bg-emerald-800 text-cream-100 font-bold text-sm flex items-center justify-center border border-gold-500/20" title="Zoom In">+</button>
 
-                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample_2.pdf" download="Tech_Probiotic_Free_Sample_2.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer" title="Download Free Sample PDF">
+                    <a id="sample-modal-download-link" href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-gold-500/20 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-400/40 text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer" title="Download Free Sample PDF">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                         <span class="hidden sm:inline">PDF ডাউনলোড</span>
                     </a>
@@ -2026,34 +2026,38 @@
             }
         }
 
-        // 6. Interactive 15-Page Sample PDF Flipbook Reader
+        // 6. Interactive 15-Page Sample PDF Flipbook Reader (Tech_Probiotic_Free_Sample.pdf)
         const SAMPLE_PAGE_TITLES = [
-            "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার",
-            "পৃষ্ঠা ২: সূচিপত্র (১–১২ বিভাগ)",
-            "পৃষ্ঠা ৩: সূচিপত্র (১৩–২৩ বিভাগ)",
-            "পৃষ্ঠা ৪: চার্ট পড়ার সহজ নিয়মাবলি",
-            "পৃষ্ঠা ৫: কেপ কুর্তি কাটিং চার্ট",
-            "পৃষ্ঠা ৬: ডিপ নেক ব্লাউজ প্যাটার্ন",
-            "পৃষ্ঠা ৭: প্রিন্সেস কাট কামিজ চার্ট",
-            "পৃষ্ঠা ৮: সারারা সেট কাটিং চার্ট",
-            "পৃষ্ঠা ৯: আংরাখা কামিজ প্যাটার্ন",
-            "পৃষ্ঠা ১০: ২৪-কলি লেহেঙ্গা কাটিং চার্ট",
-            "পৃষ্ঠা ১১: বেবি ফ্রিল ফ্রক প্যাটার্ন",
-            "পৃষ্ঠা ১২: পাটিয়ালা সালোয়ার চার্ট",
-            "পৃষ্ঠা ১৩: ধোতি সালোয়ার কাটিং চার্ট",
-            "পৃষ্ঠা ১৪: লেডিস ব্লেজার ড্রাফটিং চার্ট",
-            "পৃষ্ঠা ১৫: সম্পূর্ণ ৫০০+ চার্ট সংগ্রহ নির্দেশিকা"
+            "পৃষ্ঠা ১: বিশেষ ডিজিটাল ই-বুক কভার (৫০০+ কাটিং চার্ট)",
+            "পৃষ্ঠা ২: এই বইয়ে কী কী পাবেন? (৫০১টি চার্ট ও ২৩টি বিভাগ)",
+            "পৃষ্ঠা ৩: এই ই-বুক কার জন্য?",
+            "পৃষ্ঠা ৪: চার্ট কীভাবে পড়বেন?",
+            "পৃষ্ঠা ৫: ৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (চার্ট #০০২)",
+            "পৃষ্ঠা ৬: ৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (চার্ট #০৫২)",
+            "পৃষ্ঠা ৭: ৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (চার্ট #০৯৩)",
+            "পৃষ্ঠা ৮: ৩৮ সাইজ সারারা সেট কাটিং চার্ট (চার্ট #১২২)",
+            "পৃষ্ঠা ৯: ৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (চার্ট #১৪৪)",
+            "পৃষ্ঠা ১০: ৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (চার্ট #১৭০)",
+            "পৃষ্ঠা ১১: ৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (চার্ট #১৮২)",
+            "পৃষ্ঠা ১২: ৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (চার্ট #২১০)",
+            "পৃষ্ঠা ১৩: ২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (চার্ট #২৬৭)",
+            "পৃষ্ঠা ১৪: ৪২ সাইজ ব্লেজার কাটিং চার্ট (চার্ট #৩৫২)",
+            "পৃষ্ঠা ১৫: পুরো বই পেতে এখনই অর্ডার করুন"
         ];
 
         let currentSamplePage = 1;
+        let totalSamplePages = 15;
         let currentSampleZoom = 1;
         let sampleFlipInstance = null;
+        let sampleBookReady = false;
+        let sampleLoadingPromise = null;
 
-        function buildSamplePagePills() {
+        function buildSamplePagePills(pageCount = 15) {
             const pillsContainer = document.getElementById('sample-page-pills');
-            if (!pillsContainer || pillsContainer.children.length > 0) return;
+            if (!pillsContainer) return;
+            pillsContainer.innerHTML = '';
 
-            for (let i = 1; i <= 15; i++) {
+            for (let i = 1; i <= pageCount; i++) {
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.id = `sample-pill-${i}`;
@@ -2065,22 +2069,291 @@
         }
 
         function updateSampleReaderUI(pageNum) {
-            currentSamplePage = pageNum;
+            const clampedPage = Math.max(1, Math.min(totalSamplePages, pageNum));
+            currentSamplePage = clampedPage;
+
             const heading = document.getElementById('sample-page-heading');
             const counter = document.getElementById('sample-page-counter');
-            if (heading) heading.textContent = SAMPLE_PAGE_TITLES[pageNum - 1] || `পৃষ্ঠা ${pageNum}`;
-            if (counter) counter.textContent = `পৃষ্ঠা ${pageNum} / ১৫`;
+            const prevBtn = document.getElementById('sample-prev-btn');
+            const nextBtn = document.getElementById('sample-next-btn');
 
-            for (let i = 1; i <= 15; i++) {
+            if (heading) heading.textContent = SAMPLE_PAGE_TITLES[clampedPage - 1] || `পৃষ্ঠা ${clampedPage}`;
+            if (counter) counter.textContent = `পৃষ্ঠা ${clampedPage} / ${totalSamplePages}`;
+            if (prevBtn) prevBtn.disabled = clampedPage <= 1;
+            if (nextBtn) nextBtn.disabled = clampedPage >= totalSamplePages;
+
+            for (let i = 1; i <= totalSamplePages; i++) {
                 const pill = document.getElementById(`sample-pill-${i}`);
                 if (pill) {
-                    if (i === pageNum) {
+                    if (i === clampedPage) {
                         pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold whitespace-nowrap transition-colors bg-gold-500 text-emerald-950 shadow-sm';
+                        pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     } else {
                         pill.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors bg-emerald-950/70 text-cream-200 hover:bg-gold-500 hover:text-emerald-950 border border-gold-500/20';
                     }
                 }
             }
+        }
+
+        function renderFallbackSampleLeaves(container) {
+            const charts = (window.STORE_CONFIG && window.STORE_CONFIG.sampleCharts) || {};
+            const fallbackPages = [
+                {
+                    type: 'cover',
+                    title: '৫০০+ কাটিং চার্ট',
+                    subtitle: 'ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড',
+                    note: 'বিশেষ ডিজিটাল ই-বুক • টেক প্রোবায়োটিক • মাত্র ৳১৯৯ টাকা'
+                },
+                {
+                    type: 'toc',
+                    title: 'এই বইয়ে কী কী পাবেন?',
+                    items: [
+                        '৫০১টি কাটিং চার্ট — কামিজ, ব্লাউজ, সালোয়ার, গাউন, শীতের পোশাক সহ সব জনপ্রিয় ডিজাইন',
+                        '২৩টি বিভাগ — ডিজাইন অনুযায়ী সাজানো, তাই খুঁজে পাওয়া সহজ',
+                        'সব বয়স ও সাইজ — নবজাতক থেকে বড়দের প্লাস সাইজ (৪৬-৫২) পর্যন্ত',
+                        'প্রতিটি চার্টে গাইড — ডিজাইনের বিশেষত্ব ও মাপ বোঝার সহজ ধারণা'
+                    ]
+                },
+                {
+                    type: 'toc',
+                    title: 'এই ই-বুক কার জন্য?',
+                    items: [
+                        '১. নতুন শিক্ষার্থী — প্রথমবার কাটিং শিখছেন? মাপসহ চার্ট দেখে ধাপে ধাপে শিখুন।',
+                        '২. টেইলার ও কারিগর — নতুন নতুন ডিজাইনের কাটিং সবসময় হাতের কাছে রাখুন।',
+                        '৩. বুটিক ব্যবসায়ী — কাস্টমারকে দিন নতুন নতুন কালেকশনের অপশন।',
+                        '৪. সেলাই-শখীন মেয়েরা — নিজের পছন্দের পোশাক নিজেই বানিয়ে নিন।'
+                    ]
+                },
+                {
+                    type: 'guide',
+                    title: 'চার্ট কীভাবে পড়বেন?',
+                    items: [
+                        '১. কাঁচির চিহ্ন — কাঁচির চিহ্ন যেখানে, সেখান থেকে কাপড় কাটা শুরু বা শেষ করুন।',
+                        '২. তীর ও মাপ — দুই তীরের মাঝের সংখ্যাই ইঞ্চিতে সেই অংশের মাপ।',
+                        '৩. ড্যাশ দাগ — ড্যাশ দাগ মানে সেলাইয়ের অংশ। মাপের বাইরে অতিরিক্ত কাপড় ছেড়ে কাটুন।',
+                        '৪. গ্রেন লাইন ও ফোল্ড লাইন — গ্রেন লাইন কাপড়ের সুতার দিক। ফোল্ড লাইনে কাপড় ভাঁজ করে কাটুন।'
+                    ]
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #০০২ • কামিজ ও কুর্তি',
+                    title: '৪০ সাইজ ডিট্যাচেবল কেপ কুর্তি চার্ট (Size - 40)',
+                    desc: 'এক কুর্তি, দুই লুক। কেপ খুলে-পরে যখন খুশি স্টাইল করুন।',
+                    specs: ['কেপের গলা (Cape Neck): ১৬"', 'বুক (Chest): ৪০" | কোমর (Waist): ৩৬"', 'কেপের ঝুল: ১৪" | কুর্তির ঝুল: ৪৪"']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #০৫২ • ব্লাউজ',
+                    title: '৩৮ সাইজ ব্যাক ডিপ নেক ব্লাউজ চার্ট (Size - 38)',
+                    desc: 'পেছনে গভীর গলার স্টাইলিশ ব্লাউজ। ডোরি আর ফেসিং পট্টির মাপসহ।',
+                    specs: ['গলার চওড়া (Neck Width): ৬"', 'গলার গভীরতা (Neck Depth): ৮"', 'Facing Strip / ফেসিং পট্টি: ১.৫" চওড়া']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #০৯৩ • সালোয়ার',
+                    title: '৪৪ সাইজ প্লাজো ও লং কুর্তি চার্ট (Size - 44)',
+                    desc: 'কুর্তি আর প্লাজোর সব মাপ এক পেজে। ম্যাচিং সেট এখন সহজ।',
+                    specs: ['লং কুর্তি: বডি ৪৪", লম্বা ৪৬", পুট ১৫.৫", হাতা ১৭"', 'প্লাজো: ঝুল ৩৯-৪০", হাই ১৫.৫", কোমর ৩২-৪৬"', 'মুহুরী / ঘের (Full Hem Width): ৩৬ ইঞ্চি']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #১২২ • শারারা',
+                    title: '৩৮ সাইজ সারারা সেট কাটিং চার্ট (Size - 38)',
+                    desc: 'বিয়ে-পার্টির গর্জিয়াস শারারা। হাঁটুর কাটিং আর ঘেরের গোপন হিসাব এখানেই।',
+                    specs: ['সাইজ: ৩৮ (কোমর, হাঁটু ও ঘেরের স্পষ্ট মার্কিং)', 'উপরের কুর্তি ও নিচের ফ্লেয়ার অংশের আলাদা ডায়াগ্রাম']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #১৪৪ • ছায়া',
+                    title: '৩৮ সাইজ ৬-কলি ছায়া কাটিং চার্ট (Size - 38)',
+                    desc: 'প্রতিটি কলির মাপ দেওয়া, কাঁচি ধরার আগেই পুরো হিসাব হাতে।',
+                    specs: ['কোমরপট্টি: ৩৮ ইঞ্চি × ৫ ইঞ্চি', 'প্রতি কলি: উপরে ৭.৫ ইঞ্চি, নিচে ১৪.৫ ইঞ্চি, লম্বা ৩৬ ইঞ্চি']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #১৭০ • লেহেঙ্গা',
+                    title: '৩৮ সাইজ ২৪-কলি লেহেঙ্গা কাটিং চার্ট (Size - 38)',
+                    desc: '২৪ কলির ভরপুর ঘের। প্রতিটি কলির মাপ আর কোমরপট্টিসহ।',
+                    specs: ['প্রতি কলি (২৪ পিস): উপরে ২", নিচে ১২", লম্বা ৪০"', 'কোমরপট্টি: ৩২" × ৩" | হেম ফোল্ড: ১.৫"']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #১৮২ • গাউন ও ম্যাক্সি',
+                    title: '৪২ সাইজ ওভারল্যাপ ম্যাক্সি ড্রেস (Size - 42)',
+                    desc: 'আংরাখা স্টাইলের ওভারল্যাপ ডিজাইন, সাধারণ ড্রেসকেও করে ডিজাইনার পিস।',
+                    specs: ['সাইজ: ৪২ | বগল (Armhole): ২১"', 'লম্বা (Length): ৫২" | ফ্রন্ট ওভারল্যাপ ও টাই-বেল্ট']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #২১০ • স্কার্ট',
+                    title: '৪০ সাইজ প্লিটেড স্কার্ট কাটিং চার্ট (Size - 40)',
+                    desc: '২ ইঞ্চি পর পর প্লিট। কাপড়ের হিসাব, বেল্ট আর জিপারের মাপসহ।',
+                    specs: ['কোমরপট্টি / বেল্ট: ৩২" × ২" | লম্বা: ২৮"', 'কাপড় বহর: ৮০" | ২" পর পর ১" গভীর প্লিট']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #২৬৭ • বাচ্চাদের',
+                    title: '২-৩ বছর ফ্রিল ফ্রক কাটিং চার্ট (Age 2-3 Years)',
+                    desc: 'কাঁধ ও হাতায় ফ্রিলের ঝলক। উপরের বডি আর নিচের কুঁচির আলাদা মাপ।',
+                    specs: ['বডি পার্ট: ছাতি ১১", লম্বা ৯" (পিছনে ৩টি বোতাম)', 'নিচের কুঁচি পার্ট: চওড়া ৪০", লম্বা ১২" | হাতার ফ্রিল: ২৪" × ২"']
+                },
+                {
+                    type: 'spec',
+                    chartCode: 'চার্ট #৩৫২ • শীতের পোশাক',
+                    title: '৪২ সাইজ ব্লেজার কাটিং চার্ট (Size - 42)',
+                    desc: 'ফ্ল্যাপ পকেট, চেস্ট ওয়েল্ট পকেট আর লাইনিংসহ। অফিসের জন্য স্মার্ট ব্লেজার।',
+                    specs: ['Shoulder: ১৮" | Chest: ২২" | Length: ৩০"', 'হাতার লম্বা: ২৫" | ফ্ল্যাপ পকেট: ৬" × ২"']
+                },
+                {
+                    type: 'cta',
+                    title: 'পুরো বই পেতে এখনই অর্ডার করুন',
+                    subtitle: 'এটি শুধু নমুনা। পুরো ই-বুকে আছে ৫০০টি কাটিং চার্ট ও ২৩টি বিভাগ। মাত্র ৳১৯৯ টাকা • যোগাযোগ: 01348-166644'
+                }
+            ];
+
+            fallbackPages.forEach((pageInfo, idx) => {
+                const pageNumber = idx + 1;
+                const leaf = document.createElement('div');
+                leaf.className = 'flip-page-item p-4 sm:p-5 flex flex-col justify-between bg-cream-50 border border-stone-300 text-charcoal-900 select-none';
+
+                if (pageInfo.type === 'cover') {
+                    leaf.innerHTML = `
+                        <div class="w-full h-full rounded-2xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-charcoal-900 text-cream-50 p-5 flex flex-col justify-between text-center border-2 border-gold-500/60">
+                            <span class="inline-block mx-auto px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-[11px] font-bold">টেক প্রোবায়োটিক • FREE SAMPLE</span>
+                            <div class="space-y-3 my-auto">
+                                <div class="w-16 h-16 mx-auto rounded-2xl bg-gold-500 text-emerald-950 flex items-center justify-center font-serif font-extrabold text-2xl shadow-lg">৫০০+</div>
+                                <h4 class="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">${pageInfo.title}</h4>
+                                <p class="text-xs text-gold-300 font-semibold">${pageInfo.subtitle}</p>
+                                <p class="text-[11px] text-cream-200">${pageInfo.note}</p>
+                            </div>
+                            <div class="pt-2.5 border-t border-gold-500/30 text-[11px] text-gold-300 font-bold">পৃষ্ঠা ১ / ১৫ • পাতা উল্টে ভেতরের চার্ট দেখুন →</div>
+                        </div>
+                    `;
+                } else if (pageInfo.type === 'toc' || pageInfo.type === 'guide') {
+                    const listHtml = pageInfo.items.map(line => `<li class="p-2.5 rounded-xl bg-white border border-stone-200 text-xs sm:text-sm font-medium text-charcoal-800">${line}</li>`).join('');
+                    leaf.innerHTML = `
+                        <div class="text-xs font-bold text-emerald-900 border-b-2 border-gold-500/50 pb-2 flex justify-between items-center">
+                            <span>${pageInfo.title}</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-900 text-gold-300 text-[10px]">পৃষ্ঠা ${pageNumber}</span>
+                        </div>
+                        <ul class="space-y-2 my-auto py-2">${listHtml}</ul>
+                        <div class="text-[11px] text-center text-stone-500 border-t border-stone-200 pt-1.5">টেক প্রোবায়োটিক • ৫০০+ কাটিং চার্ট ফ্রি স্যাম্পল</div>
+                    `;
+                } else if (pageInfo.type === 'spec') {
+                    const specsHtml = pageInfo.specs.map(s => `<li class="px-3 py-2 rounded-lg bg-emerald-950/5 border border-emerald-900/15 text-xs font-semibold text-emerald-950">✓ ${s}</li>`).join('');
+                    leaf.innerHTML = `
+                        <div class="text-[11px] font-bold text-emerald-900 border-b-2 border-gold-500/50 pb-1.5 flex justify-between items-center">
+                            <span>${pageInfo.chartCode}</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-900 text-gold-300 text-[10px]">পৃষ্ঠা ${pageNumber}</span>
+                        </div>
+                        <div class="my-auto space-y-3 py-2">
+                            <h4 class="font-serif text-base sm:text-lg font-bold text-charcoal-900 leading-snug">${pageInfo.title}</h4>
+                            <p class="text-xs text-stone-600">${pageInfo.desc}</p>
+                            <ul class="space-y-1.5">${specsHtml}</ul>
+                        </div>
+                        <div class="text-[11px] text-center text-stone-500 border-t border-stone-200 pt-1.5">টেক প্রোবায়োটিক • সম্পূর্ণ ৫০০+ চার্ট মাত্র ৳১৯৯</div>
+                    `;
+                } else {
+                    leaf.innerHTML = `
+                        <div class="w-full h-full rounded-2xl bg-emerald-950 text-cream-50 p-5 flex flex-col justify-between text-center border-2 border-gold-500">
+                            <span class="inline-block mx-auto px-3 py-1 rounded-full bg-gold-500 text-emerald-950 text-[11px] font-extrabold">টেক প্রোবায়োটিক • ১৫ / ১৫</span>
+                            <div class="space-y-3 my-auto">
+                                <h4 class="font-serif text-xl font-bold text-gold-300 leading-snug">${pageInfo.title}</h4>
+                                <p class="text-xs sm:text-sm text-cream-100 leading-relaxed">${pageInfo.subtitle}</p>
+                            </div>
+                            <div class="text-xs text-gold-300 font-bold">নিচের "সম্পূর্ণ ৫০০ চার্ট অর্ডার করুন" বাটনে ক্লিক করুন 👇</div>
+                        </div>
+                    `;
+                }
+
+                container.appendChild(leaf);
+            });
+            return fallbackPages.length;
+        }
+
+        async function loadSamplePdfLeaves(container) {
+            if (!window.pdfjsLib) throw new Error('PDF.js unavailable');
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            const candidates = [];
+            if (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) {
+                candidates.push(window.STORE_CONFIG.freeSamplePdfUrl);
+            }
+            if (window.STORE_CONFIG && Array.isArray(window.STORE_CONFIG.freeSamplePdfFallbacks)) {
+                window.STORE_CONFIG.freeSamplePdfFallbacks.forEach(u => {
+                    if (u && !candidates.includes(u)) candidates.push(u);
+                });
+            }
+
+            let pdfDoc = null;
+            for (const pdfUrl of candidates) {
+                try {
+                    const loadingTask = window.pdfjsLib.getDocument({
+                        url: pdfUrl,
+                        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                        cMapPacked: true
+                    });
+                    pdfDoc = await loadingTask.promise;
+                    if (pdfDoc && pdfDoc.numPages > 0) break;
+                } catch (singleErr) {
+                    console.warn('Sample PDF candidate failed:', pdfUrl, singleErr);
+                }
+            }
+
+            if (!pdfDoc) throw new Error('Could not load sample PDF file');
+
+            const pageCount = Math.min(pdfDoc.numPages, 15);
+            for (let p = 1; p <= pageCount; p++) {
+                const page = await pdfDoc.getPage(p);
+                const viewport = page.getViewport({ scale: 1.8 });
+                const offscreenCanvas = document.createElement('canvas');
+                offscreenCanvas.width = viewport.width;
+                offscreenCanvas.height = viewport.height;
+                const ctx = offscreenCanvas.getContext('2d', { alpha: false });
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+
+                await page.render({ canvasContext: ctx, viewport }).promise;
+
+                const imgDataUrl = offscreenCanvas.toDataURL('image/jpeg', 0.92);
+                const leaf = document.createElement('div');
+                leaf.className = 'flip-page-item flex items-center justify-center bg-white';
+                const pageImg = document.createElement('img');
+                pageImg.src = imgDataUrl;
+                pageImg.alt = SAMPLE_PAGE_TITLES[p - 1] || `পৃষ্ঠা ${p}`;
+                pageImg.className = 'w-full h-full object-contain select-none pointer-events-none';
+                pageImg.draggable = false;
+                leaf.appendChild(pageImg);
+                container.appendChild(leaf);
+            }
+            return pageCount;
+        }
+
+        function computeFlipbookDimensions() {
+            const viewportEl = document.getElementById('sample-reader-viewport');
+            const isMobile = window.innerWidth < 768;
+            const rawW = (viewportEl && viewportEl.clientWidth > 0) ? viewportEl.clientWidth : window.innerWidth;
+            const rawH = (viewportEl && viewportEl.clientHeight > 0) ? viewportEl.clientHeight : Math.round(window.innerHeight * 0.68);
+
+            const availW = Math.max(260, rawW - (isMobile ? 24 : 56));
+            const availH = Math.max(340, rawH - 48);
+            const pageRatio = 0.5625; // Matches 9:16 portrait pages of Tech_Probiotic_Free_Sample.pdf
+
+            let pageH = Math.min(availH, isMobile ? 520 : 560);
+            let pageW = Math.round(pageH * pageRatio);
+
+            if (isMobile) {
+                if (pageW > availW) {
+                    pageW = availW;
+                    pageH = Math.round(pageW / pageRatio);
+                }
+            } else {
+                if (pageW * 2 > availW) {
+                    pageW = Math.floor(availW / 2);
+                    pageH = Math.round(pageW / pageRatio);
+                }
+            }
+            return { pageW, pageH, isMobile };
         }
 
         async function openSampleReader(startPage = 1) {
@@ -2091,8 +2364,6 @@
 
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            buildSamplePagePills();
-            updateSampleReaderUI(startPage);
 
             trackMetaEvent('ViewContent', {
                 content_name: '15-Page Free Sample PDF Reader',
@@ -2101,7 +2372,13 @@
                 currency: 'BDT'
             });
 
-            if (sampleFlipInstance) {
+            if (sampleBookReady) {
+                goToSamplePage(startPage);
+                return;
+            }
+
+            if (sampleLoadingPromise) {
+                await sampleLoadingPromise;
                 goToSamplePage(startPage);
                 return;
             }
@@ -2110,86 +2387,89 @@
             stage.classList.add('hidden');
             container.innerHTML = '';
 
-            try {
-                if (window.pdfjsLib) {
-                    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-                    const pdfDoc = await window.pdfjsLib.getDocument(window.STORE_CONFIG.freeSamplePdfUrl).promise;
-                    const totalPages = Math.min(pdfDoc.numPages, 15);
-
-                    for (let p = 1; p <= totalPages; p++) {
-                        const page = await pdfDoc.getPage(p);
-                        const viewport = page.getViewport({ scale: 1.4 });
-                        const leaf = document.createElement('div');
-                        leaf.className = 'flip-page-item flex items-center justify-center bg-white';
-                        const canvas = document.createElement('canvas');
-                        canvas.width = viewport.width;
-                        canvas.height = viewport.height;
-                        canvas.className = 'w-full h-full object-contain';
-                        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-                        leaf.appendChild(canvas);
-                        container.appendChild(leaf);
-                    }
-                } else {
-                    throw new Error('PDF.js not available');
+            sampleLoadingPromise = (async () => {
+                try {
+                    totalSamplePages = await loadSamplePdfLeaves(container);
+                } catch (err) {
+                    container.innerHTML = '';
+                    totalSamplePages = renderFallbackSampleLeaves(container);
                 }
-            } catch (err) {
-                // Graceful fallback pages using the available sample charts if PDF file isn't loaded
-                const fallbackKeys = ['blouse', 'angrakha', 'princess', 'dhoti', 'frock', 'patiala'];
-                for (let p = 1; p <= 15; p++) {
-                    const key = fallbackKeys[(p - 1) % fallbackKeys.length];
-                    const chart = window.STORE_CONFIG.sampleCharts[key];
-                    const leaf = document.createElement('div');
-                    leaf.className = 'flip-page-item p-4 flex flex-col justify-between bg-cream-50 border border-stone-200';
-                    leaf.innerHTML = `
-                        <div class="text-xs font-bold text-emerald-900 border-b border-stone-200 pb-1.5 flex justify-between">
-                            <span>${SAMPLE_PAGE_TITLES[p - 1]}</span>
-                            <span>#${p}</span>
-                        </div>
-                        <div class="my-auto py-2 flex items-center justify-center overflow-hidden">
-                            <img src="${chart.src}" alt="${chart.title}" class="max-h-full max-w-full object-contain rounded-lg" onerror="this.style.display='none'">
-                        </div>
-                        <div class="text-[11px] text-center text-stone-500 border-t border-stone-200 pt-1">৫০০+ সেলাই ও কাটিং চার্ট — ফ্রি স্যাম্পল প্রিভিউ</div>
-                    `;
-                    container.appendChild(leaf);
-                }
-            }
 
-            loading.classList.add('hidden');
-            stage.classList.remove('hidden');
+                buildSamplePagePills(totalSamplePages);
+                loading.classList.add('hidden');
+                stage.classList.remove('hidden');
 
-            if (window.St && window.St.PageFlip) {
-                const isMobile = window.innerWidth < 768;
-                sampleFlipInstance = new window.St.PageFlip(container, {
-                    width: isMobile ? 310 : 380,
-                    height: isMobile ? 440 : 530,
-                    size: 'stretch',
-                    minWidth: 260,
-                    maxWidth: 460,
-                    minHeight: 370,
-                    maxHeight: 620,
-                    showCover: true,
-                    usePortrait: isMobile,
-                    mobileScrollSupport: false
-                });
-                sampleFlipInstance.loadFromHTML(container.querySelectorAll('.flip-page-item'));
-                sampleFlipInstance.on('flip', (e) => {
-                    updateSampleReaderUI((e.data || 0) + 1);
-                });
-                if (startPage > 1) {
-                    setTimeout(() => sampleFlipInstance.flip(startPage - 1), 150);
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+                if (window.St && window.St.PageFlip) {
+                    const { pageW, pageH, isMobile } = computeFlipbookDimensions();
+                    container.style.width = (isMobile ? pageW : pageW * 2) + 'px';
+                    container.style.height = pageH + 'px';
+
+                    sampleFlipInstance = new window.St.PageFlip(container, {
+                        width: pageW,
+                        height: pageH,
+                        size: 'fixed',
+                        showCover: true,
+                        usePortrait: isMobile,
+                        flippingTime: 600,
+                        maxShadowOpacity: 0.45,
+                        mobileScrollSupport: false
+                    });
+                    sampleFlipInstance.loadFromHTML(container.querySelectorAll('.flip-page-item'));
+                    sampleFlipInstance.on('flip', (e) => {
+                        updateSampleReaderUI((e.data || 0) + 1);
+                    });
                 }
-            }
+
+                sampleBookReady = true;
+                sampleLoadingPromise = null;
+            })();
+
+            await sampleLoadingPromise;
+            goToSamplePage(startPage);
         }
 
         function goToSamplePage(pageNum) {
-            updateSampleReaderUI(pageNum);
+            const target = Math.max(1, Math.min(totalSamplePages, pageNum));
+            updateSampleReaderUI(target);
+
             if (sampleFlipInstance) {
-                sampleFlipInstance.flip(pageNum - 1);
+                try {
+                    if (typeof sampleFlipInstance.turnToPage === 'function') {
+                        sampleFlipInstance.turnToPage(target - 1);
+                    } else {
+                        sampleFlipInstance.flip(target - 1);
+                    }
+                } catch (e) {
+                    console.warn('Flipbook turnToPage notice:', e);
+                }
+            } else {
+                const leaves = document.querySelectorAll('#sample-flipbook-container .flip-page-item');
+                leaves.forEach((leaf, idx) => {
+                    leaf.style.display = (idx === target - 1) ? 'flex' : 'none';
+                    leaf.style.width = '320px';
+                    leaf.style.height = '520px';
+                });
             }
         }
 
         function changeSamplePage(delta) {
-            const next = Math.max(1, Math.min(15, currentSamplePage + delta));
+            const next = Math.max(1, Math.min(totalSamplePages, currentSamplePage + delta));
+            if (sampleFlipInstance && Math.abs(delta) === 1) {
+                try {
+                    if (delta > 0 && typeof sampleFlipInstance.flipNext === 'function') {
+                        sampleFlipInstance.flipNext();
+                        return;
+                    }
+                    if (delta < 0 && typeof sampleFlipInstance.flipPrev === 'function') {
+                        sampleFlipInstance.flipPrev();
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('Flipbook flipNext/Prev notice:', e);
+                }
+            }
             goToSamplePage(next);
         }
 
@@ -2209,13 +2489,75 @@
             }
         }
 
-        function downloadFreeSamplePdf(event, anchorEl) {
-            // Allow normal browser download of Tech_Probiotic_Free_Sample_2.pdf
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('sample-pdf-modal');
+            if (!modal || modal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeSampleReader();
+            if (e.key === 'ArrowRight') changeSamplePage(1);
+            if (e.key === 'ArrowLeft') changeSamplePage(-1);
+        });
+
+        async function downloadFreeSamplePdf(event, anchorEl) {
             trackMetaEvent('ViewContent', {
                 content_name: 'Download Free Sample PDF',
                 content_category: 'Sample Download'
             });
-            return true;
+
+            if (window.location.protocol === 'file:') {
+                return true;
+            }
+
+            if (event) event.preventDefault();
+
+            const candidates = [];
+            if (window.STORE_CONFIG && window.STORE_CONFIG.freeSamplePdfUrl) {
+                candidates.push(window.STORE_CONFIG.freeSamplePdfUrl);
+            }
+            if (window.STORE_CONFIG && Array.isArray(window.STORE_CONFIG.freeSamplePdfFallbacks)) {
+                window.STORE_CONFIG.freeSamplePdfFallbacks.forEach(u => {
+                    if (u && !candidates.includes(u)) candidates.push(u);
+                });
+            }
+
+            for (const pdfUrl of candidates) {
+                try {
+                    const response = await fetch(pdfUrl);
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        if (blob && blob.size > 1000 && (!blob.type || blob.type.includes('pdf') || blob.type === 'application/octet-stream')) {
+                            const blobUrl = URL.createObjectURL(blob);
+                            const tempLink = document.createElement('a');
+                            tempLink.href = blobUrl;
+                            tempLink.download = 'Tech_Probiotic_Free_Sample.pdf';
+                            document.body.appendChild(tempLink);
+                            tempLink.click();
+                            document.body.removeChild(tempLink);
+                            setTimeout(() => URL.revokeObjectURL(blobUrl), 4000);
+                            return false;
+                        }
+                    }
+                } catch (err) {
+                    console.warn('Direct PDF fetch fallback triggered:', pdfUrl, err);
+                }
+            }
+
+            if (window.jspdf && window.jspdf.jsPDF) {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+                doc.setFillColor(2, 35, 26);
+                doc.rect(0, 0, 210, 297, 'F');
+                doc.setTextColor(243, 216, 125);
+                doc.setFontSize(22);
+                doc.text('500+ Sewing & Cutting Measurement Charts', 105, 95, { align: 'center' });
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(14);
+                doc.text('Tech Probiotic — Free Sample Preview Edition', 105, 112, { align: 'center' });
+                doc.setFontSize(11);
+                doc.text('Full 500+ Charts Digital PDF Catalog — Only 199 BDT', 105, 130, { align: 'center' });
+                doc.text('WhatsApp Support: 01348-166644', 105, 145, { align: 'center' });
+                doc.save('Tech_Probiotic_Free_Sample.pdf');
+            }
+            return false;
         }
 
         // 7. Order Form Validation, n8n Webhook Submission & Meta Purchase Event
