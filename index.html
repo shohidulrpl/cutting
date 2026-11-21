@@ -196,13 +196,138 @@
             filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.48));
         }
 
-        /* Subtle 3D Book Floating Micro-Animation for Hero Showcase */
+        /* Realistic 3D Hardcover E-Book Mockup for Hero Showcase */
         @keyframes float3DBook {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-7px); }
+            50% { transform: translateY(-8px); }
         }
         .book-3d-float {
-            animation: float3DBook 4.5s ease-in-out infinite;
+            animation: float3DBook 4.8s ease-in-out infinite;
+        }
+        .hero-book-stage {
+            perspective: 1400px;
+        }
+        .hero-3d-book {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(-21deg) rotateX(4deg);
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-book-trigger:hover .hero-3d-book {
+            transform: rotateY(-11deg) rotateX(2deg) scale(1.025);
+        }
+        /* Left 3D Book Spine */
+        .hero-book-spine {
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            left: -26px;
+            width: 28px;
+            background: linear-gradient(180deg, #5B0E1A 0%, #2F060D 48%, #4A0B15 100%);
+            border-top: 2px solid #E5C158;
+            border-bottom: 2px solid #B59021;
+            border-left: 1px solid rgba(243, 216, 125, 0.55);
+            border-radius: 6px 0 0 6px;
+            transform-origin: right center;
+            transform: rotateY(-74deg);
+            box-shadow: inset -6px 0 12px rgba(0, 0, 0, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        @media (min-width: 640px) {
+            .hero-book-spine {
+                left: -32px;
+                width: 34px;
+            }
+        }
+        .hero-book-spine-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: #F3D87D;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        /* Front Hardcover Face */
+        .hero-book-front {
+            position: relative;
+            border-radius: 4px 14px 14px 4px;
+            overflow: hidden;
+            background: linear-gradient(160deg, #5E0F1C 0%, #2A050B 100%);
+            border-top: 2px solid rgba(243, 216, 125, 0.75);
+            border-right: 2px solid rgba(243, 216, 125, 0.5);
+            border-bottom: 2px solid rgba(181, 144, 33, 0.75);
+            box-shadow:
+                14px 18px 34px rgba(0, 0, 0, 0.55),
+                0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+        /* Realistic Binding Hinge Groove & Glossy Sheen */
+        .hero-book-front::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0.45) 0%,
+                rgba(255, 255, 255, 0.28) 2.5%,
+                rgba(0, 0, 0, 0.22) 5%,
+                rgba(255, 255, 255, 0.08) 7.5%,
+                transparent 15%
+            );
+            z-index: 10;
+            pointer-events: none;
+        }
+        .hero-book-front::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                125deg,
+                rgba(255, 255, 255, 0.16) 0%,
+                rgba(255, 255, 255, 0.03) 38%,
+                transparent 60%
+            );
+            z-index: 11;
+            pointer-events: none;
+        }
+        /* Right 3D White Paper Pages Edge */
+        .hero-book-pages {
+            position: absolute;
+            top: 6px;
+            bottom: 6px;
+            right: -15px;
+            width: 17px;
+            background: repeating-linear-gradient(
+                90deg,
+                #FAF6EE 0px,
+                #E6DEC8 1.5px,
+                #FFFDF9 3px
+            );
+            border-top: 1px solid #D6CCB8;
+            border-bottom: 1px solid #C8BCA4;
+            border-right: 2px solid #4A0B15;
+            border-radius: 0 4px 4px 0;
+            transform-origin: left center;
+            transform: rotateY(76deg);
+            box-shadow: inset 4px 0 8px rgba(0, 0, 0, 0.18);
+        }
+        @media (min-width: 640px) {
+            .hero-book-pages {
+                right: -19px;
+                width: 21px;
+            }
+        }
+        /* Grounded Studio Floor Shadow */
+        .hero-book-floor-shadow {
+            width: 82%;
+            height: 24px;
+            margin: 14px auto 0;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.25) 48%, transparent 74%);
+            filter: blur(4px);
         }
     </style>
 
@@ -220,7 +345,12 @@
             bkashQrCodeUrl: "https://i.ibb.co.com/6c4b6wCr/199.jpg",
             // Free 15-Page Sample PDF File:
             freeSamplePdfUrl: "Tech_Probiotic_Free_Sample.pdf",
-            freeSamplePdfFallbacks: ["Tech_Probiotic_Free_Sample.pdf", "Tech_Probiotic_Free_Sample_2.pdf"],
+            freeSamplePdfFallbacks: [
+                "Tech_Probiotic_Free_Sample.pdf",
+                "./Tech_Probiotic_Free_Sample.pdf",
+                "https://shohidulrpl.github.io/cutting/Tech_Probiotic_Free_Sample.pdf",
+                "https://raw.githubusercontent.com/shohidulrpl/cutting/main/Tech_Probiotic_Free_Sample.pdf"
+            ],
             // Sample Chart Images:
             sampleCharts: {
                 blouse: {
@@ -361,7 +491,7 @@
 
             <!-- Quick Links (Desktop) -->
             <nav class="hidden md:flex items-center gap-6 text-sm text-cream-200 font-medium">
-                <a href="#preview-gallery" class="hover:text-gold-400 transition-colors">নমুনা চার্ট দেখুন</a>
+                <a href="#hero" onclick="openSampleReader(1); return false;" class="hover:text-gold-400 transition-colors">নমুনা চার্ট দেখুন</a>
                 <a href="#what-you-get" class="hover:text-gold-400 transition-colors">কী কী থাকছে</a>
                 <a href="#how-to-order" class="hover:text-gold-400 transition-colors">অর্ডার নিয়ম</a>
                 <a href="#faq" class="hover:text-gold-400 transition-colors">সাধারণ জিজ্ঞাসা</a>
@@ -447,13 +577,13 @@
                             </button>
 
                             <!-- Secondary Preview Button -->
-                            <a href="#preview-gallery" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-emerald-950/70 hover:bg-emerald-950 text-cream-100 border border-gold-500/30 font-semibold text-sm sm:text-base transition-all">
+                            <button type="button" onclick="openSampleReader(1)" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-emerald-950/70 hover:bg-emerald-950 text-cream-100 border border-gold-500/30 font-semibold text-sm sm:text-base transition-all cursor-pointer">
                                 <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                 </svg>
                                 <span>নমুনা চার্ট দেখুন</span>
-                            </a>
+                            </button>
 
                             <!-- Interactive 15-Page Free Sample PDF Reader Trigger -->
                             <button type="button" onclick="openSampleReader(1)" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-cream-50/10 hover:bg-cream-50/20 text-gold-300 border border-gold-400/50 font-bold text-sm sm:text-base transition-all cursor-pointer">
@@ -478,40 +608,75 @@
                     </div>
                 </div>
 
-                <!-- Right Column: 3D Digital PDF Catalog Mockup Showcase -->
+                <!-- Right Column: Realistic 3D Hardcover PDF Catalog Mockup Showcase -->
                 <div class="lg:col-span-5 flex flex-col items-center">
-                    <div class="relative w-full max-w-sm mx-auto book-3d-float">
-                        <!-- Top Floating Tag -->
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full bg-gradient-to-r from-gold-400 to-gold-500 text-emerald-950 font-extrabold text-xs shadow-lg whitespace-nowrap">
-                            ✨ ৫০১টি কাটিং চার্ট • ২৩টি বিভাগ
-                        </div>
+                    <div class="relative w-full max-w-sm mx-auto flex flex-col items-center">
+                        
+                        <!-- Ambient Gold Glow Behind 3D Book -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gold-400/20 blur-3xl pointer-events-none"></div>
 
-                        <!-- Main Book Cover Card -->
-                        <div onclick="openSampleReader(1)" class="cursor-pointer group relative rounded-3xl bg-gradient-to-br from-emerald-900 to-emerald-950 p-3 border-2 border-gold-500/60 shadow-2xl overflow-hidden">
-                            <div class="rounded-2xl overflow-hidden bg-emerald-950 aspect-[4/5] relative">
-                                <img src="photo.jpg"
-                                     alt="৫০০টি সেলাই ও কাপড় কাটিংয়ের মাপের চার্ট ডিজিটাল ই-বুক"
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                                <!-- Crisp Fallback Cover if photo.jpg is missing -->
-                                <div class="hidden w-full h-full bg-gradient-to-br from-emerald-900 via-emerald-950 to-charcoal-900 p-6 flex flex-col justify-between text-center border border-gold-500/30">
-                                    <span class="inline-block mx-auto px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold">DIGITAL PDF E-BOOK</span>
-                                    <div class="space-y-3 my-auto">
-                                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gold-500 text-emerald-950 flex items-center justify-center font-serif font-extrabold text-2xl shadow-lg">৫০০+</div>
-                                        <h2 class="font-serif text-2xl font-bold text-white leading-snug">সেলাই ও কাপড় কাটিংয়ের মাপের চার্ট</h2>
-                                        <p class="text-xs text-cream-200">ব্লাউজ, কামিজ, সারারা, লেহেঙ্গা, ফ্রক ও ব্লেজারসহ ২৩টি পূর্ণাঙ্গ বিভাগ</p>
+                        <!-- Interactive 3D Book Stage -->
+                        <div onclick="openSampleReader(1)" class="hero-book-trigger cursor-pointer group relative pt-5 pb-1 px-6 flex flex-col items-center select-none">
+                            
+                            <!-- Top-Right Floating Seal Badge (Inspired by Demo 1) -->
+                            <div class="absolute top-1 right-1 sm:right-2 z-30 w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-full bg-gradient-to-br from-gold-300 via-gold-400 to-gold-600 text-emerald-950 border-2 border-white/80 shadow-xl flex flex-col items-center justify-center text-center leading-tight transform rotate-12 group-hover:rotate-6 transition-transform">
+                                <span class="text-[11px] sm:text-xs font-extrabold">৫০১টি</span>
+                                <span class="text-[9px] sm:text-[10px] font-bold">কাটিং চার্ট</span>
+                                <span class="text-[8px] sm:text-[9px] font-extrabold bg-emerald-950 text-gold-300 px-1.5 py-0.2 rounded-full mt-0.5">২৩ বিভাগ</span>
+                            </div>
+
+                            <!-- Floating 3D Hardcover Book -->
+                            <div class="book-3d-float hero-book-stage relative z-20">
+                                <div class="hero-3d-book w-[215px] h-[365px] sm:w-[250px] sm:h-[425px]">
+                                    
+                                    <!-- 3D Book Spine -->
+                                    <div class="hero-book-spine">
+                                        <span class="hero-book-spine-text">৫০০+ কাটিং চার্ট • টেক প্রোবায়োটিক</span>
                                     </div>
-                                    <div class="pt-3 border-t border-gold-500/30 text-gold-300 font-extrabold text-lg">এককালীন মূল্য: ৳১৯৯</div>
-                                </div>
 
-                                <!-- Bottom Overlay Caption inside Cover -->
-                                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-emerald-950 via-emerald-950/90 to-transparent p-4 pt-10 text-center">
-                                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gold-500 text-emerald-950 font-extrabold text-xs shadow-md group-hover:bg-gold-400 transition-colors">
-                                        📖 ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল উল্টে দেখুন
-                                    </span>
+                                    <!-- 3D Front Cover (Full Unobstructed Cover Art) -->
+                                    <div class="hero-book-front w-full h-full">
+                                        <img src="photo.jpg"
+                                             alt="৫০০+ সেলাই ও কাপড় কাটিংয়ের মাপের চার্ট ডিজিটাল ই-বুক"
+                                             class="w-full h-full object-fill"
+                                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                                        <!-- Crisp Fallback Cover if photo.jpg is missing -->
+                                        <div class="hidden w-full h-full bg-gradient-to-b from-[#691120] via-[#470914] to-[#260409] p-5 flex flex-col justify-between text-center">
+                                            <span class="inline-block mx-auto px-3 py-1 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 text-emerald-950 text-[11px] font-extrabold shadow">বিশেষ ডিজিটাল ই-বুক</span>
+                                            <div class="space-y-2 my-auto">
+                                                <div class="font-serif font-extrabold text-4xl sm:text-5xl text-gold-300 drop-shadow">৫০০+</div>
+                                                <h2 class="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">কাটিং চার্ট</h2>
+                                                <p class="text-[11px] text-cream-200 leading-relaxed">ঘরে বসে বুটিক-মানের ড্রেস বানানোর সম্পূর্ণ গাইড</p>
+                                            </div>
+                                            <div class="space-y-2">
+                                                <div class="inline-block px-3 py-1 rounded-full bg-gold-400 text-emerald-950 font-extrabold text-sm shadow">মাত্র ৳১৯৯ টাকা</div>
+                                                <div class="text-[10px] text-gold-300 font-bold">একবার কিনুন, সারাজীবন ব্যবহার করুন</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 3D Stacked Paper Page Edges -->
+                                    <div class="hero-book-pages"></div>
                                 </div>
                             </div>
+
+                            <!-- Companion Foreground Mini Sample Badge (Inspired by Demo 2) -->
+                            <div class="relative z-30 -mt-6 mr-auto ml-1 sm:ml-2 px-3 py-1.5 rounded-xl bg-emerald-950/95 border border-gold-400/70 text-cream-50 shadow-xl flex items-center gap-2 backdrop-blur-sm">
+                                <span class="w-6 h-6 rounded-lg bg-gold-500 text-emerald-950 font-extrabold text-xs flex items-center justify-center shrink-0">PDF</span>
+                                <div class="text-left leading-tight">
+                                    <span class="block text-[10px] text-gold-300 font-bold">ডিজিটাল ই-বুক সংস্করণ</span>
+                                    <span class="block text-[11px] text-white font-semibold">মোবাইল ও পিসিতে পাঠযোগ্য</span>
+                                </div>
+                            </div>
+
+                            <!-- Grounded 3D Shadow -->
+                            <div class="hero-book-floor-shadow"></div>
                         </div>
+
+                        <!-- Clean Interactive Preview Trigger Below 3D Book -->
+                        <button type="button" onclick="openSampleReader(1)" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/80 hover:bg-gold-500 text-gold-300 hover:text-emerald-950 border border-gold-500/40 font-bold text-xs sm:text-sm shadow-lg transition-all cursor-pointer">
+                            <span>📖 3D বইটিতে ক্লিক করে ১৫ পৃষ্ঠার ফ্রি স্যাম্পল দেখুন</span>
+                        </button>
                     </div>
                 </div>
 
@@ -755,249 +920,6 @@
                 </div>
 
             </div>
-        </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 04: PRODUCT GALLERY / PDF PREVIEW (নমুনা চার্ট প্রিভিউ গ্যালারি)
-         ===================================================================== -->
-    <section id="preview-gallery" class="py-14 md:py-20 bg-emerald-950 text-cream-50 relative overflow-hidden">
-        <div class="absolute inset-0 bg-tailor-grid opacity-30 pointer-events-none"></div>
-
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
-            
-            <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto mb-10 reveal">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 font-bold text-xs uppercase tracking-wider mb-3">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                    নমুনা চার্ট প্রিভিউ (PDF Sample Preview)
-                </span>
-                <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-snug">
-                    কেনার আগে দেখে নিন আমাদের PDF ক্যাটালগের ভেতরের নমুনা চার্ট
-                </h2>
-                <p class="mt-3 text-cream-200 text-base sm:text-lg">
-                    যেকোনো চার্টের ওপর ক্লিক বা ট্যাপ করে বড় করে (Zoom) বিস্তারিত মাপ ও প্যাটার্ন ড্রয়িং দেখে নিন।
-                </p>
-            </div>
-
-            <!-- Main Featured 4-Chart Showcase Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                
-                <!-- GALLERY CARD 01: 38 SIZE FRONT OPEN BLOUSE CHART -->
-                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-3.5 sm:p-4 border-2 border-gold-500/50 shadow-2xl flex flex-col justify-between reveal group">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="px-2.5 py-1 rounded-lg bg-emerald-900 text-gold-300 font-bold text-xs">নমুনা #০১</span>
-                            <button type="button" onclick="openChartModal('blouse')" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-gold-400 hover:text-emerald-950 px-2.5 py-1 rounded-lg transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
-                                <span>জুম</span>
-                            </button>
-                        </div>
-
-                        <div onclick="openChartModal('blouse')" class="cursor-zoom-in rounded-2xl bg-[#4A0E17] border border-stone-300 overflow-hidden aspect-[9/15] relative shadow-inner">
-                            <img src="Blouse_cutting_chart_layout_78f992c3.jpg"
-                                 alt="৩৮ সাইজ ফ্রন্ট ওপেন ব্লাউজ কাটিং চার্ট"
-                                 class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-                                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <div class="hidden w-full h-full bg-blueprint-grid p-3 flex items-center justify-center text-center text-xs font-bold text-emerald-900">
-                                ৩৮ সাইজ ফ্রন্ট ওপেন ব্লাউজ কাটিং চার্ট (ক্লিক করে বিস্তারিত দেখুন)
-                            </div>
-                        </div>
-
-                        <h3 class="font-bold text-base text-charcoal-900 mt-3 leading-snug">৩৮ সাইজ ফ্রন্ট ওপেন ব্লাউজ কাটিং চার্ট</h3>
-                        <p class="text-xs text-stone-600 mt-1">সামনে, পিছনে ও হাতার মাপসহ তৈরি ব্লাউজের ছবি</p>
-                    </div>
-
-                    <div class="mt-3 pt-2.5 border-t border-stone-200 flex items-center justify-between text-xs">
-                        <span class="text-emerald-900 font-semibold">✓ সাইজ ৩৮ ডায়াগ্রাম</span>
-                        <button type="button" onclick="openChartModal('blouse')" class="font-bold text-emerald-900 underline">বড় করে দেখুন</button>
-                    </div>
-                </div>
-
-                <!-- GALLERY CARD 02: 40 SIZE ANGRAKHA KAMEEZ CHART -->
-                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-3.5 sm:p-4 border-2 border-gold-500/50 shadow-2xl flex flex-col justify-between reveal group">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="px-2.5 py-1 rounded-lg bg-gold-500 text-emerald-950 font-bold text-xs">নমুনা #০২</span>
-                            <button type="button" onclick="openChartModal('angrakha')" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-gold-400 hover:text-emerald-950 px-2.5 py-1 rounded-lg transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
-                                <span>জুম</span>
-                            </button>
-                        </div>
-
-                        <div onclick="openChartModal('angrakha')" class="cursor-zoom-in rounded-2xl bg-[#F7F1E5] border border-stone-300 overflow-hidden aspect-[9/15] relative shadow-inner">
-                            <img src="৪০_সাইজ_আংরাখা_কামিজ_কাটিং_6708be10.jpg"
-                                 alt="৪০ সাইজ আংরাখা কামিজ কাটিং চার্ট"
-                                 class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-                                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <div class="hidden w-full h-full bg-blueprint-grid p-3 flex items-center justify-center text-center text-xs font-bold text-emerald-900">
-                                ৪০ সাইজ আংরাখা কামিজ কাটিং চার্ট (ক্লিক করে বিস্তারিত দেখুন)
-                            </div>
-                        </div>
-
-                        <h3 class="font-bold text-base text-charcoal-900 mt-3 leading-snug">৪০ সাইজ আংরাখা কামিজ কাটিং চার্ট</h3>
-                        <p class="text-xs text-stone-600 mt-1">Cross flap angle, Overlap width ও মডেল প্রিভিউ</p>
-                    </div>
-
-                    <div class="mt-3 pt-2.5 border-t border-stone-200 flex items-center justify-between text-xs">
-                        <span class="text-emerald-900 font-semibold">✓ সাইজ ৪০ প্যাটার্ন</span>
-                        <button type="button" onclick="openChartModal('angrakha')" class="font-bold text-emerald-900 underline">বড় করে দেখুন</button>
-                    </div>
-                </div>
-
-                <!-- GALLERY CARD 03: 40 SIZE PRINCESS CUT KAMEEZ CHART -->
-                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-3.5 sm:p-4 border-2 border-gold-500/50 shadow-2xl flex flex-col justify-between reveal group">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="px-2.5 py-1 rounded-lg bg-emerald-900 text-gold-300 font-bold text-xs">নমুনা #০৩</span>
-                            <button type="button" onclick="openChartModal('princess')" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-gold-400 hover:text-emerald-950 px-2.5 py-1 rounded-lg transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
-                                <span>জুম</span>
-                            </button>
-                        </div>
-
-                        <div onclick="openChartModal('princess')" class="cursor-zoom-in rounded-2xl bg-[#0D2B45] border border-stone-300 overflow-hidden aspect-[9/15] relative shadow-inner">
-                            <img src="Princess_cut_kameez_sizing_chart_bdc6ebd5.jpg"
-                                 alt="৪০ সাইজ প্রিন্সেস কাট কামিজ চার্ট"
-                                 class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-                                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <div class="hidden w-full h-full bg-blueprint-grid p-3 flex items-center justify-center text-center text-xs font-bold text-emerald-900">
-                                ৪০ সাইজ প্রিন্সেস কাট কামিজ চার্ট (ক্লিক করে বিস্তারিত দেখুন)
-                            </div>
-                        </div>
-
-                        <h3 class="font-bold text-base text-charcoal-900 mt-3 leading-snug">৪০ সাইজ প্রিন্সেস কাট কামিজ চার্ট</h3>
-                        <p class="text-xs text-stone-600 mt-1">প্রিন্সেস লাইন কার্ভ, বাস্ট পয়েন্ট ও ওয়েস্ট শেপিং</p>
-                    </div>
-
-                    <div class="mt-3 pt-2.5 border-t border-stone-200 flex items-center justify-between text-xs">
-                        <span class="text-emerald-900 font-semibold">✓ সাইজ ৪০ প্রিন্সেস কাট</span>
-                        <button type="button" onclick="openChartModal('princess')" class="font-bold text-emerald-900 underline">বড় করে দেখুন</button>
-                    </div>
-                </div>
-
-                <!-- GALLERY CARD 04: 42 SIZE DHOTI SALWAR CHART -->
-                <div class="bg-cream-50 text-charcoal-900 rounded-3xl p-3.5 sm:p-4 border-2 border-gold-500/50 shadow-2xl flex flex-col justify-between reveal group">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="px-2.5 py-1 rounded-lg bg-gold-500 text-emerald-950 font-bold text-xs">নমুনা #০৪</span>
-                            <button type="button" onclick="openChartModal('dhoti')" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-900 bg-emerald-100 hover:bg-gold-400 hover:text-emerald-950 px-2.5 py-1 rounded-lg transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
-                                <span>জুম</span>
-                            </button>
-                        </div>
-
-                        <div onclick="openChartModal('dhoti')" class="cursor-zoom-in rounded-2xl bg-[#135B6E] border border-stone-300 overflow-hidden aspect-[9/15] relative shadow-inner">
-                            <img src="Dhoti_salwar_cutting_chart_tutorial_ad0e30db.jpg"
-                                 alt="৪২ সাইজ ধোতি সালোয়ার কাটিং চার্ট"
-                                 class="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-                                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <div class="hidden w-full h-full bg-blueprint-grid p-3 flex items-center justify-center text-center text-xs font-bold text-emerald-900">
-                                ৪২ সাইজ ধোতি সালোয়ার কাটিং চার্ট (ক্লিক করে বিস্তারিত দেখুন)
-                            </div>
-                        </div>
-
-                        <h3 class="font-bold text-base text-charcoal-900 mt-3 leading-snug">৪২ সাইজ ধোতি সালোয়ার কাটিং চার্ট</h3>
-                        <p class="text-xs text-stone-600 mt-1">কোমর, আসন (Crotch) ও মোহরির পরিষ্কার হিসাব</p>
-                    </div>
-
-                    <div class="mt-3 pt-2.5 border-t border-stone-200 flex items-center justify-between text-xs">
-                        <span class="text-emerald-900 font-semibold">✓ সাইজ ৪২ সালোয়ার</span>
-                        <button type="button" onclick="openChartModal('dhoti')" class="font-bold text-emerald-900 underline">বড় করে দেখুন</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Secondary Sample Preview Strip -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                
-                <!-- Gallery Card 05: 36 Size Frock Kameez Chart -->
-                <div onclick="openChartModal('frock')" class="cursor-pointer bg-emerald-900/80 hover:bg-emerald-900 border border-gold-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all reveal group">
-                    <div class="w-20 h-28 sm:w-24 sm:h-32 rounded-xl bg-[#FCE7F3] border border-gold-400/40 shrink-0 overflow-hidden">
-                        <img src="Frok_kamiz_cutting_guide_813ddf46.jpg"
-                             alt="৩৬ সাইজ ফ্রক কামিজ কাটিং চার্ট"
-                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                        <div class="hidden w-full h-full p-2 flex items-center justify-center text-center text-[10px] font-bold text-emerald-950">ফ্রক কামিজ চার্ট</div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <span class="text-[11px] font-bold text-gold-400 uppercase">নমুনা পৃষ্ঠা #০৫</span>
-                        <h4 class="text-base sm:text-lg font-bold text-white truncate">৩৬ সাইজ ফ্রক কামিজ কাটিং চার্ট</h4>
-                        <p class="text-xs sm:text-sm text-cream-200 line-clamp-2 mt-0.5">উপরের বডি (Upper Bodice), কোমর জোড় ও নিচের কুঁচির ঘেরের পূর্ণাঙ্গ মাপ ও ডায়াগ্রাম।</p>
-                        <span class="inline-flex items-center gap-1 text-xs font-bold text-gold-300 mt-1.5">ক্লিক করে জুম করুন →</span>
-                    </div>
-                </div>
-
-                <!-- Gallery Card 06: 38 Size Patiala Salwar Chart -->
-                <div onclick="openChartModal('patiala')" class="cursor-pointer bg-emerald-900/80 hover:bg-emerald-900 border border-gold-500/30 rounded-2xl p-4 flex items-center gap-4 transition-all reveal group">
-                    <div class="w-20 h-28 sm:w-24 sm:h-32 rounded-xl bg-[#701A52] border border-gold-400/40 shrink-0 overflow-hidden">
-                        <img src="Patiala_salwar_cutting_measureme_2eaaf554.jpg"
-                             alt="৩৮ সাইজ পাটিয়ালা সালোয়ার কাটিং চার্ট"
-                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                        <div class="hidden w-full h-full p-2 flex items-center justify-center text-center text-[10px] font-bold text-cream-50">পাটিয়ালা সালোয়ার</div>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <span class="text-[11px] font-bold text-gold-400 uppercase">নমুনা পৃষ্ঠা #০৬</span>
-                        <h4 class="text-base sm:text-lg font-bold text-white truncate">৩৮ সাইজ পাটিয়ালা সালোয়ার কাটিং চার্ট</h4>
-                        <p class="text-xs sm:text-sm text-cream-200 line-clamp-2 mt-0.5">ঝুল, কোমর, আসন/হাই, কুঁচির ঘের ও পায়ের মুখ (Mohri)-এর সহজ চিত্রসহ মাপ।</p>
-                        <span class="inline-flex items-center gap-1 text-xs font-bold text-gold-300 mt-1.5">ক্লিক করে জুম করুন →</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Interactive 15-Page Free Sample PDF Book Banner -->
-            <div class="mt-8 bg-gradient-to-r from-emerald-900 via-emerald-850 to-emerald-900 rounded-3xl p-5 sm:p-7 border-2 border-gold-500/45 shadow-2xl reveal">
-                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
-                    <div class="space-y-2 text-center lg:text-left max-w-2xl">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-400/40 text-gold-300 text-xs font-bold">
-                            📖 সম্পূর্ণ ফ্রি স্যাম্পল ই-বুক প্রিভিউ (১৫ পৃষ্ঠা)
-                        </span>
-                        <h3 class="font-serif text-xl sm:text-2xl font-bold text-white">
-                            সূচিপত্র, চার্ট পড়ার নিয়ম ও ১০টি ডিজাইনের ফ্রি স্যাম্পল বই পড়ে দেখুন!
-                        </h3>
-                        <p class="text-xs sm:text-sm text-cream-200 leading-relaxed">
-                            কেনার আগে আমাদের ১৫ পৃষ্ঠার ফ্রি স্যাম্পল PDF ক্যাটালগটি ওয়েবসাইটের ভেতরেই পাতা উল্টে দেখুন অথবা সরাসরি ডাউনলোড করে যাচাই করুন।
-                        </p>
-                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
-                            <button type="button" onclick="openSampleReader(1)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ১: কভার</button>
-                            <button type="button" onclick="openSampleReader(2)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ২-৪: সূচিপত্র ও নিয়ম</button>
-                            <button type="button" onclick="openSampleReader(5)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ৫: কেপ কুর্তি</button>
-                            <button type="button" onclick="openSampleReader(8)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ৮: সারারা সেট</button>
-                            <button type="button" onclick="openSampleReader(10)" class="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-gold-500 hover:text-emerald-950 text-cream-100 border border-gold-500/30 transition-colors">পৃষ্ঠা ১০: ২৪-কলি লেহেঙ্গা</button>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto shrink-0">
-                        <button type="button" onclick="openSampleReader(1)" class="btn-emerald border border-gold-400 text-gold-300 hover:text-white font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-2xl shadow-lg flex items-center justify-center gap-2 cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                            </svg>
-                            <span>১৫ পৃষ্ঠার স্যাম্পল পড়ুন</span>
-                        </button>
-                        <a href="Tech_Probiotic_Free_Sample.pdf" download="Tech_Probiotic_Free_Sample.pdf" onclick="return downloadFreeSamplePdf(event, this)" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-cream-50/10 hover:bg-cream-50/20 text-cream-100 border border-cream-200/30 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
-                            <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                            </svg>
-                            <span>ফ্রি স্যাম্পল PDF ডাউনলোড</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery Bottom CTA -->
-            <div class="mt-10 text-center">
-                <p class="text-cream-200 text-sm sm:text-base mb-4">
-                    উপরে দেখানো চার্টগুলোর মতোই <strong class="text-gold-300">মোট ৫০০টি কাটিং ও মাপের চার্ট</strong> পাচ্ছেন মাত্র ১৯৯ টাকায়!
-                </p>
-                <button type="button" onclick="scrollToCheckout('Gallery_CTA')" class="btn-gold-shimmer text-emerald-950 font-extrabold text-base sm:text-lg px-8 py-4 rounded-2xl shadow-gold-glow inline-flex items-center gap-2">
-                    <span>৫০০টি চার্টের PDF ক্যাটালগ নিন — ৳১৯৯</span>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                </button>
-            </div>
-
         </div>
     </section>
 
@@ -1693,7 +1615,7 @@
                 <p class="mt-0.5 text-xs text-cream-200/70">পেমেন্ট মাধ্যম: বিকাশ Send Money (৳১৯৯ BDT) • WhatsApp সাপোর্ট: <a href="https://wa.me/8801348166644" target="_blank" rel="noopener noreferrer" class="text-gold-300 font-bold hover:underline">01348166644</a></p>
             </div>
             <div class="flex items-center gap-4">
-                <a href="#preview-gallery" class="hover:text-gold-300 transition-colors">নমুনা চার্ট</a>
+                <a href="#hero" onclick="openSampleReader(1); return false;" class="hover:text-gold-300 transition-colors">নমুনা চার্ট</a>
                 <span>•</span>
                 <a href="#bkash-order-section" class="hover:text-gold-300 transition-colors">অর্ডার ফর্ম</a>
                 <span>•</span>
@@ -1895,8 +1817,9 @@
                         entry.target.classList.add('active');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.05 });
             revealElements.forEach(el => revealObserver.observe(el));
+            setTimeout(() => revealElements.forEach(el => el.classList.add('active')), 600);
 
             // Hide sticky mobile bar when order form section is on screen
             const orderSection = document.getElementById('bkash-order-section');
@@ -2503,10 +2426,6 @@
                 content_category: 'Sample Download'
             });
 
-            if (window.location.protocol === 'file:') {
-                return true;
-            }
-
             if (event) event.preventDefault();
 
             const candidates = [];
@@ -2521,42 +2440,41 @@
 
             for (const pdfUrl of candidates) {
                 try {
-                    const response = await fetch(pdfUrl);
+                    const response = await fetch(pdfUrl, { cache: 'no-store' });
                     if (response.ok) {
-                        const blob = await response.blob();
-                        if (blob && blob.size > 1000 && (!blob.type || blob.type.includes('pdf') || blob.type === 'application/octet-stream')) {
-                            const blobUrl = URL.createObjectURL(blob);
-                            const tempLink = document.createElement('a');
-                            tempLink.href = blobUrl;
-                            tempLink.download = 'Tech_Probiotic_Free_Sample.pdf';
-                            document.body.appendChild(tempLink);
-                            tempLink.click();
-                            document.body.removeChild(tempLink);
-                            setTimeout(() => URL.revokeObjectURL(blobUrl), 4000);
-                            return false;
+                        const rawBlob = await response.blob();
+                        if (rawBlob && rawBlob.size > 1000) {
+                            const headerBytes = new Uint8Array(await rawBlob.slice(0, 5).arrayBuffer());
+                            const magic = String.fromCharCode(...headerBytes);
+                            if (magic === '%PDF-') {
+                                const pdfBlob = new Blob([rawBlob], { type: 'application/pdf' });
+                                const blobUrl = URL.createObjectURL(pdfBlob);
+                                const tempLink = document.createElement('a');
+                                tempLink.href = blobUrl;
+                                tempLink.download = 'Tech_Probiotic_Free_Sample.pdf';
+                                document.body.appendChild(tempLink);
+                                tempLink.click();
+                                document.body.removeChild(tempLink);
+                                setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+                                return false;
+                            }
                         }
                     }
                 } catch (err) {
-                    console.warn('Direct PDF fetch fallback triggered:', pdfUrl, err);
+                    console.warn('GitHub PDF fetch attempt failed:', pdfUrl, err);
                 }
             }
 
-            if (window.jspdf && window.jspdf.jsPDF) {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-                doc.setFillColor(2, 35, 26);
-                doc.rect(0, 0, 210, 297, 'F');
-                doc.setTextColor(243, 216, 125);
-                doc.setFontSize(22);
-                doc.text('500+ Sewing & Cutting Measurement Charts', 105, 95, { align: 'center' });
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(14);
-                doc.text('Tech Probiotic — Free Sample Preview Edition', 105, 112, { align: 'center' });
-                doc.setFontSize(11);
-                doc.text('Full 500+ Charts Digital PDF Catalog — Only 199 BDT', 105, 130, { align: 'center' });
-                doc.text('WhatsApp Support: 01348-166644', 105, 145, { align: 'center' });
-                doc.save('Tech_Probiotic_Free_Sample.pdf');
-            }
+            // Direct GitHub fallback if fetch is restricted by browser
+            const directGithubPdf = 'https://shohidulrpl.github.io/cutting/Tech_Probiotic_Free_Sample.pdf';
+            const fallbackLink = document.createElement('a');
+            fallbackLink.href = directGithubPdf;
+            fallbackLink.download = 'Tech_Probiotic_Free_Sample.pdf';
+            fallbackLink.target = '_blank';
+            fallbackLink.rel = 'noopener noreferrer';
+            document.body.appendChild(fallbackLink);
+            fallbackLink.click();
+            document.body.removeChild(fallbackLink);
             return false;
         }
 
